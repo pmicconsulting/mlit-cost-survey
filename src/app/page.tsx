@@ -6,11 +6,10 @@ import {
   FileText,
   PlayCircle,
   Search,
-  Download,
   ArrowRight,
   Building2,
   ClipboardCheck,
-  TrendingUp
+  Truck
 } from "lucide-react";
 
 export default function Home() {
@@ -18,7 +17,7 @@ export default function Home() {
     {
       icon: <ClipboardCheck className="w-8 h-8" />,
       title: "調査に回答",
-      description: "建設業における原価の実態について、簡単なフォームで回答いただけます。",
+      description: "貨物自動車運送事業における原価の実態について、簡単なフォームで回答いただけます。",
       href: "/survey",
       color: "from-blue-500 to-blue-600",
     },
@@ -35,13 +34,6 @@ export default function Home() {
       description: "過去の調査結果を検索し、業界の傾向を把握できます。",
       href: "/search",
       color: "from-purple-500 to-purple-600",
-    },
-    {
-      icon: <Download className="w-8 h-8" />,
-      title: "レポート出力",
-      description: "調査データをExcel形式でダウンロードできます。",
-      href: "/export",
-      color: "from-orange-500 to-orange-600",
     },
   ];
 
@@ -92,8 +84,8 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10">
-              建設業界における適正原価の実態を調査し、
-              持続可能な建設産業の発展に寄与するための調査にご協力ください。
+              貨物自動車運送事業における適正原価の実態を調査し、
+              持続可能な運送事業の発展に寄与するための調査にご協力ください。
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -129,11 +121,11 @@ export default function Home() {
               調査システムの機能
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              本システムでは、調査への回答、動画による解説、データ検索、レポート出力などの機能をご利用いただけます。
+              本システムでは、調査への回答、動画による解説、データ検索などの機能をご利用いただけます。
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -161,46 +153,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-white"
-            >
-              <div className="text-5xl font-bold mb-2">1,200+</div>
-              <div className="text-blue-100">回答企業数</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="text-white"
-            >
-              <div className="text-5xl font-bold mb-2">47</div>
-              <div className="text-blue-100">都道府県</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="text-white"
-            >
-              <div className="text-5xl font-bold mb-2">98%</div>
-              <div className="text-blue-100">回答完了率</div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -208,18 +162,18 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <TrendingUp className="w-16 h-16 text-blue-600 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              建設業界の発展に貢献
+            <Truck className="w-16 h-16 text-white mx-auto mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              運送業界の発展に貢献
             </h2>
-            <p className="text-slate-600 mb-8 max-w-2xl mx-auto">
-              皆様からの回答は、建設業界における適正な原価構造の把握と、
+            <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+              皆様からの回答は、貨物自動車運送事業における適正な原価構造の把握と、
               政策立案の基礎資料として活用されます。
               ぜひご協力をお願いいたします。
             </p>
             <Link
               href="/survey"
-              className="inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-800 transition-all"
+              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all"
             >
               調査に参加する
               <ArrowRight className="w-5 h-5" />
