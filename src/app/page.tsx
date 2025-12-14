@@ -208,7 +208,7 @@ export default function Home() {
                       <ul className="space-y-4 mt-6">
                         <li className="flex items-start gap-3">
                           <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">1</span>
-                          <span className="text-slate-600">「調査に回答を開始」をクリック</span>
+                          <span className="text-slate-600">「実態調査の回答を開始」をクリック</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
@@ -225,7 +225,7 @@ export default function Home() {
                       >
                         <ClipboardCheck className="w-5 h-5" />
                         <span className="leading-tight">
-                          調査に回答を開始
+                          実態調査の回答を開始
                           <br />
                           <span className="text-sm font-normal">（サインアップ）</span>
                         </span>

@@ -2,7 +2,7 @@ import RegisterForm from "@/components/auth/RegisterForm";
 
 export const metadata = {
   title: "回答者登録 | 国土交通省 適正原価実態調査",
-  description: "調査に回答するためのアカウントを作成します",
+  description: "実態調査の回答を開始するためのアカウントを作成します",
 };
 
 export default function RegisterPage() {

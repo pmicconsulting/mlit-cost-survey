@@ -23,7 +23,7 @@ export default function RegisterForm() {
   const [searchingAddress, setSearchingAddress] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [formData, setFormData] = useState<RegisterFormData>({
+  const [formData, setFormData] = useState<Omit<RegisterFormData, 'password_confirm'>>({
     business_name: "",
     postal_code: "",
     address: "",
@@ -35,7 +35,6 @@ export default function RegisterForm() {
     phone: "",
     email: "",
     password: "",
-    password_confirm: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,12 +68,6 @@ export default function RegisterForm() {
     setError(null);
 
     // バリデーション
-    if (formData.password !== formData.password_confirm) {
-      setError("パスワードが一致しません");
-      setLoading(false);
-      return;
-    }
-
     if (formData.password.length < 8) {
       setError("パスワードは8文字以上で入力してください");
       setLoading(false);
@@ -151,7 +144,7 @@ export default function RegisterForm() {
           回答者登録
         </h2>
         <p className="text-slate-600 text-center mb-6">
-          調査に回答するためのアカウントを作成します
+          実態調査の回答を開始するためのアカウントを作成します
         </p>
 
         {error && (
@@ -372,42 +365,27 @@ export default function RegisterForm() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  パスワード <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="8文字以上"
-                    required
-                    minLength={8}
-                    className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                  />
-                </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
+                パスワード <span className="text-red-500">*</span>
+                <span className="text-slate-500 font-normal ml-2">（8文字以上）</span>
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input
+                  type="text"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="パスワードを入力"
+                  required
+                  minLength={8}
+                  className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  パスワード確認 <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input
-                    type="password"
-                    name="password_confirm"
-                    value={formData.password_confirm}
-                    onChange={handleChange}
-                    placeholder="パスワードを再入力"
-                    required
-                    className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                  />
-                </div>
-              </div>
+              <p className="mt-1 text-xs text-slate-500">
+                ※入力したパスワードが表示されます。周囲にご注意ください。
+              </p>
             </div>
           </div>
 
@@ -423,7 +401,7 @@ export default function RegisterForm() {
                 登録中...
               </>
             ) : (
-              "登録して調査を開始する"
+              "登録して調査に回答する"
             )}
           </button>
         </form>
