@@ -1,41 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  FileText,
-  PlayCircle,
-  Search,
   ArrowRight,
   Building2,
   ClipboardCheck,
-  Truck
+  LogIn,
+  User,
+  HelpCircle,
+  Download,
+  PlayCircle,
 } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function Home() {
-  const features = [
-    {
-      icon: <ClipboardCheck className="w-8 h-8" />,
-      title: "調査に回答",
-      description: "貨物自動車運送事業における原価の実態について、簡単なフォームで回答いただけます。",
-      href: "/survey",
-      color: "from-blue-500 to-blue-600",
-    },
-    {
-      icon: <PlayCircle className="w-8 h-8" />,
-      title: "動画解説",
-      description: "調査の目的や回答方法について、動画でわかりやすく解説しています。",
-      href: "/video",
-      color: "from-green-500 to-green-600",
-    },
-    {
-      icon: <Search className="w-8 h-8" />,
-      title: "データ検索",
-      description: "過去の調査結果を検索し、業界の傾向を把握できます。",
-      href: "/search",
-      color: "from-purple-500 to-purple-600",
-    },
-  ];
+  const supabase = createClient();
+  const [user, setUser] = useState<{ email?: string } | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
+    };
+    getUser();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -45,154 +47,288 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
               <Building2 className="w-8 h-8 text-blue-600" />
-              <span className="font-bold text-lg text-slate-800">国土交通省</span>
+              <span className="font-bold text-lg text-slate-800">
+                国土交通省
+              </span>
             </div>
             <nav className="hidden md:flex items-center gap-6">
-              <Link href="/survey" className="text-slate-600 hover:text-blue-600 transition-colors">
-                調査回答
+              <Link
+                href="/qa"
+                className="text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                Q&A
               </Link>
-              <Link href="/video" className="text-slate-600 hover:text-blue-600 transition-colors">
+              <Link
+                href="/download"
+                className="text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                資料DL
+              </Link>
+              <Link
+                href="/video"
+                className="text-slate-600 hover:text-blue-600 transition-colors"
+              >
                 動画解説
               </Link>
-              <Link href="/search" className="text-slate-600 hover:text-blue-600 transition-colors">
-                データ検索
-              </Link>
+              {!loading && (
+                <>
+                  {user ? (
+                    <Link
+                      href="/dashboard"
+                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                    >
+                      <User className="w-4 h-4" />
+                      ダッシュボード
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/auth/login"
+                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      ログイン
+                    </Link>
+                  )}
+                </>
+              )}
             </nav>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              {!loading && (
+                <>
+                  {user ? (
+                    <Link
+                      href="/dashboard"
+                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium"
+                    >
+                      <User className="w-4 h-4" />
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/auth/login"
+                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium"
+                    >
+                      <LogIn className="w-4 h-4" />
+                    </Link>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
+      <section className="relative overflow-hidden py-12 lg:py-20">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <FileText className="w-4 h-4" />
-              令和6年度 実態調査
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
-              適正原価に関する
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                実態調査
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10">
-              貨物自動車運送事業における適正原価の実態を調査し、
-              持続可能な運送事業の発展に寄与するための調査にご協力ください。
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/survey"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
-              >
-                調査に回答する
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                href="/video"
-                className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-4 rounded-xl font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all"
-              >
-                <PlayCircle className="w-5 h-5" />
-                動画で説明を見る
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Text Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+                適正原価に関する
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                  実態調査
+                </span>
+              </h1>
+              <p className="text-lg text-slate-600 mb-8">
+                貨物自動車運送事業における適正原価の実態を調査し、
+                持続可能な運送事業の発展に寄与するための調査にご協力ください。
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {user ? (
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
+                    >
+                      ダッシュボードへ
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                    <Link
+                      href="/video"
+                      className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-4 rounded-xl font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all"
+                    >
+                      <PlayCircle className="w-5 h-5" />
+                      動画で説明を見る
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/register"
+                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
+                    >
+                      調査へ回答を開始する
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                    <Link
+                      href="/auth/login"
+                      className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-4 rounded-xl font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all"
+                    >
+                      <LogIn className="w-5 h-5" />
+                      ログイン
+                    </Link>
+                  </>
+                )}
+              </div>
+            </motion.div>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              調査システムの機能
-            </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
-              本システムでは、調査への回答、動画による解説、データ検索などの機能をご利用いただけます。
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Link href={feature.href}>
-                  <div className="group h-full bg-white rounded-2xl p-6 border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all cursor-pointer">
-                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-r ${feature.color} text-white mb-4 group-hover:scale-110 transition-transform`}>
-                      {feature.icon}
+            {/* Right: Info Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              {!loading && (
+                <>
+                  {user ? (
+                    <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200 text-center">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <User className="w-8 h-8 text-green-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                        ログイン中
+                      </h2>
+                      <p className="text-slate-600 mb-6">{user.email}</p>
+                      <Link
+                        href="/dashboard"
+                        className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all"
+                      >
+                        ダッシュボードへ
+                        <ArrowRight className="w-5 h-5" />
+                      </Link>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-slate-600">
-                      {feature.description}
-                    </p>
+                  ) : (
+                    <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <ClipboardCheck className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">
+                        調査への参加方法
+                      </h2>
+                      <ul className="space-y-4 mt-6">
+                        <li className="flex items-start gap-3">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                          <span className="text-slate-600">「調査へ回答を開始する」をクリック</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                          <span className="text-slate-600">事業者情報・ログイン情報を登録</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">3</span>
+                          <span className="text-slate-600">ダッシュボードから調査に回答</span>
+                        </li>
+                      </ul>
+                      <Link
+                        href="/register"
+                        className="mt-6 inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all"
+                      >
+                        調査へ回答を開始する
+                        <ArrowRight className="w-5 h-5" />
+                      </Link>
+                    </div>
+                  )}
+                </>
+              )}
+              {loading && (
+                <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-200 h-96 flex items-center justify-center">
+                  <div className="animate-pulse text-slate-400">
+                    読み込み中...
                   </div>
-                </Link>
-              </motion.div>
-            ))}
+                </div>
+              )}
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Truck className="w-16 h-16 text-white mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              運送業界の発展に貢献
-            </h2>
-            <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
-              皆様からの回答は、貨物自動車運送事業における適正な原価構造の把握と、
-              政策立案の基礎資料として活用されます。
-              ぜひご協力をお願いいたします。
-            </p>
-            <Link
-              href="/survey"
-              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all"
-            >
-              調査に参加する
-              <ArrowRight className="w-5 h-5" />
+      {/* Quick Links Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid sm:grid-cols-3 gap-6">
+            <Link href="/qa">
+              <div className="group bg-orange-50 border border-orange-100 rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer text-center">
+                <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <HelpCircle className="w-7 h-7 text-orange-600" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  よくあるご質問
+                </h3>
+                <p className="text-slate-600 text-sm">
+                  調査やシステムについてのQ&A
+                </p>
+              </div>
             </Link>
-          </motion.div>
+            <Link href="/download">
+              <div className="group bg-green-50 border border-green-100 rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer text-center">
+                <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Download className="w-7 h-7 text-green-600" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  資料ダウンロード
+                </h3>
+                <p className="text-slate-600 text-sm">
+                  調査票の記入例やテンプレート
+                </p>
+              </div>
+            </Link>
+            <Link href="/video">
+              <div className="group bg-purple-50 border border-purple-100 rounded-2xl p-6 hover:shadow-lg transition-all cursor-pointer text-center">
+                <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <PlayCircle className="w-7 h-7 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  動画解説
+                </h3>
+                <p className="text-slate-600 text-sm">
+                  調査の目的や回答方法を解説
+                </p>
+              </div>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3">
-              <Building2 className="w-6 h-6 text-blue-400" />
-              <span className="text-white font-semibold">国土交通省</span>
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Building2 className="w-6 h-6 text-blue-400" />
+                <span className="text-white font-semibold">国土交通省</span>
+              </div>
+              <p className="text-sm">
+                貨物自動車運送事業 適正原価に関する実態調査
+              </p>
             </div>
-            <div className="text-sm">
-              © 2024 Ministry of Land, Infrastructure, Transport and Tourism. All rights reserved.
+            <div>
+              <h4 className="text-white font-semibold mb-4">リンク</h4>
+              <ul className="space-y-2 text-sm">
+                <li><Link href="/qa" className="hover:text-white transition-colors">よくある質問</Link></li>
+                <li><Link href="/download" className="hover:text-white transition-colors">資料ダウンロード</Link></li>
+                <li><Link href="/video" className="hover:text-white transition-colors">動画解説</Link></li>
+              </ul>
             </div>
+            <div>
+              <h4 className="text-white font-semibold mb-4">お問い合わせ</h4>
+              <p className="text-sm">
+                ご不明な点がございましたら、
+                <br />
+                お気軽にお問い合わせください。
+              </p>
+            </div>
+          </div>
+          <div className="border-t border-slate-800 pt-8 text-center text-sm">
+            © 2024 Ministry of Land, Infrastructure, Transport and Tourism.
+            All rights reserved.
           </div>
         </div>
       </footer>
