@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
+import Anthropic from "@anthropic-ai/sdk";
 
-function getOpenAIClient() {
-  const apiKey = process.env.OPENAI_API_KEY;
+function getAnthropicClient() {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    throw new Error("OPENAI_API_KEY is not set");
+    throw new Error("ANTHROPIC_API_KEY is not set");
   }
-  return new OpenAI({ apiKey });
+  return new Anthropic({ apiKey });
 }
 
 const SYSTEM_PROMPT = `あなたは国土交通省の「一般貨物自動車運送事業 適正原価に関する実態調査」についての相談員AIです。
@@ -62,33 +62,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let openai: OpenAI;
+    let anthropic: Anthropic;
     try {
-      openai = getOpenAIClient();
+      anthropic = getAnthropicClient();
     } catch {
-      console.error("OPENAI_API_KEY is not set");
+      console.error("ANTHROPIC_API_KEY is not set");
       return NextResponse.json(
         { error: "サーバー設定エラー" },
         { status: 500 }
       );
     }
 
-    const openaiMessages = [
-      { role: "system" as const, content: SYSTEM_PROMPT },
-      ...messages.map((msg: { role: string; content: string }) => ({
-        role: msg.role as "user" | "assistant",
-        content: msg.content,
-      })),
-    ];
+    const anthropicMessages = messages.map((msg: { role: string; content: string }) => ({
+      role: msg.role as "user" | "assistant",
+      content: msg.content,
+    }));
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: openaiMessages,
-      max_tokens: 1000,
-      temperature: 0.7,
+    const response = await anthropic.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1024,
+      system: SYSTEM_PROMPT,
+      messages: anthropicMessages,
     });
 
-    const assistantMessage = completion.choices[0]?.message?.content || "申し訳ございません。回答を生成できませんでした。";
+    const assistantMessage = response.content[0].type === "text"
+      ? response.content[0].text
+      : "申し訳ございません。回答を生成できませんでした。";
 
     return NextResponse.json({ message: assistantMessage });
   } catch (error) {
