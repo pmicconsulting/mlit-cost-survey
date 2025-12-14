@@ -1,54 +1,68 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import qaData from "@/data/qa-sample.json";
 
 function getAnthropicClient() {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.ANTHROPIC_API_KEY?.trim();
   if (!apiKey) {
     throw new Error("ANTHROPIC_API_KEY is not set");
   }
+  // デバッグ: キーの最初と最後の数文字を表示
+  console.log("API Key prefix:", apiKey.substring(0, 15));
+  console.log("API Key length:", apiKey.length);
   return new Anthropic({ apiKey });
 }
 
-const SYSTEM_PROMPT = `あなたは国土交通省の「一般貨物自動車運送事業 適正原価に関する実態調査」についての相談員AIです。
+// 簡易的なキーワードマッチングで関連Q&Aを検索
+function findRelevantQA(userQuestion: string, topK: number = 5) {
+  const keywords = userQuestion.toLowerCase().split(/[\s、。？！]+/).filter(k => k.length > 1);
 
-この調査について以下の情報を基に、丁寧かつ分かりやすく回答してください：
+  const scored = qaData.qa_items.map(item => {
+    const text = `${item.question} ${item.answer} ${item.category}`.toLowerCase();
+    let score = 0;
 
-【調査の概要】
+    for (const keyword of keywords) {
+      if (text.includes(keyword)) {
+        score += 1;
+      }
+    }
+
+    return { ...item, score };
+  });
+
+  return scored
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, topK);
+}
+
+function buildSystemPrompt(relevantQA: typeof qaData.qa_items) {
+  const qaContext = relevantQA.length > 0
+    ? `\n\n【参考Q&A】\n${relevantQA.map(qa =>
+        `Q: ${qa.question}\nA: ${qa.answer}`
+      ).join('\n\n')}`
+    : '';
+
+  return `あなたは国土交通省の「一般貨物自動車運送事業 適正原価に関する実態調査」についての相談員AIです。
+
+以下の情報を基に、丁寧かつ分かりやすく回答してください。
+
+【調査の基本情報】
 - 調査名: 一般貨物自動車運送事業 適正原価に関する実態調査
-- 目的: 貨物自動車運送事業における適正な原価の実態を把握し、持続可能な運送事業の発展に寄与すること
-- 対象: 一般貨物自動車運送事業者
 - 調査年度: 令和6年度
 - 回答期限: 令和7年1月31日
+- 対象: 一般貨物自動車運送事業者
 
 【対象車両タイプ（12種類）】
-1. バンタイプ等の車両
-2. 冷蔵車・冷凍車
-3. ダンプ車
-4. タンク車
-5. バルク車
-6. コンテナ輸送車
-7. コンクリートミキサー車
-8. トラック搭載型クレーン車
-9. 霊柩車
-10. 一般廃棄物輸送車（塵芥車、衛生車等）
-11. 車積載車（キャリアカー）
-12. 重量物輸送車
+バンタイプ等の車両、冷蔵車・冷凍車、ダンプ車、タンク車、バルク車、コンテナ輸送車、コンクリートミキサー車、トラック搭載型クレーン車、霊柩車、一般廃棄物輸送車、車積載車（キャリアカー）、重量物輸送車
+${qaContext}
 
-【回答方法】
-1. サイトでサインアップ（事業者情報・ログイン情報を登録）
-2. ダッシュボードから調査に回答
-3. 調査票はエクセルファイルでもダウンロード可能（記載要領付き）
-
-【サポート】
-- よくある質問（Q&A）ページあり
-- お問い合わせフォームあり
-- 動画解説あり
-
-回答時の注意:
+【回答時の注意】
 - 丁寧な敬語を使用してください
-- 具体的で分かりやすい説明を心がけてください
-- 不明な点は正直に「詳細についてはお問い合わせフォームをご利用ください」と案内してください
+- 参考Q&Aがある場合は、その内容を基に回答してください
+- 不明な点は「詳細についてはお問い合わせフォームをご利用ください」と案内してください
 - 調査と関係ない質問には「この相談窓口は適正原価実態調査に関するご質問専用です」と伝えてください`;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -73,15 +87,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 最新のユーザーメッセージから関連Q&Aを検索
+    const lastUserMessage = messages.filter((m: { role: string }) => m.role === "user").pop();
+    const relevantQA = lastUserMessage ? findRelevantQA(lastUserMessage.content) : [];
+
+    const systemPrompt = buildSystemPrompt(relevantQA);
+
     const anthropicMessages = messages.map((msg: { role: string; content: string }) => ({
       role: msg.role as "user" | "assistant",
       content: msg.content,
     }));
 
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-3-5-haiku-20241022",
       max_tokens: 1024,
-      system: SYSTEM_PROMPT,
+      system: systemPrompt,
       messages: anthropicMessages,
     });
 
@@ -89,7 +109,14 @@ export async function POST(request: NextRequest) {
       ? response.content[0].text
       : "申し訳ございません。回答を生成できませんでした。";
 
-    return NextResponse.json({ message: assistantMessage });
+    return NextResponse.json({
+      message: assistantMessage,
+      // デバッグ用: 検索されたQ&A数
+      debug: {
+        relevantQACount: relevantQA.length,
+        categories: [...new Set(relevantQA.map(q => q.category))]
+      }
+    });
   } catch (error) {
     console.error("AI相談員エラー:", error);
     return NextResponse.json(
