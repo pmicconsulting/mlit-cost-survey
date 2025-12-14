@@ -11,6 +11,7 @@ import {
   Square,
   Package,
   Loader2,
+  Truck,
 } from "lucide-react";
 
 interface DownloadFile {
@@ -18,37 +19,80 @@ interface DownloadFile {
   name: string;
   description: string;
   filename: string;
-  size: string;
 }
 
 const downloadFiles: DownloadFile[] = [
   {
-    id: "sample",
-    name: "調査票記入例",
-    description: "調査票の記入方法のサンプルです。回答の参考にしてください。",
-    filename: "survey_sample.xlsx",
-    size: "245 KB",
+    id: "van",
+    name: "バンタイプ等の車両",
+    description: "一般的なバン型トラック向け調査票",
+    filename: "survey_van.zip",
   },
   {
-    id: "cost_calc",
-    name: "原価計算シート",
-    description: "原価計算の補助シートです。各項目の計算にご活用ください。",
-    filename: "cost_calculation.xlsx",
-    size: "180 KB",
+    id: "refrigerator",
+    name: "冷蔵車・冷凍車",
+    description: "冷蔵・冷凍設備付き車両向け調査票",
+    filename: "survey_refrigerator.zip",
   },
   {
-    id: "template",
-    name: "調査票テンプレート",
-    description: "調査回答用のテンプレートです。オフラインで作成する場合にご利用ください。",
-    filename: "survey_template.xlsx",
-    size: "120 KB",
+    id: "dump",
+    name: "ダンプ車",
+    description: "ダンプトラック向け調査票",
+    filename: "survey_dump.zip",
   },
   {
-    id: "guide",
-    name: "調査ガイドライン",
-    description: "調査の目的、回答方法、注意事項をまとめた資料です。",
-    filename: "survey_guide.xlsx",
-    size: "310 KB",
+    id: "tank",
+    name: "タンク車",
+    description: "タンクローリー向け調査票",
+    filename: "survey_tank.zip",
+  },
+  {
+    id: "bulk",
+    name: "バルク車",
+    description: "粉粒体運搬車向け調査票",
+    filename: "survey_bulk.zip",
+  },
+  {
+    id: "container",
+    name: "コンテナ輸送車",
+    description: "コンテナ輸送用車両向け調査票",
+    filename: "survey_container.zip",
+  },
+  {
+    id: "mixer",
+    name: "コンクリートミキサー車",
+    description: "生コンミキサー車向け調査票",
+    filename: "survey_mixer.zip",
+  },
+  {
+    id: "crane",
+    name: "トラック搭載型クレーン車",
+    description: "ユニック車等クレーン付き車両向け調査票",
+    filename: "survey_crane.zip",
+  },
+  {
+    id: "hearse",
+    name: "霊柩車",
+    description: "霊柩運送事業向け調査票",
+    filename: "survey_hearse.zip",
+  },
+  {
+    id: "waste",
+    name: "一般廃棄物輸送車（塵芥車、衛生車等）",
+    description: "ごみ収集車・衛生車向け調査票",
+    filename: "survey_waste.zip",
+  },
+  {
+    id: "carrier",
+    name: "車積載車（キャリアカー）",
+    description: "自動車運搬車向け調査票",
+    filename: "survey_carrier.zip",
+  },
+  {
+    id: "heavy",
+    name: "重量物輸送車",
+    description: "重量物・特殊貨物運搬車向け調査票",
+    filename: "survey_heavy.zip",
   },
 ];
 
@@ -71,7 +115,6 @@ export default function DownloadPage() {
   };
 
   const handleSingleDownload = (file: DownloadFile) => {
-    // 個別ファイルダウンロード
     const link = document.createElement("a");
     link.href = `/downloads/${file.filename}`;
     link.download = file.filename;
@@ -141,21 +184,39 @@ export default function DownloadPage() {
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
             <Download className="w-8 h-8 text-green-600" />
           </div>
           <h1 className="text-3xl font-bold text-slate-900 mb-2">
-            資料ダウンロード
+            調査回答用エクセルファイル
+            <br />
+            ダウンロード
           </h1>
           <p className="text-slate-600">
-            調査に必要な資料をダウンロードできます
+            車両タイプ別の調査票をダウンロードできます
           </p>
+        </div>
+
+        {/* Info Banner */}
+        <div className="bg-blue-50 rounded-xl p-6 border border-blue-100 mb-8">
+          <div className="flex items-start gap-3">
+            <Truck className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h2 className="text-lg font-bold text-slate-900 mb-2">
+                ダウンロード内容について
+              </h2>
+              <p className="text-slate-600">
+                各ファイルには<strong>調査入力用エクセルファイル</strong>と<strong>記載要領</strong>がセットで含まれています。
+                該当する車両タイプのファイルをダウンロードしてご利用ください。
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Bulk Download Section */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between flex-wrap gap-4">
             <button
               onClick={toggleAll}
               className="inline-flex items-center gap-2 text-slate-700 hover:text-blue-600 transition-colors"
@@ -193,16 +254,16 @@ export default function DownloadPage() {
         </div>
 
         {/* File List */}
-        <div className="space-y-4">
-          {downloadFiles.map((file) => (
+        <div className="space-y-3">
+          {downloadFiles.map((file, index) => (
             <div
               key={file.id}
-              className="bg-white rounded-xl border border-slate-200 p-6 hover:border-blue-300 transition-colors"
+              className="bg-white rounded-xl border border-slate-200 p-4 hover:border-blue-300 transition-colors"
             >
-              <div className="flex items-start gap-4">
+              <div className="flex items-center gap-4">
                 <button
                   onClick={() => toggleFile(file.id)}
-                  className="mt-1 text-slate-400 hover:text-blue-600 transition-colors"
+                  className="text-slate-400 hover:text-blue-600 transition-colors"
                 >
                   {selectedFiles.includes(file.id) ? (
                     <CheckSquare className="w-6 h-6 text-blue-600" />
@@ -211,25 +272,26 @@ export default function DownloadPage() {
                   )}
                 </button>
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <FileSpreadsheet className="w-6 h-6 text-green-600" />
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <FileSpreadsheet className="w-5 h-5 text-green-600" />
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">
-                    {file.name}
-                  </h3>
-                  <p className="text-slate-600 text-sm mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-bold text-slate-900">
+                      {file.name}
+                    </h3>
+                  </div>
+                  <p className="text-slate-500 text-sm mt-0.5">
                     {file.description}
                   </p>
-                  <div className="flex items-center gap-4 text-sm text-slate-500">
-                    <span>{file.filename}</span>
-                    <span>{file.size}</span>
-                  </div>
                 </div>
                 <button
                   onClick={() => handleSingleDownload(file)}
-                  className="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors"
+                  className="inline-flex items-center gap-2 border border-slate-300 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-50 transition-colors text-sm"
                 >
                   <Download className="w-4 h-4" />
                   ダウンロード
@@ -240,11 +302,17 @@ export default function DownloadPage() {
         </div>
 
         {/* Info Section */}
-        <div className="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-100">
+        <div className="mt-8 bg-slate-50 rounded-xl p-6 border border-slate-200">
           <h2 className="text-lg font-bold text-slate-900 mb-3">
             ご利用にあたって
           </h2>
           <ul className="space-y-2 text-slate-600">
+            <li className="flex items-start gap-2">
+              <span className="text-blue-600 mt-1">•</span>
+              <span>
+                各ZIPファイルには調査入力用エクセルファイルと記載要領が含まれています。
+              </span>
+            </li>
             <li className="flex items-start gap-2">
               <span className="text-blue-600 mt-1">•</span>
               <span>
@@ -264,8 +332,7 @@ export default function DownloadPage() {
             <li className="flex items-start gap-2">
               <span className="text-blue-600 mt-1">•</span>
               <span>
-                ファイルが開けない場合は、Microsoft
-                Excelまたは互換ソフトウェアをご利用ください。
+                ファイルが開けない場合は、Microsoft Excelまたは互換ソフトウェアをご利用ください。
               </span>
             </li>
           </ul>

@@ -12,6 +12,8 @@ import {
   HelpCircle,
   Download,
   PlayCircle,
+  Mail,
+  Bot,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -53,16 +55,16 @@ export default function Home() {
             </div>
             <nav className="hidden md:flex items-center gap-6">
               <Link
-                href="/qa"
-                className="text-slate-600 hover:text-blue-600 transition-colors"
-              >
-                Q&A
-              </Link>
-              <Link
                 href="/download"
                 className="text-slate-600 hover:text-blue-600 transition-colors"
               >
-                資料DL
+                資料ダウンロード
+              </Link>
+              <Link
+                href="/qa"
+                className="text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                よくある質問
               </Link>
               <Link
                 href="/video"
@@ -81,13 +83,22 @@ export default function Home() {
                       ダッシュボード
                     </Link>
                   ) : (
-                    <Link
-                      href="/auth/login"
-                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                    >
-                      <LogIn className="w-4 h-4" />
-                      ログイン
-                    </Link>
+                    <>
+                      <Link
+                        href="/register"
+                        className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
+                      >
+                        <ClipboardCheck className="w-4 h-4" />
+                        サインアップ
+                      </Link>
+                      <Link
+                        href="/auth/login"
+                        className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                      >
+                        <LogIn className="w-4 h-4" />
+                        ログイン
+                      </Link>
+                    </>
                   )}
                 </>
               )}
@@ -137,44 +148,26 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-lg text-slate-600 mb-8">
-                貨物自動車運送事業における適正原価の実態を調査し、
+                一般貨物自動車運送事業における適正原価の実態を調査し、
                 持続可能な運送事業の発展に寄与するための調査にご協力ください。
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 {user ? (
-                  <>
-                    <Link
-                      href="/dashboard"
-                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
-                    >
-                      ダッシュボードへ
-                      <ArrowRight className="w-5 h-5" />
-                    </Link>
-                    <Link
-                      href="/video"
-                      className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-4 rounded-xl font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all"
-                    >
-                      <PlayCircle className="w-5 h-5" />
-                      動画で説明を見る
-                    </Link>
-                  </>
+                  <Link
+                    href="/dashboard"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
+                  >
+                    ダッシュボードへ
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
                 ) : (
-                  <>
-                    <Link
-                      href="/register"
-                      className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
-                    >
-                      調査へ回答を開始する
-                      <ArrowRight className="w-5 h-5" />
-                    </Link>
-                    <Link
-                      href="/auth/login"
-                      className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-4 rounded-xl font-semibold border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all"
-                    >
-                      <LogIn className="w-5 h-5" />
-                      ログイン
-                    </Link>
-                  </>
+                  <Link
+                    href="/auth/login"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40"
+                  >
+                    <LogIn className="w-5 h-5" />
+                    ログイン
+                  </Link>
                 )}
               </div>
             </motion.div>
@@ -215,7 +208,7 @@ export default function Home() {
                       <ul className="space-y-4 mt-6">
                         <li className="flex items-start gap-3">
                           <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">1</span>
-                          <span className="text-slate-600">「調査へ回答を開始する」をクリック</span>
+                          <span className="text-slate-600">「調査に回答を開始」をクリック</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold">2</span>
@@ -228,10 +221,14 @@ export default function Home() {
                       </ul>
                       <Link
                         href="/register"
-                        className="mt-6 inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all"
+                        className="mt-6 inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-800 transition-all text-center shadow-lg shadow-green-500/30"
                       >
-                        調査へ回答を開始する
-                        <ArrowRight className="w-5 h-5" />
+                        <ClipboardCheck className="w-5 h-5" />
+                        <span className="leading-tight">
+                          調査に回答を開始
+                          <br />
+                          <span className="text-sm font-normal">（サインアップ）</span>
+                        </span>
                       </Link>
                     </div>
                   )}
@@ -272,7 +269,9 @@ export default function Home() {
                   <Download className="w-7 h-7 text-green-600" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  資料ダウンロード
+                  調査回答用エクセルファイル
+                  <br />
+                  ダウンロード
                 </h3>
                 <p className="text-slate-600 text-sm">
                   調査票の記入例やテンプレート
@@ -296,6 +295,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Contact & AI Consultant Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* AI Consultant */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200 text-center">
+              <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Bot className="w-7 h-7 text-purple-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                調査に関するAI相談員
+              </h2>
+              <p className="text-slate-600 mb-6">
+                調査についてAIがお答えします。お気軽にご質問ください
+              </p>
+              <Link
+                href="/ai-consultant"
+                className="inline-flex items-center justify-center gap-2 bg-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors"
+              >
+                <Bot className="w-5 h-5" />
+                AI相談員に質問する
+              </Link>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200 text-center">
+              <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-7 h-7 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                お問い合わせ
+              </h2>
+              <p className="text-slate-600 mb-6">
+                個別のご質問やご不明な点はこちらからお問い合わせください
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                お問い合わせフォームへ
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -306,7 +352,7 @@ export default function Home() {
                 <span className="text-white font-semibold">国土交通省</span>
               </div>
               <p className="text-sm">
-                貨物自動車運送事業 適正原価に関する実態調査
+                一般貨物自動車運送事業 適正原価に関する実態調査
               </p>
             </div>
             <div>
@@ -315,6 +361,8 @@ export default function Home() {
                 <li><Link href="/qa" className="hover:text-white transition-colors">よくある質問</Link></li>
                 <li><Link href="/download" className="hover:text-white transition-colors">資料ダウンロード</Link></li>
                 <li><Link href="/video" className="hover:text-white transition-colors">動画解説</Link></li>
+                <li><Link href="/ai-consultant" className="hover:text-white transition-colors">AI相談員</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">お問い合わせ</Link></li>
               </ul>
             </div>
             <div>
@@ -322,12 +370,12 @@ export default function Home() {
               <p className="text-sm">
                 ご不明な点がございましたら、
                 <br />
-                お気軽にお問い合わせください。
+                <Link href="/contact" className="text-blue-400 hover:text-blue-300">お問い合わせフォーム</Link>よりご連絡ください。
               </p>
             </div>
           </div>
           <div className="border-t border-slate-800 pt-8 text-center text-sm">
-            © 2024 Ministry of Land, Infrastructure, Transport and Tourism.
+            © 2025 Ministry of Land, Infrastructure, Transport and Tourism.
             All rights reserved.
           </div>
         </div>
