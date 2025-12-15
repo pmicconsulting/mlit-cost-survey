@@ -117,24 +117,27 @@ export default function RegisterForm() {
         return;
       }
 
-      // プロファイル更新
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .update({
+      // プロファイル更新（API経由でService Role使用）
+      const profileResponse = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: authData.user.id,
           business_name: formData.business_name,
           postal_code: formData.postal_code,
           address: formData.address,
-          business_number: formData.business_number || null,
-          office_count: formData.office_count ? parseInt(formData.office_count) : null,
-          permit_year: formData.permit_year ? parseInt(formData.permit_year) : null,
-          business_types: formData.business_types.length > 0 ? formData.business_types : null,
+          business_number: formData.business_number,
+          office_count: formData.office_count,
+          permit_year: formData.permit_year,
+          business_types: formData.business_types,
           contact_name: formData.contact_name,
           phone: formData.phone,
-        })
-        .eq("id", authData.user.id);
+        }),
+      });
 
-      if (profileError) {
-        console.error("プロファイル更新エラー:", profileError);
+      if (!profileResponse.ok) {
+        const profileData = await profileResponse.json();
+        console.error("プロファイル更新エラー:", profileData.error);
       }
 
       // AWS SESでメール送信（API経由）
