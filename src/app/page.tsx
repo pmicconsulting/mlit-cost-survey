@@ -12,8 +12,7 @@ import {
   HelpCircle,
   Download,
   PlayCircle,
-  Mail,
-  Bot,
+  Headphones,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -71,6 +70,12 @@ export default function Home() {
                 className="text-slate-600 hover:text-blue-600 transition-colors"
               >
                 動画解説
+              </Link>
+              <Link
+                href="/ask"
+                className="text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                総合相談窓口
               </Link>
               {!loading && (
                 <>
@@ -295,50 +300,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact & AI Consultant Section */}
+      {/* Contact Section - 総合相談窓口 */}
       <section className="py-16 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* AI Consultant */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200 text-center">
-              <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Bot className="w-7 h-7 text-purple-600" />
+          <Link href="/ask">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transition-all cursor-pointer">
+              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Headphones className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                調査に関するAI相談員
+              <h2 className="text-3xl font-bold text-white mb-3">
+                総合相談窓口
               </h2>
-              <p className="text-slate-600 mb-6">
-                調査についてAIがお答えします。お気軽にご質問ください
+              <p className="text-white/90 mb-6 text-lg">
+                AI相談員・WEBフォーム・FAQ・FAX・メールなど
+                <br />
+                各種お問い合わせ方法をご案内しています
               </p>
-              <Link
-                href="/ai-consultant"
-                className="inline-flex items-center justify-center gap-2 bg-purple-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors"
-              >
-                <Bot className="w-5 h-5" />
-                AI相談員に質問する
-              </Link>
+              <span className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                <Headphones className="w-5 h-5" />
+                相談窓口へ
+                <ArrowRight className="w-5 h-5" />
+              </span>
             </div>
-
-            {/* Contact Form */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200 text-center">
-              <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-7 h-7 text-blue-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                お問い合わせ
-              </h2>
-              <p className="text-slate-600 mb-6">
-                個別のご質問やご不明な点はこちらからお問い合わせください
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                お問い合わせフォームへ
-              </Link>
-            </div>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -361,8 +345,7 @@ export default function Home() {
                 <li><Link href="/qa" className="hover:text-white transition-colors">よくある質問</Link></li>
                 <li><Link href="/download" className="hover:text-white transition-colors">資料ダウンロード</Link></li>
                 <li><Link href="/video" className="hover:text-white transition-colors">動画解説</Link></li>
-                <li><Link href="/ai-consultant" className="hover:text-white transition-colors">AI相談員</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">お問い合わせ</Link></li>
+                <li><Link href="/ask" className="hover:text-white transition-colors">総合相談窓口</Link></li>
               </ul>
             </div>
             <div>
@@ -370,7 +353,7 @@ export default function Home() {
               <p className="text-sm">
                 ご不明な点がございましたら、
                 <br />
-                <Link href="/contact" className="text-blue-400 hover:text-blue-300">お問い合わせフォーム</Link>よりご連絡ください。
+                <Link href="/ask" className="text-blue-400 hover:text-blue-300">総合相談窓口</Link>よりご連絡ください。
               </p>
             </div>
           </div>
