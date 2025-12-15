@@ -11,12 +11,14 @@ export default function ContactPage() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactForm.email || !contactForm.message) return;
 
     setSubmitting(true);
+    setError(null);
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -27,9 +29,13 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitted(true);
         setContactForm({ email: "", message: "" });
+      } else {
+        const data = await response.json();
+        setError(data.error || "送信に失敗しました。しばらく経ってから再度お試しください。");
       }
-    } catch (error) {
-      console.error("送信エラー:", error);
+    } catch (err) {
+      console.error("送信エラー:", err);
+      setError("送信に失敗しました。しばらく経ってから再度お試しください。");
     } finally {
       setSubmitting(false);
     }
@@ -80,8 +86,8 @@ export default function ContactPage() {
                 送信完了
               </h2>
               <p className="text-slate-600 mb-6">
-                お問い合わせを受け付けました。<br />
-                ご返信までしばらくお待ちください。
+                お問い合わせメールを送信完了しました。<br />
+                担当者からの連絡をお待ちください。
               </p>
               <Link
                 href="/"
@@ -93,6 +99,11 @@ export default function ContactPage() {
             </div>
           ) : (
             <form onSubmit={handleContactSubmit} className="space-y-6">
+              {error && (
+                <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
               <div>
                 <label
                   htmlFor="contact-email"

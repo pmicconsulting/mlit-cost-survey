@@ -42,6 +42,24 @@ export default function RegisterForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // 事業者番号の入力処理（数字のみ許可、4桁区切りで表示）
+  const handleBusinessNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/[^0-9]/g, ""); // 数字のみ抽出
+    if (rawValue.length <= 12) {
+      setFormData((prev) => ({ ...prev, business_number: rawValue }));
+    }
+  };
+
+  // 事業者番号を4桁区切りで表示
+  const formatBusinessNumber = (value: string) => {
+    const digits = value.replace(/[^0-9]/g, "");
+    const parts = [];
+    for (let i = 0; i < digits.length; i += 4) {
+      parts.push(digits.slice(i, i + 4));
+    }
+    return parts.join("-");
+  };
+
   const handleBusinessTypeChange = (type: BusinessType) => {
     setFormData((prev) => {
       const types = prev.business_types.includes(type)
@@ -68,8 +86,14 @@ export default function RegisterForm() {
     setError(null);
 
     // バリデーション
-    if (formData.password.length < 8) {
-      setError("パスワードは8文字以上で入力してください");
+    if (formData.business_number && formData.business_number.length !== 12) {
+      setError("事業者番号は12桁で入力してください");
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("パスワードは6文字以上で入力してください");
       setLoading(false);
       return;
     }
@@ -227,24 +251,25 @@ export default function RegisterForm() {
               </div>
             </div>
 
-            {/* 事業者番号・事業所数・許可年 */}
+            {/* 事業者番号・営業所数・許可年 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
                   事業者番号
+                  <span className="text-slate-500 font-normal ml-1 text-xs">（12桁）</span>
                 </label>
                 <input
                   type="text"
                   name="business_number"
-                  value={formData.business_number}
-                  onChange={handleChange}
-                  placeholder="00-000000"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  value={formatBusinessNumber(formData.business_number)}
+                  onChange={handleBusinessNumberChange}
+                  placeholder="0000-0000-0000"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-center"
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
-                  事業所数
+                  一般貨物運送事業：営業所数
                 </label>
                 <input
                   type="number"
@@ -253,7 +278,7 @@ export default function RegisterForm() {
                   onChange={handleChange}
                   placeholder="1"
                   min="1"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-center"
                 />
               </div>
               <div>
@@ -268,7 +293,7 @@ export default function RegisterForm() {
                   placeholder="2020"
                   min="1900"
                   max={new Date().getFullYear()}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-center"
                 />
               </div>
             </div>
@@ -368,7 +393,7 @@ export default function RegisterForm() {
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 パスワード <span className="text-red-500">*</span>
-                <span className="text-slate-500 font-normal ml-2">（8文字以上）</span>
+                <span className="text-slate-500 font-normal ml-2">（6文字以上）</span>
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -379,7 +404,7 @@ export default function RegisterForm() {
                   onChange={handleChange}
                   placeholder="パスワードを入力"
                   required
-                  minLength={8}
+                  minLength={6}
                   className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 />
               </div>

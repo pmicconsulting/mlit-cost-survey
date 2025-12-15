@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const adminEmail = process.env.ADMIN_EMAIL || process.env.AWS_SES_FROM_EMAIL || "";
+    const adminEmail = "ask@mlit.site";
     const fromEmail = process.env.AWS_SES_FROM_EMAIL || "noreply@example.com";
 
     if (!adminEmail) {
