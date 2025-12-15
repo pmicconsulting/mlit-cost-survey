@@ -2,8 +2,35 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Mail, Lock, Loader2 } from "lucide-react";
+
+// Supabaseエラーメッセージを日本語に変換
+function translateAuthError(message: string): string {
+  const errorMessages: Record<string, string> = {
+    "Invalid login credentials": "メールアドレスまたはパスワードが正しくありません。",
+    "Email not confirmed": "メールアドレスの確認が完了していません。確認メールをご確認ください。",
+    "Too many requests": "リクエストが多すぎます。しばらく時間をおいてから再度お試しください。",
+    "User not found": "このメールアドレスは登録されていません。",
+    "Invalid email": "有効なメールアドレスを入力してください。",
+    "Signups not allowed": "現在新規登録を受け付けておりません。",
+  };
+
+  // 完全一致でチェック
+  if (errorMessages[message]) {
+    return errorMessages[message];
+  }
+
+  // 部分一致でチェック
+  for (const [key, value] of Object.entries(errorMessages)) {
+    if (message.includes(key)) {
+      return value;
+    }
+  }
+
+  return `ログインに失敗しました: ${message}`;
+}
 
 export default function LoginForm() {
   const router = useRouter();
@@ -24,7 +51,7 @@ export default function LoginForm() {
     });
 
     if (error) {
-      setError(error.message);
+      setError(translateAuthError(error.message));
       setLoading(false);
       return;
     }
@@ -86,6 +113,14 @@ export default function LoginForm() {
                 required
                 className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
               />
+            </div>
+            <div className="text-right mt-1">
+              <Link
+                href="/auth/forgot-password"
+                className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
+              >
+                パスワードを忘れた方
+              </Link>
             </div>
           </div>
 

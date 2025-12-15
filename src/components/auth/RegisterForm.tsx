@@ -16,6 +16,31 @@ import {
   Search,
 } from "lucide-react";
 
+// Supabaseエラーメッセージを日本語に変換
+function translateAuthError(message: string): string {
+  const errorMessages: Record<string, string> = {
+    "User already registered": "このメールアドレスは既に登録されています。ログイン画面からログインしてください。",
+    "Invalid login credentials": "メールアドレスまたはパスワードが正しくありません。",
+    "Email not confirmed": "メールアドレスの確認が完了していません。確認メールをご確認ください。",
+    "Password should be at least 6 characters": "パスワードは6文字以上で入力してください。",
+    "Unable to validate email address: invalid format": "メールアドレスの形式が正しくありません。",
+    "Signup requires a valid password": "有効なパスワードを入力してください。",
+    "To signup, please provide your email": "メールアドレスを入力してください。",
+    "Email rate limit exceeded": "メール送信の制限に達しました。しばらく時間をおいてから再度お試しください。",
+    "For security purposes, you can only request this once every 60 seconds": "セキュリティのため、60秒に1回のみリクエストできます。しばらくお待ちください。",
+  };
+
+  // 部分一致でも対応
+  for (const [key, value] of Object.entries(errorMessages)) {
+    if (message.includes(key)) {
+      return value;
+    }
+  }
+
+  // 未知のエラーはそのまま返す（開発時のデバッグ用）
+  return `エラーが発生しました: ${message}`;
+}
+
 export default function RegisterForm() {
   const router = useRouter();
   const supabase = createClient();
@@ -106,7 +131,7 @@ export default function RegisterForm() {
       });
 
       if (authError) {
-        setError(authError.message);
+        setError(translateAuthError(authError.message));
         setLoading(false);
         return;
       }
