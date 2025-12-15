@@ -82,7 +82,8 @@ ${message}
 このメールは適正原価実態調査システムから自動送信されています。
     `.trim();
 
-    const command = new SendEmailCommand({
+    // 管理者へのメール送信
+    const adminCommand = new SendEmailCommand({
       Source: fromEmail,
       Destination: {
         ToAddresses: [adminEmail],
@@ -106,7 +107,103 @@ ${message}
       },
     });
 
-    await sesClient.send(command);
+    await sesClient.send(adminCommand);
+
+    // 送信者への確認メール
+    const now = new Date();
+    const sendTime = now.toLocaleString("ja-JP", {
+      timeZone: "Asia/Tokyo",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const confirmSubject = "【国土交通省 適正原価実態調査】お問い合わせを受け付けました";
+
+    const confirmHtmlBody = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="font-family: sans-serif; line-height: 1.6; color: #333;">
+  <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    <div style="border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 20px;">
+      <h1 style="color: #1e293b; font-size: 24px; margin: 0;">お問い合わせ受付完了</h1>
+      <p style="color: #64748b; margin: 5px 0 0;">国土交通省 適正原価実態調査</p>
+    </div>
+
+    <p style="margin: 20px 0;">
+      お問い合わせいただきありがとうございます。<br>
+      以下の内容で受け付けました。担当者より順次ご連絡いたします。
+    </p>
+
+    <div style="background: #f1f5f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+      <h2 style="font-size: 16px; margin: 0 0 10px; color: #1e293b;">【送信日時】</h2>
+      <p style="margin: 5px 0;">${sendTime}</p>
+    </div>
+
+    <div style="margin: 20px 0;">
+      <h2 style="font-size: 16px; margin: 0 0 10px; color: #1e293b;">【質問内容】</h2>
+      <div style="background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; white-space: pre-wrap;">${message}</div>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 30px 0;">
+
+    <p style="color: #94a3b8; font-size: 12px;">
+      このメールは適正原価実態調査システムから自動送信されています。<br>
+      このメールに返信いただいても回答できませんのでご了承ください。
+    </p>
+  </div>
+</body>
+</html>
+    `.trim();
+
+    const confirmTextBody = `
+【お問い合わせ受付完了】
+国土交通省 適正原価実態調査
+
+お問い合わせいただきありがとうございます。
+以下の内容で受け付けました。担当者より順次ご連絡いたします。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【送信日時】
+${sendTime}
+
+【質問内容】
+${message}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+このメールは適正原価実態調査システムから自動送信されています。
+このメールに返信いただいても回答できませんのでご了承ください。
+    `.trim();
+
+    const confirmCommand = new SendEmailCommand({
+      Source: fromEmail,
+      Destination: {
+        ToAddresses: [email],
+      },
+      Message: {
+        Subject: {
+          Data: confirmSubject,
+          Charset: "UTF-8",
+        },
+        Body: {
+          Text: {
+            Data: confirmTextBody,
+            Charset: "UTF-8",
+          },
+          Html: {
+            Data: confirmHtmlBody,
+            Charset: "UTF-8",
+          },
+        },
+      },
+    });
+
+    await sesClient.send(confirmCommand);
 
     return NextResponse.json({ message: "お問い合わせを送信しました" });
   } catch (error) {
