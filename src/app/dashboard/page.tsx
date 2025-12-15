@@ -22,7 +22,7 @@ import {
   Mail,
   Building,
 } from "lucide-react";
-import { Profile, SurveyDraft, BUSINESS_TYPE_LABELS, BusinessType } from "@/types/profile";
+import { Profile, SurveyDraft } from "@/types/profile";
 
 type SurveyStatus = "not_started" | "in_progress" | "submitted";
 
@@ -314,7 +314,7 @@ export default function DashboardPage() {
                               key={type}
                               className="inline-block px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded"
                             >
-                              {BUSINESS_TYPE_LABELS[type as BusinessType] || type}
+                              {type}
                             </span>
                           ))}
                         </div>

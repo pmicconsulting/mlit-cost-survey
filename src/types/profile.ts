@@ -1,30 +1,23 @@
-// 事業種別
+// 事業種別（日本語で保存）
 export type BusinessType =
-  | 'general'       // 一般貨物
-  | 'specific'      // 特定貨物
-  | 'consolidated'  // 特積貨物
-  | 'freight_type1' // 第一種利用運送
-  | 'freight_type2' // 第二種利用運送
-
-export const BUSINESS_TYPE_LABELS: Record<BusinessType, string> = {
-  general: '一般貨物',
-  specific: '特定貨物',
-  consolidated: '特積貨物',
-  freight_type1: '第一種利用運送',
-  freight_type2: '第二種利用運送',
-}
+  | '一般貨物'
+  | '特定貨物'
+  | '特積貨物'
+  | '第一種利用運送'
+  | '第二種利用運送'
 
 export const BUSINESS_TYPES: { value: BusinessType; label: string }[] = [
-  { value: 'general', label: '一般貨物' },
-  { value: 'specific', label: '特定貨物' },
-  { value: 'consolidated', label: '特積貨物' },
-  { value: 'freight_type1', label: '第一種利用運送' },
-  { value: 'freight_type2', label: '第二種利用運送' },
+  { value: '一般貨物', label: '一般貨物' },
+  { value: '特定貨物', label: '特定貨物' },
+  { value: '特積貨物', label: '特積貨物' },
+  { value: '第一種利用運送', label: '第一種利用運送' },
+  { value: '第二種利用運送', label: '第二種利用運送' },
 ]
 
 export interface Profile {
   id: string
   email: string
+  provider?: string
   // 事業者情報
   business_name: string
   postal_code?: string
@@ -36,10 +29,7 @@ export interface Profile {
   // 記入者情報
   contact_name: string
   phone: string
-  // 互換性
-  display_name?: string
-  avatar_url?: string
-  provider?: string
+  // タイムスタンプ
   created_at: string
   updated_at: string
 }

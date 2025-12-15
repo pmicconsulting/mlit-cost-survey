@@ -21,11 +21,28 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   business_types TEXT[],
   contact_name TEXT,
   phone TEXT,
-  display_name TEXT,
-  avatar_url TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
+
+-- =====================================================
+-- 1-1. profilesテーブル 日本語コメント
+-- =====================================================
+COMMENT ON TABLE public.profiles IS 'ユーザープロファイル・事業者情報';
+COMMENT ON COLUMN public.profiles.id IS 'ユーザーID（認証システム連携）';
+COMMENT ON COLUMN public.profiles.email IS 'メールアドレス';
+COMMENT ON COLUMN public.profiles.provider IS '認証方式（email固定）';
+COMMENT ON COLUMN public.profiles.business_name IS '事業者名';
+COMMENT ON COLUMN public.profiles.postal_code IS '郵便番号';
+COMMENT ON COLUMN public.profiles.address IS '住所';
+COMMENT ON COLUMN public.profiles.business_number IS '事業者番号（12桁）';
+COMMENT ON COLUMN public.profiles.office_count IS '一般貨物運送事業：営業所数';
+COMMENT ON COLUMN public.profiles.permit_year IS '事業許可年';
+COMMENT ON COLUMN public.profiles.business_types IS '事業種別（一般貨物/特定貨物/特積貨物/第一種利用運送/第二種利用運送）';
+COMMENT ON COLUMN public.profiles.contact_name IS '記入者名';
+COMMENT ON COLUMN public.profiles.phone IS '連絡先電話番号';
+COMMENT ON COLUMN public.profiles.created_at IS '作成日時';
+COMMENT ON COLUMN public.profiles.updated_at IS '更新日時';
 
 -- =====================================================
 -- 2. survey_draftsテーブル作成
@@ -42,6 +59,20 @@ CREATE TABLE IF NOT EXISTS public.survey_drafts (
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   UNIQUE(user_id, survey_year)
 );
+
+-- =====================================================
+-- 2-1. survey_draftsテーブル 日本語コメント
+-- =====================================================
+COMMENT ON TABLE public.survey_drafts IS '調査回答の下書き・提出データ';
+COMMENT ON COLUMN public.survey_drafts.id IS 'レコードID';
+COMMENT ON COLUMN public.survey_drafts.user_id IS 'ユーザーID';
+COMMENT ON COLUMN public.survey_drafts.survey_year IS '調査年度';
+COMMENT ON COLUMN public.survey_drafts.form_data IS '回答データ（JSON形式）';
+COMMENT ON COLUMN public.survey_drafts.current_step IS '現在の入力ステップ';
+COMMENT ON COLUMN public.survey_drafts.is_submitted IS '提出済みフラグ';
+COMMENT ON COLUMN public.survey_drafts.submitted_at IS '提出日時';
+COMMENT ON COLUMN public.survey_drafts.created_at IS '作成日時';
+COMMENT ON COLUMN public.survey_drafts.updated_at IS '更新日時';
 
 -- =====================================================
 -- 3. インデックス作成
@@ -123,12 +154,10 @@ CREATE POLICY drafts_delete ON public.survey_drafts
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, email, display_name, avatar_url, provider)
+  INSERT INTO public.profiles (id, email, provider)
   VALUES (
     NEW.id,
     NEW.email,
-    COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.raw_user_meta_data->>'name', ''),
-    COALESCE(NEW.raw_user_meta_data->>'avatar_url', NEW.raw_user_meta_data->>'picture', ''),
     COALESCE(NEW.raw_app_meta_data->>'provider', 'email')
   );
   RETURN NEW;
