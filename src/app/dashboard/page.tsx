@@ -474,12 +474,19 @@ export default function DashboardPage() {
 
         {/* Survey Info Banner */}
         <div className="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-100">
-          <h3 className="text-lg font-bold text-slate-900 mb-2">
+          <h3 className="text-lg font-bold text-slate-900 mb-3">
             令和6年度 適正原価実態調査
           </h3>
-          <p className="text-slate-600 mb-4">
-            回答期限: <strong className="text-blue-600">令和7年1月31日</strong>
-          </p>
+          <div className="space-y-2 mb-4">
+            <p className="text-slate-700">
+              <span className="font-medium">ドライバンタイプ等：</span>
+              <span className="text-red-600 font-bold bg-yellow-200 px-2 py-0.5 rounded">令和8年2月20日（金）</span>
+            </p>
+            <p className="text-slate-700">
+              <span className="font-medium">特殊車両：</span>
+              <span className="text-red-600 font-bold bg-yellow-200 px-2 py-0.5 rounded">令和8年2月27日（金）</span>
+            </p>
+          </div>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/survey"
