@@ -210,10 +210,10 @@ export default function DashboardPage() {
             <div className="flex items-center gap-4">
               <Link
                 href="/download"
-                className="hidden sm:inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-blue-600 transition-colors"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-blue-600 transition-colors text-center"
               >
                 <Download className="w-4 h-4" />
-                資料ダウンロード
+                <span className="leading-tight">調査回答用エクセルファイル<br />ダウンロード</span>
               </Link>
               <Link
                 href="/contact"
@@ -497,10 +497,10 @@ export default function DashboardPage() {
             </Link>
             <Link
               href="/download"
-              className="inline-flex items-center gap-2 border border-slate-300 bg-white text-slate-700 px-6 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors"
+              className="inline-flex items-center gap-2 border border-slate-300 bg-white text-slate-700 px-6 py-3 rounded-lg font-medium hover:bg-slate-50 transition-colors text-center"
             >
               <Download className="w-5 h-5" />
-              資料ダウンロード
+              <span className="leading-tight">調査回答用エクセルファイル<br />ダウンロード</span>
             </Link>
           </div>
         </div>

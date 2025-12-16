@@ -55,9 +55,9 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-6">
               <Link
                 href="/download"
-                className="text-slate-600 hover:text-blue-600 transition-colors"
+                className="text-slate-600 hover:text-blue-600 transition-colors text-center leading-tight"
               >
-                資料ダウンロード
+                調査回答用エクセルファイル<br />ダウンロード
               </Link>
               <Link
                 href="/qa"
@@ -343,7 +343,7 @@ export default function Home() {
               <h4 className="text-white font-semibold mb-4">リンク</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/qa" className="hover:text-white transition-colors">よくある質問</Link></li>
-                <li><Link href="/download" className="hover:text-white transition-colors">資料ダウンロード</Link></li>
+                <li><Link href="/download" className="hover:text-white transition-colors">調査回答用エクセルファイル<br />ダウンロード</Link></li>
                 <li><Link href="/video" className="hover:text-white transition-colors">動画解説</Link></li>
                 <li><Link href="/ask" className="hover:text-white transition-colors">総合相談窓口</Link></li>
               </ul>
