@@ -21,10 +21,47 @@ import {
   Phone,
   Mail,
   Building,
+  Warehouse,
+  Upload,
+  Headphones,
 } from "lucide-react";
 import { Profile, SurveyDraft } from "@/types/profile";
 
 type SurveyStatus = "not_started" | "in_progress" | "submitted";
+type OfficeType = "single" | "multiple";
+
+interface OfficeTypeInfo {
+  type: OfficeType;
+  label: string;
+  description: string;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+}
+
+function getOfficeType(officeCount: number | string | null | undefined): OfficeTypeInfo {
+  const count = typeof officeCount === "string" ? parseInt(officeCount, 10) : officeCount;
+
+  if (!count || count === 1) {
+    return {
+      type: "single",
+      label: "1営業所",
+      description: "一般貨物運送事業の営業所が1か所の事業者様向け調査",
+      color: "text-emerald-700",
+      bgColor: "bg-emerald-50",
+      borderColor: "border-emerald-200",
+    };
+  }
+
+  return {
+    type: "multiple",
+    label: "2以上の営業所",
+    description: "一般貨物運送事業の営業所が2か所以上の事業者様向け調査",
+    color: "text-purple-700",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200",
+  };
+}
 
 interface SurveyStatusInfo {
   status: SurveyStatus;
@@ -123,6 +160,7 @@ export default function DashboardPage() {
   };
 
   const surveyStatus = getSurveyStatus(surveyDraft);
+  const officeType = getOfficeType(profile?.office_count);
 
   const menuItems = [
     {
@@ -137,18 +175,12 @@ export default function DashboardPage() {
       highlight: surveyStatus.status === "in_progress",
     },
     {
-      icon: <Download className="w-6 h-6" />,
-      title: "資料ダウンロード",
-      description: "調査票や記入例をダウンロード",
-      href: "/download",
+      icon: <Upload className="w-6 h-6" />,
+      title: "資料アップロード",
+      description: "調査資料をアップロード",
+      href: "#",
       color: "from-green-500 to-green-600",
-    },
-    {
-      icon: <HelpCircle className="w-6 h-6" />,
-      title: "よくあるご質問",
-      description: "調査やシステムについてのQ&A",
-      href: "/qa",
-      color: "from-orange-500 to-orange-600",
+      disabled: true,
     },
   ];
 
@@ -176,7 +208,21 @@ export default function DashboardPage() {
               </span>
             </Link>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-slate-600 hidden sm:block">
+              <Link
+                href="/download"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                資料ダウンロード
+              </Link>
+              <Link
+                href="/contact"
+                className="hidden sm:inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-blue-600 transition-colors"
+              >
+                <Headphones className="w-4 h-4" />
+                総合問合せ窓口
+              </Link>
+              <span className="text-sm text-slate-600 hidden sm:block border-l border-slate-300 pl-4">
                 {profile?.contact_name || user?.email}
               </span>
               <button
@@ -198,6 +244,34 @@ export default function DashboardPage() {
 
       {/* Main */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Office Type Banner */}
+        <div className={`rounded-2xl p-4 mb-6 border-2 ${officeType.bgColor} ${officeType.borderColor}`}>
+          <div className="flex items-center gap-4">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${officeType.type === "single" ? "bg-emerald-100" : "bg-purple-100"}`}>
+              <Warehouse className={`w-6 h-6 ${officeType.color}`} />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-3">
+                <span className={`text-xl font-bold ${officeType.color}`}>
+                  {officeType.label}
+                </span>
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${officeType.type === "single" ? "bg-emerald-100 text-emerald-700" : "bg-purple-100 text-purple-700"}`}>
+                  {officeType.type === "single" ? "簡易版" : "詳細版"}
+                </span>
+              </div>
+              <p className="text-slate-600 text-sm mt-1">{officeType.description}</p>
+            </div>
+            {profile?.office_count && (
+              <div className="text-right hidden sm:block">
+                <div className="text-xs text-slate-500">登録営業所数</div>
+                <div className={`text-2xl font-bold ${officeType.color}`}>
+                  {profile.office_count}<span className="text-sm font-normal ml-1">か所</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Welcome Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-slate-200">
           <div className="flex items-start gap-4">
@@ -233,18 +307,20 @@ export default function DashboardPage() {
 
         {/* Menu Grid */}
         <h2 className="text-xl font-bold text-slate-900 mb-4">メニュー</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {menuItems.map((item) => (
-            <Link key={item.title} href={item.href}>
+        <div className="grid md:grid-cols-2 gap-6">
+          {menuItems.map((item) => {
+            const content = (
               <div
-                className={`group h-full bg-white rounded-2xl p-6 border transition-all cursor-pointer ${
-                  item.highlight
-                    ? "border-blue-300 ring-2 ring-blue-100 hover:shadow-xl"
-                    : "border-slate-200 hover:border-slate-300 hover:shadow-lg"
+                className={`group h-full bg-white rounded-2xl p-6 border transition-all ${
+                  item.disabled
+                    ? "border-slate-200 opacity-60 cursor-not-allowed"
+                    : item.highlight
+                    ? "border-blue-300 ring-2 ring-blue-100 hover:shadow-xl cursor-pointer"
+                    : "border-slate-200 hover:border-slate-300 hover:shadow-lg cursor-pointer"
                 }`}
               >
                 <div
-                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} text-white mb-4 group-hover:scale-110 transition-transform`}
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} text-white mb-4 ${!item.disabled && "group-hover:scale-110"} transition-transform`}
                 >
                   {item.icon}
                 </div>
@@ -252,13 +328,29 @@ export default function DashboardPage() {
                   {item.title}
                 </h3>
                 <p className="text-slate-600 text-sm mb-4">{item.description}</p>
-                <span className="inline-flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
-                  開く
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </span>
+                {item.disabled ? (
+                  <span className="inline-flex items-center text-slate-400 text-sm font-medium">
+                    準備中
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
+                    開く
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </span>
+                )}
               </div>
-            </Link>
-          ))}
+            );
+
+            if (item.disabled) {
+              return <div key={item.title}>{content}</div>;
+            }
+
+            return (
+              <Link key={item.title} href={item.href}>
+                {content}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Business Info */}
