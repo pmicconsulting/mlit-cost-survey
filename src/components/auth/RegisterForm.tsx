@@ -231,51 +231,52 @@ export default function RegisterForm() {
               </div>
             </div>
 
-            {/* 郵便番号・住所 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  郵便番号
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    name="postal_code"
-                    value={formData.postal_code}
-                    onChange={handleChange}
-                    placeholder="123-4567"
-                    className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleSearchAddress}
-                    disabled={searchingAddress}
-                    className="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
-                  >
-                    {searchingAddress ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      <Search className="w-5 h-5" />
-                    )}
-                  </button>
-                </div>
+            {/* 郵便番号 */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
+                郵便番号
+              </label>
+              <div className="flex gap-2 max-w-xs">
+                <input
+                  type="text"
+                  name="postal_code"
+                  value={formData.postal_code}
+                  onChange={handleChange}
+                  placeholder="123-4567"
+                  className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={handleSearchAddress}
+                  disabled={searchingAddress}
+                  className="px-4 py-3 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex-shrink-0"
+                  title="住所を検索"
+                >
+                  {searchingAddress ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Search className="w-5 h-5" />
+                  )}
+                </button>
               </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  住所 <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    placeholder="東京都千代田区..."
-                    required
-                    className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                  />
-                </div>
+            </div>
+
+            {/* 住所 */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
+                住所 <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  placeholder="東京都千代田区..."
+                  required
+                  className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
               </div>
             </div>
 
@@ -297,7 +298,7 @@ export default function RegisterForm() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">
-                  一般貨物運送事業：営業所数
+                  一般貨物運送事業：営業所数 <span className="text-red-500">（必須）</span>
                 </label>
                 <input
                   type="number"
@@ -306,6 +307,7 @@ export default function RegisterForm() {
                   onChange={handleChange}
                   placeholder="1"
                   min="1"
+                  required
                   className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-center"
                 />
               </div>
