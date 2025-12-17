@@ -22,15 +22,10 @@ export async function POST(request: NextRequest) {
     }
 
     const adminEmail = "ask@mlit.site";
-    const fromEmail = process.env.AWS_SES_FROM_EMAIL || "noreply@example.com";
+    const fromEmail = "ask@mlit.site";
 
-    if (!adminEmail) {
-      console.error("管理者メールアドレスが設定されていません");
-      return NextResponse.json(
-        { error: "サーバー設定エラー" },
-        { status: 500 }
-      );
-    }
+    console.log("=== お問い合わせ処理開始 ===");
+    console.log("送信者メールアドレス:", email);
 
     const subject = "【国土交通省 適正原価実態調査】お問い合わせ";
 
@@ -107,7 +102,14 @@ ${message}
       },
     });
 
-    await sesClient.send(adminCommand);
+    try {
+      console.log("1. 管理者へのメール送信開始:", adminEmail);
+      const adminResult = await sesClient.send(adminCommand);
+      console.log("1. 管理者へのメール送信成功:", adminResult.MessageId);
+    } catch (adminError) {
+      console.error("1. 管理者へのメール送信失敗:", adminError);
+      throw adminError;
+    }
 
     // 送信者への確認メール
     const now = new Date();
@@ -203,8 +205,17 @@ ${message}
       },
     });
 
-    await sesClient.send(confirmCommand);
+    try {
+      console.log("2. 確認メール送信開始:", email);
+      const confirmResult = await sesClient.send(confirmCommand);
+      console.log("2. 確認メール送信成功:", confirmResult.MessageId);
+    } catch (confirmError) {
+      console.error("2. 確認メール送信失敗:", confirmError);
+      // 確認メールが失敗しても、管理者への通知は成功しているので
+      // エラーとせずに処理を続行（ただしログには記録）
+    }
 
+    console.log("=== お問い合わせ処理完了 ===");
     return NextResponse.json({ message: "お問い合わせを送信しました" });
   } catch (error) {
     console.error("お問い合わせ送信エラー:", error);
