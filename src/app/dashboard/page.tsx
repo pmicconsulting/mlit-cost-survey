@@ -289,9 +289,16 @@ export default function DashboardPage() {
         surveyStatus.status === "in_progress"
           ? `ステップ${surveyStatus.currentStep || 1}から再開`
           : "原価の実態について回答する",
-      href: "/survey",
+      href: "/survey/common/q2-q3",
       color: "from-blue-500 to-blue-600",
       highlight: surveyStatus.status === "in_progress",
+    },
+    {
+      icon: <HelpCircle className="w-6 h-6" />,
+      title: "車両選択ガイド",
+      description: "回答対象車両の確認",
+      href: "/select_truck",
+      color: "from-orange-500 to-orange-600",
     },
     {
       icon: <Upload className="w-6 h-6" />,
@@ -430,7 +437,7 @@ export default function DashboardPage() {
 
         {/* Menu Grid */}
         <h2 className="text-xl font-bold text-slate-900 mb-4">メニュー</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {menuItems.map((item) => {
             const content = (
               <div
