@@ -30,11 +30,11 @@ export function Q5AdministrativePenalty({ className = "" }: Q5AdministrativePena
         </div>
       </div>
 
-      <div className="space-y-3">
+      <div className="flex flex-wrap gap-3">
         {OPTIONS.map((option) => (
           <label
             key={option.value}
-            className={`flex items-center gap-3 p-4 rounded-lg cursor-pointer transition-colors border-2 ${
+            className={`flex items-center gap-2 px-4 py-3 rounded-lg cursor-pointer transition-colors border-2 ${
               data.hasAdministrativePenalty === option.value
                 ? "bg-blue-50 border-blue-300"
                 : "bg-white border-slate-200 hover:bg-slate-50"
