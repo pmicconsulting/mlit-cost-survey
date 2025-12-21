@@ -24,7 +24,11 @@ import {
   Warehouse,
   Upload,
   Headphones,
+  Pencil,
+  X,
+  Save,
 } from "lucide-react";
+import { BUSINESS_TYPES, BusinessType } from "@/types/profile";
 import { Profile, SurveyDraft } from "@/types/profile";
 
 type SurveyStatus = "not_started" | "in_progress" | "submitted";
@@ -106,6 +110,19 @@ function getSurveyStatus(draft: SurveyDraft | null): SurveyStatusInfo {
   };
 }
 
+// 編集フォームの型
+interface EditFormData {
+  business_name: string;
+  postal_code: string;
+  address: string;
+  business_number: string;
+  office_count: string;
+  permit_year: string;
+  business_types: BusinessType[];
+  contact_name: string;
+  phone: string;
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const supabase = createClient();
@@ -114,6 +131,22 @@ export default function DashboardPage() {
   const [surveyDraft, setSurveyDraft] = useState<SurveyDraft | null>(null);
   const [loading, setLoading] = useState(true);
   const [loggingOut, setLoggingOut] = useState(false);
+
+  // 編集モード関連
+  const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [editForm, setEditForm] = useState<EditFormData>({
+    business_name: "",
+    postal_code: "",
+    address: "",
+    business_number: "",
+    office_count: "",
+    permit_year: "",
+    business_types: [],
+    contact_name: "",
+    phone: "",
+  });
 
   useEffect(() => {
     const getUser = async () => {
@@ -157,6 +190,92 @@ export default function DashboardPage() {
     await supabase.auth.signOut();
     router.push("/");
     router.refresh();
+  };
+
+  // 編集モード開始
+  const handleStartEdit = () => {
+    if (profile) {
+      setEditForm({
+        business_name: profile.business_name || "",
+        postal_code: profile.postal_code || "",
+        address: profile.address || "",
+        business_number: profile.business_number || "",
+        office_count: profile.office_count?.toString() || "",
+        permit_year: profile.permit_year?.toString() || "",
+        business_types: profile.business_types || [],
+        contact_name: profile.contact_name || "",
+        phone: profile.phone || "",
+      });
+      setIsEditing(true);
+      setSaveMessage(null);
+    }
+  };
+
+  // 編集キャンセル
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setSaveMessage(null);
+  };
+
+  // フォーム入力変更
+  const handleFormChange = (field: keyof EditFormData, value: string | BusinessType[]) => {
+    setEditForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  // 事業種別のトグル
+  const handleBusinessTypeToggle = (type: BusinessType) => {
+    setEditForm((prev) => ({
+      ...prev,
+      business_types: prev.business_types.includes(type)
+        ? prev.business_types.filter((t) => t !== type)
+        : [...prev.business_types, type],
+    }));
+  };
+
+  // 保存処理
+  const handleSave = async () => {
+    if (!user || !profile) return;
+
+    setSaving(true);
+    setSaveMessage(null);
+
+    try {
+      const updateData = {
+        business_name: editForm.business_name,
+        postal_code: editForm.postal_code || null,
+        address: editForm.address,
+        business_number: editForm.business_number || null,
+        office_count: editForm.office_count ? parseInt(editForm.office_count, 10) : null,
+        permit_year: editForm.permit_year ? parseInt(editForm.permit_year, 10) : null,
+        business_types: editForm.business_types.length > 0 ? editForm.business_types : null,
+        contact_name: editForm.contact_name,
+        phone: editForm.phone,
+        updated_at: new Date().toISOString(),
+      };
+
+      const { error } = await supabase
+        .from("profiles")
+        .update(updateData)
+        .eq("id", profile.id);
+
+      if (error) {
+        throw error;
+      }
+
+      // プロファイルを更新
+      setProfile({
+        ...profile,
+        ...updateData,
+      } as Profile);
+
+      setSaveMessage({ type: "success", text: "登録情報を更新しました" });
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Update error:", error);
+      setSaveMessage({ type: "error", text: "更新に失敗しました。もう一度お試しください。" });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const surveyStatus = getSurveyStatus(surveyDraft);
@@ -355,29 +474,209 @@ export default function DashboardPage() {
 
         {/* Business Info */}
         <div className="mt-8 bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
-          <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <FileText className="w-5 h-5 text-blue-600" />
-            登録情報
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* 事業者情報 */}
-            <div>
-              <h3 className="text-sm font-semibold text-slate-700 mb-3 border-b border-slate-200 pb-2">
-                事業者情報
-              </h3>
-              <dl className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Building className="w-4 h-4 text-slate-400 mt-0.5" />
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <FileText className="w-5 h-5 text-blue-600" />
+              登録情報
+            </h2>
+            {!isEditing ? (
+              <button
+                onClick={handleStartEdit}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              >
+                <Pencil className="w-4 h-4" />
+                修正・変更
+              </button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleCancelEdit}
+                  disabled={saving}
+                  className="inline-flex items-center gap-2 px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium disabled:opacity-50"
+                >
+                  <X className="w-4 h-4" />
+                  キャンセル
+                </button>
+                <button
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium disabled:opacity-50"
+                >
+                  {saving ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Save className="w-4 h-4" />
+                  )}
+                  変更する
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* 保存メッセージ */}
+          {saveMessage && (
+            <div
+              className={`mb-4 p-3 rounded-lg ${
+                saveMessage.type === "success"
+                  ? "bg-green-50 text-green-700 border border-green-200"
+                  : "bg-red-50 text-red-700 border border-red-200"
+              }`}
+            >
+              {saveMessage.text}
+            </div>
+          )}
+
+          {isEditing ? (
+            /* 編集モード */
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* 事業者情報 */}
+              <div>
+                <h3 className="text-sm font-semibold text-slate-700 mb-3 border-b border-slate-200 pb-2">
+                  事業者情報
+                </h3>
+                <div className="space-y-4">
                   <div>
-                    <dt className="text-xs text-slate-500">事業者名</dt>
-                    <dd className="text-slate-900 font-medium">
-                      {profile?.business_name || "-"}
-                    </dd>
+                    <label className="block text-xs text-slate-500 mb-1">事業者名 *</label>
+                    <input
+                      type="text"
+                      value={editForm.business_name}
+                      onChange={(e) => handleFormChange("business_name", e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <label className="block text-xs text-slate-500 mb-1">郵便番号</label>
+                      <input
+                        type="text"
+                        value={editForm.postal_code}
+                        onChange={(e) => handleFormChange("postal_code", e.target.value)}
+                        placeholder="000-0000"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="block text-xs text-slate-500 mb-1">住所 *</label>
+                      <input
+                        type="text"
+                        value={editForm.address}
+                        onChange={(e) => handleFormChange("address", e.target.value)}
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs text-slate-500 mb-1">事業者番号</label>
+                    <input
+                      type="text"
+                      value={editForm.business_number}
+                      onChange={(e) => handleFormChange("business_number", e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-xs text-slate-500 mb-1">事業所数</label>
+                      <input
+                        type="number"
+                        value={editForm.office_count}
+                        onChange={(e) => handleFormChange("office_count", e.target.value)}
+                        min="1"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-slate-500 mb-1">事業許可年</label>
+                      <input
+                        type="number"
+                        value={editForm.permit_year}
+                        onChange={(e) => handleFormChange("permit_year", e.target.value)}
+                        placeholder="例: 2020"
+                        className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs text-slate-500 mb-2">事業種別</label>
+                    <div className="flex flex-wrap gap-2">
+                      {BUSINESS_TYPES.map((type) => (
+                        <button
+                          key={type.value}
+                          type="button"
+                          onClick={() => handleBusinessTypeToggle(type.value)}
+                          className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                            editForm.business_types.includes(type.value)
+                              ? "bg-blue-600 text-white"
+                              : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                          }`}
+                        >
+                          {type.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-slate-400 mt-0.5" />
+              </div>
+
+              {/* 記入者情報 */}
+              <div>
+                <h3 className="text-sm font-semibold text-slate-700 mb-3 border-b border-slate-200 pb-2">
+                  記入者情報
+                </h3>
+                <div className="space-y-4">
                   <div>
+                    <label className="block text-xs text-slate-500 mb-1">記入者名 *</label>
+                    <input
+                      type="text"
+                      value={editForm.contact_name}
+                      onChange={(e) => handleFormChange("contact_name", e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-slate-500 mb-1">連絡先電話番号 *</label>
+                    <input
+                      type="tel"
+                      value={editForm.phone}
+                      onChange={(e) => handleFormChange("phone", e.target.value)}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-slate-500 mb-1">メールアドレス</label>
+                    <p className="text-slate-500 text-sm bg-slate-50 px-3 py-2 rounded-lg">
+                      {user?.email || "-"}
+                      <span className="text-xs ml-2">(変更不可)</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* 表示モード */
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* 事業者情報 */}
+              <div>
+                <h3 className="text-sm font-semibold text-slate-700 mb-3 border-b border-slate-200 pb-2">
+                  事業者情報
+                </h3>
+                <dl className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Building className="w-4 h-4 text-slate-400 mt-0.5" />
+                    <div>
+                      <dt className="text-xs text-slate-500">事業者名</dt>
+                      <dd className="text-slate-900 font-medium">
+                        {profile?.business_name || "-"}
+                      </dd>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-4 h-4 text-slate-400 mt-0.5" />
+                    <div>
                     <dt className="text-xs text-slate-500">住所</dt>
                     <dd className="text-slate-900">
                       {profile?.postal_code && `〒${profile.postal_code} `}
@@ -470,12 +769,13 @@ export default function DashboardPage() {
               </dl>
             </div>
           </div>
+          )}
         </div>
 
         {/* Survey Info Banner */}
         <div className="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-100">
           <h3 className="text-lg font-bold text-slate-900 mb-3">
-            令和6年度 適正原価実態調査
+            国土交通省 適正原価に関する実態調査
           </h3>
           <div className="space-y-2 mb-4">
             <p className="text-slate-700">
@@ -489,7 +789,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/survey"
+              href="/survey/common/q2-q3"
               className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
             >
               <ClipboardCheck className="w-5 h-5" />
