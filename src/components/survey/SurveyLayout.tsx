@@ -60,6 +60,13 @@ export function SurveyLayout({
                 </div>
               )}
               {isDirty && <div className="w-2 h-2 bg-orange-400 rounded-full" title="未保存の変更があります" />}
+              {/* 開発用：確認画面へスキップ */}
+              <Link
+                href="/survey/confirm"
+                className="text-xs text-slate-400 hover:text-blue-600 underline"
+              >
+                確認画面へ
+              </Link>
             </div>
           </div>
         </div>
