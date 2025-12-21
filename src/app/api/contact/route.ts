@@ -9,6 +9,31 @@ const sesClient = new SESClient({
   },
 });
 
+// リトライ付きメール送信関数
+async function sendEmailWithRetry(
+  command: SendEmailCommand,
+  maxRetries: number = 3,
+  delayMs: number = 1000
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const result = await sesClient.send(command);
+      return { success: true, messageId: result.MessageId };
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`メール送信試行 ${attempt}/${maxRetries} 失敗:`, errorMessage);
+
+      if (attempt === maxRetries) {
+        return { success: false, error: errorMessage };
+      }
+
+      // 次のリトライまで待機
+      await new Promise(resolve => setTimeout(resolve, delayMs * attempt));
+    }
+  }
+  return { success: false, error: "最大リトライ回数に到達" };
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -102,14 +127,13 @@ ${message}
       },
     });
 
-    try {
-      console.log("1. 管理者へのメール送信開始:", adminEmail);
-      const adminResult = await sesClient.send(adminCommand);
-      console.log("1. 管理者へのメール送信成功:", adminResult.MessageId);
-    } catch (adminError) {
-      console.error("1. 管理者へのメール送信失敗:", adminError);
-      throw adminError;
+    console.log("1. 管理者へのメール送信開始:", adminEmail);
+    const adminResult = await sendEmailWithRetry(adminCommand);
+    if (!adminResult.success) {
+      console.error("1. 管理者へのメール送信失敗:", adminResult.error);
+      throw new Error(`管理者メール送信失敗: ${adminResult.error}`);
     }
+    console.log("1. 管理者へのメール送信成功:", adminResult.messageId);
 
     // 送信者への確認メール
     const now = new Date();
@@ -205,18 +229,27 @@ ${message}
       },
     });
 
-    try {
-      console.log("2. 確認メール送信開始:", email);
-      const confirmResult = await sesClient.send(confirmCommand);
-      console.log("2. 確認メール送信成功:", confirmResult.MessageId);
-    } catch (confirmError) {
-      console.error("2. 確認メール送信失敗:", confirmError);
-      // 確認メールが失敗しても、管理者への通知は成功しているので
-      // エラーとせずに処理を続行（ただしログには記録）
+    console.log("2. 確認メール送信開始:", email);
+    const confirmResult = await sendEmailWithRetry(confirmCommand);
+
+    let confirmEmailSent = true;
+    if (!confirmResult.success) {
+      console.error("2. 確認メール送信失敗:", confirmResult.error);
+      console.error("送信先アドレス:", email);
+      console.error("エラー詳細:", JSON.stringify(confirmResult, null, 2));
+      confirmEmailSent = false;
+    } else {
+      console.log("2. 確認メール送信成功:", confirmResult.messageId);
     }
 
     console.log("=== お問い合わせ処理完了 ===");
-    return NextResponse.json({ message: "お問い合わせを送信しました" });
+    console.log("管理者メール: 成功, 確認メール:", confirmEmailSent ? "成功" : "失敗");
+
+    return NextResponse.json({
+      message: "お問い合わせを送信しました",
+      confirmEmailSent,
+      ...(confirmEmailSent ? {} : { confirmEmailError: "確認メールの送信に失敗しましたが、お問い合わせは受け付けました" })
+    });
   } catch (error) {
     console.error("お問い合わせ送信エラー:", error);
     return NextResponse.json(

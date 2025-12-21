@@ -12,6 +12,7 @@ export default function ContactPage() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [confirmEmailSent, setConfirmEmailSent] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
@@ -27,11 +28,12 @@ export default function ContactPage() {
         body: JSON.stringify(contactForm),
       });
 
+      const data = await response.json();
       if (response.ok) {
         setSubmitted(true);
+        setConfirmEmailSent(data.confirmEmailSent !== false);
         setContactForm({ email: "", message: "" });
       } else {
-        const data = await response.json();
         setError(data.error || "送信に失敗しました。しばらく経ってから再度お試しください。");
       }
     } catch (err) {
@@ -92,10 +94,20 @@ export default function ContactPage() {
               <h2 className="text-xl font-bold text-slate-900 mb-2">
                 送信完了
               </h2>
-              <p className="text-slate-600 mb-6">
-                お問い合わせメールを送信完了しました。<br />
+              <p className="text-slate-600 mb-4">
+                お問い合わせを受け付けました。<br />
                 担当者からの連絡をお待ちください。
               </p>
+              {confirmEmailSent ? (
+                <p className="text-sm text-green-600 mb-6">
+                  ご入力いただいたメールアドレスに確認メールを送信しました。
+                </p>
+              ) : (
+                <p className="text-sm text-amber-600 mb-6">
+                  確認メールの送信に失敗しましたが、お問い合わせは正常に受け付けました。<br />
+                  迷惑メールフォルダもご確認ください。
+                </p>
+              )}
               <Link
                 href="/"
                 className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
