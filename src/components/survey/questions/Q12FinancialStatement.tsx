@@ -4,13 +4,13 @@ import { Calculator } from "lucide-react";
 import { useQ12 } from "../SurveyContext";
 import { Q12Data } from "../types";
 
-const Q12_ITEMS: { id: keyof Q12Data; label: string; category: string }[] = [
+const Q12_ITEMS: { id: keyof Q12Data; label: string; category: string; note?: string }[] = [
   { id: "revenue", label: "営業収益（合計）", category: "収益" },
   { id: "facilityUsageFee", label: "施設使用料", category: "費用" },
   { id: "facilityTax", label: "施設賦課税", category: "費用" },
   { id: "accidentCompensation", label: "事故賠償費", category: "費用" },
   { id: "otherExpenses", label: "その他", category: "費用" },
-  { id: "subcontractCost", label: "傭車費用", category: "費用" },
+  { id: "subcontractCost", label: "傭車費用", category: "費用", note: "（損益明細表の「その他」欄に傭車費が未記載の場合、ご確認の上、ご記入ください）" },
   { id: "adminExpenses", label: "一般管理費（合計）", category: "費用" },
   { id: "operatingExpenses", label: "営業費用（合計）", category: "費用" },
   { id: "operatingIncome", label: "営業損益", category: "損益" },
@@ -82,6 +82,9 @@ export function Q12FinancialStatement({ className = "" }: Q12FinancialStatementP
                     }`}
                   >
                     {item.label}
+                    {item.note && (
+                      <span className="block text-xs text-slate-500 mt-1">{item.note}</span>
+                    )}
                   </td>
                   <td className="border border-slate-300 px-4 py-2">
                     <div className="flex items-center justify-end gap-2">
