@@ -12,9 +12,8 @@ export default function DryvanStep6Page() {
         stepNumber={6}
         stepTitle="事業継続投資"
         prevHref="/survey/dryvan/step5"
-        nextHref="/survey/dryvan/confirm"
-        nextLabel="確認画面へ"
-        isLastStep
+        nextHref="/survey/dryvan/step7"
+        nextLabel="次へ"
       >
         <Q16BusinessInvestment />
       </SurveyLayout>
