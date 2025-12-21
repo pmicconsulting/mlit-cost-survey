@@ -134,68 +134,84 @@ export default function UploadPage() {
     setError(null);
     setSuccess(null);
 
-    const file = fileList[0];
+    const files = Array.from(fileList);
+    const totalFiles = files.length;
 
-    // バリデーション
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      setError("対応していないファイル形式です。PDF、Excel、画像ファイルをアップロードしてください。");
-      return;
-    }
-
-    if (file.size > MAX_FILE_SIZE) {
-      setError("ファイルサイズが500MBを超えています。");
-      return;
+    // 全ファイルのバリデーション
+    for (const file of files) {
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        setError(`「${file.name}」は対応していないファイル形式です。PDF、Excel、画像ファイルをアップロードしてください。`);
+        return;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        setError(`「${file.name}」のファイルサイズが500MBを超えています。`);
+        return;
+      }
     }
 
     setUploading(true);
-    setUploadProgress("アップロード中...");
+    let successCount = 0;
+    let failedFiles: string[] = [];
 
-    try {
-      // ファイルパスを生成
-      const timestamp = Date.now();
-      const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const filePath = `${user.id}/${timestamp}_${sanitizedFileName}`;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      setUploadProgress(`アップロード中... (${i + 1}/${totalFiles}) ${file.name}`);
 
-      // Supabase Storageにアップロード
-      const { error: uploadError } = await supabase.storage
-        .from("survey-documents")
-        .upload(filePath, file, {
-          cacheControl: "3600",
-          upsert: false,
-        });
+      try {
+        // ファイルパスを生成
+        const timestamp = Date.now();
+        const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const filePath = `${user.id}/${timestamp}_${sanitizedFileName}`;
 
-      if (uploadError) {
-        throw uploadError;
+        // Supabase Storageにアップロード
+        const { error: uploadError } = await supabase.storage
+          .from("survey-documents")
+          .upload(filePath, file, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+        if (uploadError) {
+          throw uploadError;
+        }
+
+        // メタデータをDBに保存
+        const { error: dbError } = await supabase
+          .from("uploaded_files")
+          .insert({
+            user_id: user.id,
+            file_name: file.name,
+            file_path: filePath,
+            file_size: file.size,
+            mime_type: file.type,
+          });
+
+        if (dbError) {
+          // DBエラーの場合、アップロードしたファイルを削除
+          await supabase.storage.from("survey-documents").remove([filePath]);
+          throw dbError;
+        }
+
+        successCount++;
+      } catch (err) {
+        console.error(`Upload error for ${file.name}:`, err);
+        failedFiles.push(file.name);
       }
-
-      setUploadProgress("メタデータを保存中...");
-
-      // メタデータをDBに保存
-      const { error: dbError } = await supabase
-        .from("uploaded_files")
-        .insert({
-          user_id: user.id,
-          file_name: file.name,
-          file_path: filePath,
-          file_size: file.size,
-          mime_type: file.type,
-        });
-
-      if (dbError) {
-        // DBエラーの場合、アップロードしたファイルを削除
-        await supabase.storage.from("survey-documents").remove([filePath]);
-        throw dbError;
-      }
-
-      setSuccess(`「${file.name}」をアップロードしました。`);
-      await fetchFiles(user.id);
-    } catch (err) {
-      console.error("Upload error:", err);
-      setError("アップロードに失敗しました。もう一度お試しください。");
-    } finally {
-      setUploading(false);
-      setUploadProgress(null);
     }
+
+    await fetchFiles(user.id);
+
+    if (failedFiles.length === 0) {
+      setSuccess(`${successCount}件のファイルをアップロードしました。`);
+    } else if (successCount > 0) {
+      setSuccess(`${successCount}件のファイルをアップロードしました。`);
+      setError(`${failedFiles.length}件のファイルが失敗しました: ${failedFiles.join(", ")}`);
+    } else {
+      setError("アップロードに失敗しました。もう一度お試しください。");
+    }
+
+    setUploading(false);
+    setUploadProgress(null);
   };
 
   const handleDelete = async (file: UploadedFile) => {
@@ -365,10 +381,11 @@ export default function UploadPage() {
                   className="hidden"
                   accept=".pdf,.xls,.xlsx,.doc,.docx,.jpg,.jpeg,.png,.gif,.webp"
                   onChange={handleFileInput}
+                  multiple
                 />
               </label>
               <p className="text-slate-400 text-xs mt-4">
-                対応形式: PDF, Excel, Word, 画像 (JPEG, PNG, GIF, WebP)
+                対応形式: PDF, Excel, Word, 画像 (JPEG, PNG, GIF, WebP) ・ 複数ファイル選択可
               </p>
             </>
           )}
