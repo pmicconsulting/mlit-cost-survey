@@ -19,12 +19,20 @@ async function sendEmailWithRetry(
     try {
       const result = await sesClient.send(command);
       return { success: true, messageId: result.MessageId };
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error(`メール送信試行 ${attempt}/${maxRetries} 失敗:`, errorMessage);
+    } catch (error: unknown) {
+      const err = error as { name?: string; message?: string; code?: string; $metadata?: { httpStatusCode?: number } };
+      const errorMessage = err.message || String(error);
+      const errorCode = err.code || err.name || 'Unknown';
+      const httpStatus = err.$metadata?.httpStatusCode || 'N/A';
+      console.error(`メール送信試行 ${attempt}/${maxRetries} 失敗:`, {
+        errorCode,
+        errorMessage,
+        httpStatus,
+        fullError: JSON.stringify(error, null, 2)
+      });
 
       if (attempt === maxRetries) {
-        return { success: false, error: errorMessage };
+        return { success: false, error: `${errorCode}: ${errorMessage}` };
       }
 
       // 次のリトライまで待機
@@ -248,7 +256,9 @@ ${message}
     return NextResponse.json({
       message: "お問い合わせを送信しました",
       confirmEmailSent,
-      ...(confirmEmailSent ? {} : { confirmEmailError: "確認メールの送信に失敗しましたが、お問い合わせは受け付けました" })
+      ...(confirmEmailSent ? {} : {
+        confirmEmailError: confirmResult.error || "確認メールの送信に失敗しましたが、お問い合わせは受け付けました"
+      })
     });
   } catch (error) {
     console.error("お問い合わせ送信エラー:", error);

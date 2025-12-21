@@ -13,6 +13,7 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [confirmEmailSent, setConfirmEmailSent] = useState(true);
+  const [confirmEmailError, setConfirmEmailError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleContactSubmit = async (e: React.FormEvent) => {
@@ -32,6 +33,9 @@ export default function ContactPage() {
       if (response.ok) {
         setSubmitted(true);
         setConfirmEmailSent(data.confirmEmailSent !== false);
+        if (data.confirmEmailError) {
+          setConfirmEmailError(data.confirmEmailError);
+        }
         setContactForm({ email: "", message: "" });
       } else {
         setError(data.error || "送信に失敗しました。しばらく経ってから再度お試しください。");
@@ -103,10 +107,16 @@ export default function ContactPage() {
                   ご入力いただいたメールアドレスに確認メールを送信しました。
                 </p>
               ) : (
-                <p className="text-sm text-amber-600 mb-6">
-                  確認メールの送信に失敗しましたが、お問い合わせは正常に受け付けました。<br />
-                  迷惑メールフォルダもご確認ください。
-                </p>
+                <div className="mb-6">
+                  <p className="text-sm text-amber-600">
+                    確認メールの送信に失敗しましたが、お問い合わせは正常に受け付けました。
+                  </p>
+                  {confirmEmailError && (
+                    <p className="text-xs text-slate-500 mt-2">
+                      エラー詳細: {confirmEmailError}
+                    </p>
+                  )}
+                </div>
               )}
               <Link
                 href="/"
