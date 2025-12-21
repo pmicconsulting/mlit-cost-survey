@@ -25,7 +25,7 @@ export function Q41VehicleSpecs() {
             value={data.officeName}
             onChange={(e) => update({ officeName: e.target.value })}
             placeholder="例：東京営業所"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.officeName ? 'input-filled' : 'flash-pink'}`}
           />
         </div>
 
@@ -41,7 +41,7 @@ export function Q41VehicleSpecs() {
                 value={data.maxLoadCapacity}
                 onChange={(e) => update({ maxLoadCapacity: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.maxLoadCapacity ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">トン</span>
             </div>
@@ -57,7 +57,7 @@ export function Q41VehicleSpecs() {
                 value={data.grossVehicleWeight}
                 onChange={(e) => update({ grossVehicleWeight: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.grossVehicleWeight ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">トン</span>
             </div>
@@ -73,7 +73,7 @@ export function Q41VehicleSpecs() {
                 value={data.displacement}
                 onChange={(e) => update({ displacement: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.displacement ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">リットル</span>
             </div>
@@ -89,7 +89,7 @@ export function Q41VehicleSpecs() {
                 value={data.axleCount}
                 onChange={(e) => update({ axleCount: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.axleCount ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">本</span>
             </div>
@@ -105,7 +105,7 @@ export function Q41VehicleSpecs() {
                 value={data.registrationYear}
                 onChange={(e) => update({ registrationYear: e.target.value })}
                 placeholder="例：2020"
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.registrationYear ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">年</span>
             </div>
@@ -121,7 +121,7 @@ export function Q41VehicleSpecs() {
                 value={data.plannedUsageYears}
                 onChange={(e) => update({ plannedUsageYears: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.plannedUsageYears ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">年</span>
             </div>

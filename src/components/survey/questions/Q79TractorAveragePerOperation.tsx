@@ -26,7 +26,7 @@ export function Q79TractorAveragePerOperation() {
                 value={data.averageTransportDistance}
                 onChange={(e) => update({ averageTransportDistance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.averageTransportDistance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">km</span>
             </div>
@@ -42,7 +42,7 @@ export function Q79TractorAveragePerOperation() {
                 value={data.averageRoundCount}
                 onChange={(e) => update({ averageRoundCount: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.averageRoundCount ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">回/日</span>
             </div>

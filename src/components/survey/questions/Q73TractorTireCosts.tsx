@@ -26,7 +26,7 @@ export function Q73TractorTireCosts() {
                 value={data.tireUnitPrice}
                 onChange={(e) => update({ tireUnitPrice: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.tireUnitPrice ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/本</span>
             </div>
@@ -42,7 +42,7 @@ export function Q73TractorTireCosts() {
                 value={data.tireCount}
                 onChange={(e) => update({ tireCount: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.tireCount ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">本/両</span>
             </div>
@@ -58,7 +58,7 @@ export function Q73TractorTireCosts() {
                 value={data.tireChangeLaborCost}
                 onChange={(e) => update({ tireChangeLaborCost: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.tireChangeLaborCost ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/回</span>
             </div>
@@ -74,7 +74,7 @@ export function Q73TractorTireCosts() {
                 value={data.tireChangeDistance}
                 onChange={(e) => update({ tireChangeDistance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.tireChangeDistance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">km/回</span>
             </div>

@@ -26,7 +26,7 @@ export function Q72TractorOilCosts() {
                 value={data.oilUnitPrice}
                 onChange={(e) => update({ oilUnitPrice: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.oilUnitPrice ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/L</span>
             </div>
@@ -42,7 +42,7 @@ export function Q72TractorOilCosts() {
                 value={data.oilChangeVolume}
                 onChange={(e) => update({ oilChangeVolume: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.oilChangeVolume ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">L/回</span>
             </div>
@@ -58,7 +58,7 @@ export function Q72TractorOilCosts() {
                 value={data.oilChangeDistance}
                 onChange={(e) => update({ oilChangeDistance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.oilChangeDistance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">km</span>
             </div>
@@ -74,7 +74,7 @@ export function Q72TractorOilCosts() {
                 value={data.oilChangeLaborCost}
                 onChange={(e) => update({ oilChangeLaborCost: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.oilChangeLaborCost ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/回</span>
             </div>

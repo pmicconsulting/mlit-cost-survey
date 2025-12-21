@@ -27,7 +27,7 @@ export function Q49Insurance() {
                 value={data.compulsoryInsurance}
                 onChange={(e) => update({ compulsoryInsurance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.compulsoryInsurance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円</span>
             </div>
@@ -44,7 +44,7 @@ export function Q49Insurance() {
                 value={data.voluntaryInsurance}
                 onChange={(e) => update({ voluntaryInsurance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.voluntaryInsurance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円</span>
             </div>

@@ -26,7 +26,7 @@ export function Q74TractorUreaCosts() {
                 value={data.ureaUnitPrice}
                 onChange={(e) => update({ ureaUnitPrice: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.ureaUnitPrice ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/L</span>
             </div>
@@ -42,7 +42,7 @@ export function Q74TractorUreaCosts() {
                 value={data.ureaDistancePerLiter}
                 onChange={(e) => update({ ureaDistancePerLiter: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.ureaDistancePerLiter ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">km/L</span>
             </div>

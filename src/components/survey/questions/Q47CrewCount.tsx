@@ -21,7 +21,7 @@ export function Q47CrewCount() {
             value={data.averageCrewCount}
             onChange={(e) => update({ averageCrewCount: e.target.value })}
             placeholder=""
-            className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className={`w-24 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.averageCrewCount ? 'input-filled' : 'flash-pink'}`}
           />
           <span className="text-gray-600">人</span>
         </div>

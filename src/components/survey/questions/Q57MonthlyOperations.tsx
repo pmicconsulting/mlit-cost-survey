@@ -26,7 +26,7 @@ export function Q57MonthlyOperations() {
                 value={data.loadRate}
                 onChange={(e) => update({ loadRate: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadRate ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">%/月</span>
             </div>
@@ -42,7 +42,7 @@ export function Q57MonthlyOperations() {
                 value={data.totalDistance}
                 onChange={(e) => update({ totalDistance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.totalDistance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">km/月</span>
             </div>
@@ -58,7 +58,7 @@ export function Q57MonthlyOperations() {
                 value={data.actualDistance}
                 onChange={(e) => update({ actualDistance: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.actualDistance ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">km/月</span>
             </div>
@@ -74,7 +74,7 @@ export function Q57MonthlyOperations() {
                 value={data.workingDays}
                 onChange={(e) => update({ workingDays: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.workingDays ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">日/月</span>
             </div>
@@ -90,7 +90,7 @@ export function Q57MonthlyOperations() {
                 value={data.transportTonnage}
                 onChange={(e) => update({ transportTonnage: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transportTonnage ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">トン/月</span>
             </div>
@@ -106,7 +106,7 @@ export function Q57MonthlyOperations() {
                 value={data.dailyWorkingHours}
                 onChange={(e) => update({ dailyWorkingHours: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.dailyWorkingHours ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-16">時間/日</span>
             </div>

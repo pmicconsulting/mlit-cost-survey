@@ -84,7 +84,7 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
                       min="0"
                       value={data.driverCount[cat.id]}
                       onChange={(e) => handleDriverCountChange(cat.id, e.target.value)}
-                      className="w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm"
+                      className={`w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${data.driverCount[cat.id] ? 'input-filled' : 'flash-pink'}`}
                       placeholder="0"
                     />
                     <span className="text-xs text-slate-500">人</span>
@@ -115,7 +115,7 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
                         onChange={(e) =>
                           handleMetricChange(cat.id, metric.id as DriverMetricId, e.target.value)
                         }
-                        className="w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm"
+                        className={`w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${data.drivers[cat.id][metric.id as keyof DriverMetrics] ? 'input-filled' : 'flash-pink'}`}
                         placeholder="-"
                       />
                       <span className="text-xs text-slate-500 w-8 text-left">{metric.unit}</span>

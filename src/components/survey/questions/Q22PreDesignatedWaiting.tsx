@@ -41,7 +41,7 @@ export function Q22PreDesignatedWaiting() {
                 type="text"
                 value={data.waitingNotCollected.maxHours}
                 onChange={(e) => handleNotCollectedChange("maxHours", e.target.value)}
-                className="w-20 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                className={`w-20 px-2 py-1 border border-gray-300 rounded text-right ${data.waitingNotCollected.maxHours ? "input-filled" : "flash-pink"}`}
               />
               <span className="text-gray-600">時間</span>
             </div>

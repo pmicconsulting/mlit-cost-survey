@@ -27,7 +27,7 @@ export function Q69TractorTaxes() {
                 value={data.environmentTax}
                 onChange={(e) => update({ environmentTax: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.environmentTax ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円</span>
             </div>
@@ -44,7 +44,7 @@ export function Q69TractorTaxes() {
                 value={data.vehicleTax}
                 onChange={(e) => update({ vehicleTax: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.vehicleTax ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円</span>
             </div>
@@ -61,7 +61,7 @@ export function Q69TractorTaxes() {
                 value={data.weightTax}
                 onChange={(e) => update({ weightTax: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.weightTax ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円</span>
             </div>

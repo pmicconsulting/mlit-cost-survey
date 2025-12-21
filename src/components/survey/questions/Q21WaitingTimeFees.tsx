@@ -51,7 +51,7 @@ export function Q21WaitingTimeFees() {
                 type="text"
                 value={data.separateCollection.hourlyRate}
                 onChange={(e) => handleSeparateChange("hourlyRate", e.target.value)}
-                className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.separateCollection.hourlyRate ? "input-filled" : "flash-pink"}`}
               />
               <span className="text-gray-600">円（税込）</span>
             </div>
@@ -76,7 +76,7 @@ export function Q21WaitingTimeFees() {
                 type="text"
                 value={data.includedInFare.hourlyRate}
                 onChange={(e) => handleIncludedChange("hourlyRate", e.target.value)}
-                className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.includedInFare.hourlyRate ? "input-filled" : "flash-pink"}`}
               />
               <span className="text-gray-600">円（税込）</span>
             </div>
@@ -101,7 +101,7 @@ export function Q21WaitingTimeFees() {
                 type="text"
                 value={data.notCollected.lossAmount}
                 onChange={(e) => handleNotCollectedChange("lossAmount", e.target.value)}
-                className="w-28 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                className={`w-28 px-2 py-1 border border-gray-300 rounded text-right ${data.notCollected.lossAmount ? "input-filled" : "flash-pink"}`}
               />
               <span className="text-gray-600">千円</span>
             </div>

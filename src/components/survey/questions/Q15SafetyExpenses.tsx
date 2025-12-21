@@ -113,98 +113,107 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
       </div>
 
       {/* カテゴリごとの項目 */}
-      {SAFETY_ITEMS.map((category) => (
-        <div key={category.category} className="mb-6">
-          <div className="bg-blue-600 text-white px-4 py-2 rounded-t-lg font-bold text-sm">
-            【{category.category}】
-          </div>
+      {SAFETY_ITEMS.map((category) => {
+        // カテゴリ内に時間入力項目があるかチェック
+        const hasTimeItems = category.items.some((item) => item.hasTime);
 
-          <div className="border border-slate-200 rounded-b-lg overflow-hidden">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-slate-100">
-                  <th className="px-4 py-2 text-left text-sm font-medium text-slate-700">項目</th>
-                  <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-32">
-                    年間受講時間
-                  </th>
-                  <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-36">
-                    <div className="text-xs leading-tight">
-                      概算額（年間の平均<br />支出額・償却額）税込
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {category.items.map((item, index) => {
-                  const itemData = data.items[item.id] || { checked: false, hours: "", amount: "" };
-                  const isChecked = itemData.checked;
+        return (
+          <div key={category.category} className="mb-6">
+            <div className="bg-blue-600 text-white px-4 py-2 rounded-t-lg font-bold text-sm">
+              【{category.category}】
+            </div>
 
-                  return (
-                    <tr
-                      key={item.id}
-                      className={`${index % 2 === 0 ? "bg-white" : "bg-slate-50"} ${
-                        isChecked ? "bg-blue-50" : ""
-                      }`}
-                    >
-                      <td className="px-4 py-3">
-                        <label className="flex items-start gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => handleToggle(item.id)}
-                            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
-                          />
-                          <span
-                            className={`text-sm ${
-                              isChecked ? "text-blue-700 font-medium" : "text-slate-700"
-                            }`}
-                          >
-                            {item.label}
-                          </span>
-                        </label>
-                      </td>
-                      <td className="px-4 py-2 text-center">
-                        {item.hasTime ? (
+            <div className="border border-slate-200 rounded-b-lg overflow-hidden">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-slate-100">
+                    <th className="px-4 py-2 text-left text-sm font-medium text-slate-700">項目</th>
+                    {hasTimeItems && (
+                      <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-32">
+                        年間受講時間
+                      </th>
+                    )}
+                    <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-36">
+                      <div className="text-xs leading-tight">
+                        概算額（年間の平均<br />支出額・償却額）税込
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {category.items.map((item, index) => {
+                    const itemData = data.items[item.id] || { checked: false, hours: "", amount: "" };
+                    const isChecked = itemData.checked;
+
+                    return (
+                      <tr
+                        key={item.id}
+                        className={`${index % 2 === 0 ? "bg-white" : "bg-slate-50"} ${
+                          isChecked ? "bg-blue-50" : ""
+                        }`}
+                      >
+                        <td className="px-4 py-3">
+                          <label className="flex items-start gap-3 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => handleToggle(item.id)}
+                              className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
+                            />
+                            <span
+                              className={`text-sm ${
+                                isChecked ? "text-blue-700 font-medium" : "text-slate-700"
+                              }`}
+                            >
+                              {item.label}
+                            </span>
+                          </label>
+                        </td>
+                        {hasTimeItems && (
+                          <td className="px-4 py-2 text-center">
+                            {item.hasTime ? (
+                              <div className="flex items-center justify-center gap-1">
+                                <input
+                                  type="text"
+                                  value={itemData.hours}
+                                  onChange={(e) => handleHoursChange(item.id, e.target.value)}
+                                  disabled={!isChecked}
+                                  className={`w-16 px-2 py-1 border rounded text-right text-sm ${
+                                    isChecked ? `border-blue-300 bg-white ${itemData.hours ? 'input-filled' : 'flash-pink'}` : "border-slate-200 bg-slate-100"
+                                  }`}
+                                  placeholder="-"
+                                />
+                                <span className="text-xs text-slate-500">時間/年</span>
+                              </div>
+                            ) : (
+                              <span className="text-slate-400">-</span>
+                            )}
+                          </td>
+                        )}
+                        <td className="px-4 py-2 text-center">
                           <div className="flex items-center justify-center gap-1">
                             <input
                               type="text"
-                              value={itemData.hours}
-                              onChange={(e) => handleHoursChange(item.id, e.target.value)}
+                              value={itemData.amount}
+                              onChange={(e) => handleAmountChange(item.id, e.target.value)}
                               disabled={!isChecked}
                               className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                                isChecked ? "border-blue-300 bg-white flash-pink" : "border-slate-200 bg-slate-100"
+                                isChecked ? `border-blue-300 bg-white ${itemData.amount ? 'input-filled' : 'flash-pink'}` : "border-slate-200 bg-slate-100"
                               }`}
                               placeholder="-"
                             />
-                            <span className="text-xs text-slate-500">時間/年</span>
+                            <span className="text-xs text-slate-500">万円/年</span>
                           </div>
-                        ) : (
-                          <span className="text-slate-400">-</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-2 text-center">
-                        <div className="flex items-center justify-center gap-1">
-                          <input
-                            type="text"
-                            value={itemData.amount}
-                            onChange={(e) => handleAmountChange(item.id, e.target.value)}
-                            disabled={!isChecked}
-                            className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                              isChecked ? "border-blue-300 bg-white flash-pink" : "border-slate-200 bg-slate-100"
-                            }`}
-                            placeholder="-"
-                          />
-                          <span className="text-xs text-slate-500">万円/年</span>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* その他 */}
       <div className="mb-6">
@@ -233,7 +242,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                       type="text"
                       value={data.otherDescription || ""}
                       onChange={(e) => update({ otherDescription: e.target.value })}
-                      className="mt-2 ml-8 w-64 px-3 py-2 border border-blue-300 rounded-lg text-sm flash-pink"
+                      className={`mt-2 ml-8 w-64 px-3 py-2 border border-blue-300 rounded-lg text-sm ${data.otherDescription ? 'input-filled' : 'flash-pink'}`}
                       placeholder="内容を入力"
                     />
                   )}
@@ -249,7 +258,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                       onChange={(e) => handleOtherAmountChange(e.target.value)}
                       disabled={!data.items.otherSafety?.checked}
                       className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                        data.items.otherSafety?.checked ? "border-blue-300 bg-white flash-pink" : "border-slate-200 bg-slate-100"
+                        data.items.otherSafety?.checked ? `border-blue-300 bg-white ${data.items.otherSafety?.amount ? 'input-filled' : 'flash-pink'}` : "border-slate-200 bg-slate-100"
                       }`}
                       placeholder="-"
                     />

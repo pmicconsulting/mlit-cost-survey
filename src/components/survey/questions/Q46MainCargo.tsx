@@ -20,7 +20,7 @@ export function Q46MainCargo() {
           value={data.mainCargo}
           onChange={(e) => update({ mainCargo: e.target.value })}
           placeholder="例：食品、日用品、機械部品など"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.mainCargo ? 'input-filled' : 'flash-pink'}`}
         />
       </div>
     </div>

@@ -99,6 +99,17 @@ export function Q17AncillaryWorkFees() {
                 };
                 const isOther = item.id === "other";
 
+                // いずれか1つでも入力があればtrue
+                const hasAnyInput = itemData.includedInFare || itemData.hourlyRate || itemData.lossAmount;
+
+                // 相互排他的な無効化ロジック
+                // 1時間当たり収受額が入力されている → 他の2つを無効化
+                // 含まれているがチェックされている → 他の2つを無効化
+                // 収入損失額が入力されている → 他の2つを無効化
+                const hourlyRateDisabled = isDisabled || !itemData.selected || itemData.includedInFare || !!itemData.lossAmount;
+                const includedInFareDisabled = isDisabled || !itemData.selected || !!itemData.hourlyRate || !!itemData.lossAmount;
+                const lossAmountDisabled = isDisabled || !itemData.selected || !!itemData.hourlyRate || itemData.includedInFare;
+
                 return (
                   <tr
                     key={item.id}
@@ -132,8 +143,7 @@ export function Q17AncillaryWorkFees() {
                             }
                             disabled={isDisabled || !itemData.selected}
                             placeholder="内容を記入"
-                            className={`flex-1 px-2 py-1 border border-gray-300 rounded text-sm
-                              ${itemData.selected && !isDisabled ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                            className="flex-1 px-2 py-1 border border-gray-300 rounded text-sm disabled:bg-gray-100 disabled:text-gray-400"
                           />
                         )}
                       </div>
@@ -148,10 +158,10 @@ export function Q17AncillaryWorkFees() {
                           onChange={(e) =>
                             handleItemChange(item.id, "hourlyRate", e.target.value)
                           }
-                          disabled={isDisabled || !itemData.selected || itemData.includedInFare}
+                          disabled={hourlyRateDisabled}
                           placeholder=""
                           className={`w-full px-2 py-1 border border-gray-300 rounded text-right
-                            ${itemData.selected && !itemData.includedInFare && !isDisabled ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                            ${itemData.selected && !hourlyRateDisabled ? (hasAnyInput ? "input-filled" : "flash-pink") : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                         />
                         <span className="text-gray-500 whitespace-nowrap">円</span>
                       </div>
@@ -159,15 +169,21 @@ export function Q17AncillaryWorkFees() {
 
                     {/* 運賃に含まれている */}
                     <td className="border border-gray-300 px-3 py-2 text-center">
-                      <input
-                        type="checkbox"
-                        checked={itemData.includedInFare}
-                        onChange={(e) =>
-                          handleItemChange(item.id, "includedInFare", e.target.checked)
-                        }
-                        disabled={isDisabled || !itemData.selected}
-                        className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-                      />
+                      <div className={`inline-block p-1 rounded ${
+                        itemData.selected && !includedInFareDisabled && !hasAnyInput ? "flash-pink" : ""
+                      }`}>
+                        <input
+                          type="checkbox"
+                          checked={itemData.includedInFare}
+                          onChange={(e) =>
+                            handleItemChange(item.id, "includedInFare", e.target.checked)
+                          }
+                          disabled={includedInFareDisabled}
+                          className={`w-4 h-4 rounded focus:ring-blue-500 ${
+                            hasAnyInput ? "text-blue-600" : "text-gray-400"
+                          }`}
+                        />
+                      </div>
                     </td>
 
                     {/* 収入損失額 */}
@@ -179,10 +195,10 @@ export function Q17AncillaryWorkFees() {
                           onChange={(e) =>
                             handleItemChange(item.id, "lossAmount", e.target.value)
                           }
-                          disabled={isDisabled || !itemData.selected}
+                          disabled={lossAmountDisabled}
                           placeholder=""
                           className={`w-full px-2 py-1 border border-gray-300 rounded text-right
-                            ${itemData.selected && !isDisabled ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                            ${itemData.selected && !lossAmountDisabled ? (hasAnyInput ? "input-filled" : "flash-pink") : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                         />
                         <span className="text-gray-500 whitespace-nowrap">円</span>
                       </div>

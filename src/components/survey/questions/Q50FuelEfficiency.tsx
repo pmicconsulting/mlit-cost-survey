@@ -21,7 +21,7 @@ export function Q50FuelEfficiency() {
             value={data.fuelEfficiency}
             onChange={(e) => update({ fuelEfficiency: e.target.value })}
             placeholder=""
-            className="w-24 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            className={`w-24 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.fuelEfficiency ? 'input-filled' : 'flash-pink'}`}
           />
           <span className="text-gray-600">km/L</span>
         </div>

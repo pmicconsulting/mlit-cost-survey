@@ -27,7 +27,7 @@ export function Q76TractorCargoHandlingSupplies() {
                 value={data.cargoHandlingSupplies}
                 onChange={(e) => update({ cargoHandlingSupplies: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.cargoHandlingSupplies ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/年</span>
             </div>
@@ -44,7 +44,7 @@ export function Q76TractorCargoHandlingSupplies() {
                 value={data.liftingEquipment}
                 onChange={(e) => update({ liftingEquipment: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.liftingEquipment ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/台</span>
             </div>
@@ -60,7 +60,7 @@ export function Q76TractorCargoHandlingSupplies() {
                 value={data.helmet}
                 onChange={(e) => update({ helmet: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.helmet ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/個</span>
             </div>
@@ -76,7 +76,7 @@ export function Q76TractorCargoHandlingSupplies() {
                 value={data.safetyClothing}
                 onChange={(e) => update({ safetyClothing: e.target.value })}
                 placeholder=""
-                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.safetyClothing ? 'input-filled' : 'flash-pink'}`}
               />
               <span className="text-gray-600 w-12">円/人</span>
             </div>

@@ -25,7 +25,7 @@ export function Q60SpecialPermitCost() {
               value={data.specialPermitCost}
               onChange={(e) => update({ specialPermitCost: e.target.value })}
               placeholder=""
-              className="w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.specialPermitCost ? 'input-filled' : 'flash-pink'}`}
             />
             <span className="text-gray-600">円/年</span>
           </div>
