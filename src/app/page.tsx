@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
-  Building2,
   ClipboardCheck,
   LogIn,
   User,
@@ -46,11 +46,15 @@ export default function Home() {
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
-              <Building2 className="w-8 h-8 text-blue-600" />
-              <span className="font-bold text-lg text-slate-800">
-                国土交通省
-              </span>
+            <div className="flex items-center">
+              <Image
+                src="/mlit_logo.png"
+                alt="国土交通省"
+                width={180}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
             </div>
             <nav className="hidden md:flex items-center gap-6">
               <Link
@@ -331,9 +335,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Building2 className="w-6 h-6 text-blue-400" />
-                <span className="text-white font-semibold">国土交通省</span>
+              <div className="flex items-center mb-4">
+                <Image
+                  src="/mlit_logo.png"
+                  alt="国土交通省"
+                  width={150}
+                  height={33}
+                  className="h-8 w-auto brightness-0 invert"
+                />
               </div>
               <p className="text-sm">
                 一般貨物自動車運送事業 適正原価に関する実態調査

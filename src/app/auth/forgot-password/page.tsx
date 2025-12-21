@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
 import {
-  Building2,
   Mail,
   Loader2,
   ArrowLeft,
@@ -152,11 +152,15 @@ export default function ForgotPasswordPage() {
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center gap-3">
-              <Building2 className="w-8 h-8 text-blue-600" />
-              <span className="font-bold text-lg text-slate-800">
-                国土交通省
-              </span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/mlit_logo.png"
+                alt="国土交通省"
+                width={180}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
             </Link>
           </div>
         </div>
