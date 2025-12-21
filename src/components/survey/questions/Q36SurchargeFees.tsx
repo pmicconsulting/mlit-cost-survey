@@ -22,7 +22,7 @@ export function Q36SurchargeFees() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-blue-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問36 割増料金の収受</h3>
+        <h3 className="font-bold text-lg">問36 割増料金の収受<span className="text-blue-200 font-normal ml-2">（複数選択可）</span></h3>
         <p className="text-sm text-blue-100 mt-1">
           適用、収受している割増料金をご回答ください。
         </p>
@@ -101,7 +101,7 @@ export function Q36SurchargeFees() {
         </table>
 
         <p className="mt-3 text-xs text-gray-500">
-          ※ 定額または割増率のいずれか、または両方をご記入ください
+          ※割増料金、割増料は該当する場合に記入し、不明な場合は記入しなくてもよい。
         </p>
       </div>
     </div>

@@ -64,20 +64,28 @@ export function Q33DistanceBands() {
                     />
                   </td>
                   <td className="border border-gray-300 px-2 py-1">
-                    <input
-                      type="text"
-                      value={row?.returnLoadRatio ?? ""}
-                      onChange={(e) => handleRowChange(band.id, "returnLoadRatio", e.target.value)}
-                      className="w-full px-2 py-1 border border-gray-200 rounded text-right"
-                    />
+                    <div className="flex items-center justify-center gap-1">
+                      <span className="text-gray-700">約</span>
+                      <input
+                        type="text"
+                        value={row?.returnLoadRatio ?? ""}
+                        onChange={(e) => handleRowChange(band.id, "returnLoadRatio", e.target.value)}
+                        className="w-16 px-2 py-1 border border-gray-200 rounded text-center"
+                      />
+                      <span className="text-gray-700">割</span>
+                    </div>
                   </td>
                   <td className="border border-gray-300 px-2 py-1">
-                    <input
-                      type="text"
-                      value={row?.returnFareRatio ?? ""}
-                      onChange={(e) => handleRowChange(band.id, "returnFareRatio", e.target.value)}
-                      className="w-full px-2 py-1 border border-gray-200 rounded text-right"
-                    />
+                    <div className="flex items-center justify-center gap-1">
+                      <span className="text-gray-700">約</span>
+                      <input
+                        type="text"
+                        value={row?.returnFareRatio ?? ""}
+                        onChange={(e) => handleRowChange(band.id, "returnFareRatio", e.target.value)}
+                        className="w-16 px-2 py-1 border border-gray-200 rounded text-center"
+                      />
+                      <span className="text-gray-700">割</span>
+                    </div>
                   </td>
                 </tr>
               );

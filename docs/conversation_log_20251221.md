@@ -167,3 +167,180 @@ git add .
 git commit -m "fix: テキスト修正"
 git push origin master
 ```
+
+---
+
+## 4. Q61・Q82 表形式レスポンシブ再設計（セッション2）
+
+### 要求
+
+> 問61について、PDF3にある内容にしたい。表形式にして回答しやすくならないものか？パソコン、タブレットでは表形式とし、スマホの場合には、現在の画面イメージでよいが、実装前に提案してほしい。
+
+> 問82も同様に修正設計する
+
+### 参照PDF
+
+- `調査票/ドバイバン等/3.pdf` - 問61の表形式レイアウト
+
+### 設計方針
+
+| 画面サイズ | レイアウト |
+|-----------|----------|
+| 768px以上 (md+) | PDFと同じ4列表形式 |
+| 768px未満 | 従来のカード形式を維持 |
+
+### 表形式の列構成
+
+1. **項目カテゴリ** - 乗務前点呼・整備点検等、指定場所へ移動時間と距離 など
+2. **項目説明** - 出社から運行開始までの所要時間（平均）など
+3. **記入例** - 15分、5km、食品/飲料 など（緑フラッシュ表示）
+4. **入力欄** - テキスト入力 + 単位
+
+### セクション見出し
+
+運行の流れに沿った見出し:
+- ▼ 運転者が出社
+- ▼ 車両乗務、運行開始（車庫を出発）
+- ▼ 積込場所に到着
+- ▼ 積込場所を出発
+- ▼ 目的地に到着
+- ▼ 目的地を出発
+- ▼ 営業所の車庫に到着
+- ▼ 運転者が退社
+
+### テーマカラー
+
+| 設問 | テーマ色 | セクション見出し | 対象 |
+|-----|---------|----------------|------|
+| Q61 | 紫 (purple) | 青背景 (blue-50) | 単車 |
+| Q82 | オレンジ (orange) | オレンジ背景 (orange-50) | トラクタ |
+
+### 入力フィードバック
+
+- **未入力**: `flash-green`（緑フラッシュアニメーション）
+- **入力済み**: `input-filled`（青背景）
+
+### 変更ファイル
+
+| ファイル | 変更行数 |
+|---------|---------|
+| `src/components/survey/questions/Q61OperationDetails.tsx` | +447行 |
+| `src/components/survey/questions/Q82TractorOperationDetails.tsx` | +449行 |
+
+### 技術実装
+
+#### レスポンシブ切替
+```tsx
+{/* PC/タブレット: 表形式 */}
+<div className="hidden md:block p-4">
+  <table className="w-full border-collapse border border-gray-300">
+    ...
+  </table>
+</div>
+
+{/* スマートフォン: カード形式 */}
+<div className="md:hidden p-4 space-y-6">
+  <div className="border border-gray-200 rounded-lg p-4">...</div>
+</div>
+```
+
+#### 入力クラス関数
+```tsx
+const inputClass = (value: string | undefined) =>
+  `px-3 py-2 border border-gray-300 rounded-lg text-right
+   focus:ring-2 focus:ring-purple-500 focus:border-transparent
+   ${value ? 'input-filled' : 'flash-green'}`;
+```
+
+#### 記入例セル（緑フラッシュ）
+```tsx
+<td className="border border-gray-300 px-3 py-2
+    text-center flash-green text-green-700 font-medium">
+  15分
+</td>
+```
+
+### コミット
+
+```
+feat: Q61・Q82を表形式レスポンシブに再設計
+
+- PC/タブレット: PDFと同じ4列表形式（項目/説明/記入例/入力欄）
+- スマートフォン: 従来のカード形式を維持
+- 記入例を緑フラッシュで強調表示
+- セクション見出し（運転者が出社、積込場所に到着等）を追加
+- Q61: 紫テーマ（単車用）
+- Q82: オレンジテーマ（トラクタ用）
+```
+
+**コミットハッシュ**: `2af8132`
+
+### デプロイ
+
+```bash
+git push origin master
+npx vercel --prod
+```
+
+**Vercel URL**: https://mlitcostsurvey-ea8l2v53z-pmis-projects.vercel.app
+
+---
+
+# 追加作業ログ（午後セッション）
+
+## 4. 入力フィールドのフラッシュピンク機能実装
+
+### 要件
+未入力フィールドはピンク色でフラッシュ、入力済みフィールドはブルーに変化
+
+### 実装内容
+- globals.cssにinput-filledクラスを追加
+- 全設問（Q2-Q69）に条件付きスタイリングを適用
+
+### CSSクラス定義
+```css
+.input-filled {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+```
+
+---
+
+## 5. 確認画面スキップ・設問間連続遷移設定
+
+### 遷移フロー
+- 設問39 -> 設問40（単車調査）
+- 設問61 -> 設問62（トラクター調査）
+- 設問82 -> ダッシュボード
+
+### 変更ファイル
+- src/app/survey/dryvan/step17/page.tsx
+- src/app/survey/single-truck/step6/page.tsx
+- src/app/survey/tractor/step6/page.tsx
+
+---
+
+## 6. 設問15のチェックボックス解除時の入力値クリア
+
+### 要件
+チェックボックスを外したら入力された数字が消える
+
+### 変更ファイル
+- src/components/survey/questions/Q15SafetyExpenses.tsx
+
+---
+
+## 追加コミット履歴
+
+- fe89079 feat: 全入力フィールドにピンク->ブルーの入力フィードバックを実装
+- c001ab3 fix: 確認画面をスキップしてダッシュボードへ直接遷移するよう変更
+- 97df8e4 fix: 設問間の連続遷移を設定
+- 1132039 fix: 設問15でチェックを外すと入力値をクリアする
+
+---
+
+## 最終デプロイURL
+
+https://mlitcostsurvey-p2ngnckzj-pmis-projects.vercel.app

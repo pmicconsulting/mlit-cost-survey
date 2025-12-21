@@ -34,7 +34,7 @@ export function Q34EmptyRunFees() {
       </div>
 
       <div className="p-4 space-y-3">
-        {/* 収受している */}
+        {/* 収受できている */}
         <div className={`p-3 rounded-lg border ${data.isCollecting ? "bg-blue-50 border-blue-200" : "border-gray-200"}`}>
           <label className="flex items-center gap-3 cursor-pointer">
             <input
@@ -43,7 +43,7 @@ export function Q34EmptyRunFees() {
               onChange={(e) => update({ isCollecting: e.target.checked })}
               className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
             />
-            <span className="font-medium">空車走行回送料金を収受している</span>
+            <span className="font-medium">収受できている</span>
           </label>
 
           {data.isCollecting && (
@@ -57,7 +57,7 @@ export function Q34EmptyRunFees() {
                     onChange={(e) => handleMethodChange("hourly", "selected", e.target.checked)}
                     className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                   />
-                  <span className="text-gray-700">所要時間から計算</span>
+                  <span className="text-gray-700">所要時間から計算（平均・税込）</span>
                   {data.calculationMethods.hourly.selected && (
                     <div className="flex items-center gap-2 ml-auto">
                       <input
@@ -81,7 +81,7 @@ export function Q34EmptyRunFees() {
                     onChange={(e) => handleMethodChange("distance", "selected", e.target.checked)}
                     className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                   />
-                  <span className="text-gray-700">走行距離から計算</span>
+                  <span className="text-gray-700">走行距離から計算（平均・税込）</span>
                   {data.calculationMethods.distance.selected && (
                     <div className="flex items-center gap-2 ml-auto">
                       <input
@@ -96,7 +96,7 @@ export function Q34EmptyRunFees() {
                 </label>
               </div>
 
-              {/* 往路運賃比率 */}
+              {/* 往路運賃に対する割合で計算 */}
               <div className={`p-2 rounded border ${data.calculationMethods.fareRatio.selected ? "bg-white border-blue-200" : "border-gray-200"}`}>
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
@@ -105,7 +105,7 @@ export function Q34EmptyRunFees() {
                     onChange={(e) => handleMethodChange("fareRatio", "selected", e.target.checked)}
                     className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                   />
-                  <span className="text-gray-700">往路運賃に対する比率</span>
+                  <span className="text-gray-700">往路運賃に対する割合で計算（税込）</span>
                   {data.calculationMethods.fareRatio.selected && (
                     <div className="flex items-center gap-2 ml-auto">
                       <input
@@ -119,41 +119,41 @@ export function Q34EmptyRunFees() {
                   )}
                 </label>
               </div>
-
-              {/* その他 */}
-              <div className={`p-2 rounded border ${data.other.selected ? "bg-white border-blue-200" : "border-gray-200"}`}>
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={data.other.selected}
-                    onChange={(e) => handleOtherChange("selected", e.target.checked)}
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                  <span className="text-gray-700">その他</span>
-                </label>
-                {data.other.selected && (
-                  <input
-                    type="text"
-                    value={data.other.description}
-                    onChange={(e) => handleOtherChange("description", e.target.value)}
-                    placeholder="具体的にご記入ください"
-                    className="mt-2 w-full px-3 py-2 border border-gray-300 rounded flash-green"
-                  />
-                )}
-              </div>
             </div>
           )}
         </div>
 
-        {/* 収受していない */}
-        <label className={`flex items-center gap-3 p-3 cursor-pointer rounded-lg border ${data.notCollected ? "bg-orange-50 border-orange-200" : "border-gray-200 hover:bg-gray-50"}`}>
+        {/* その他（独立した選択肢） */}
+        <div className={`p-3 rounded-lg border ${data.other.selected ? "bg-blue-50 border-blue-200" : "border-gray-200"}`}>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={data.other.selected}
+              onChange={(e) => handleOtherChange("selected", e.target.checked)}
+              className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+            />
+            <span className="font-medium">その他</span>
+          </label>
+          {data.other.selected && (
+            <input
+              type="text"
+              value={data.other.description}
+              onChange={(e) => handleOtherChange("description", e.target.value)}
+              placeholder="具体的にご記入ください"
+              className="mt-2 w-full px-3 py-2 border border-gray-300 rounded flash-green"
+            />
+          )}
+        </div>
+
+        {/* 収受できていない */}
+        <label className={`flex items-center gap-3 p-3 cursor-pointer rounded-lg border ${data.notCollected ? "bg-blue-50 border-blue-200" : "border-gray-200 hover:bg-gray-50"}`}>
           <input
             type="checkbox"
             checked={data.notCollected}
             onChange={(e) => update({ notCollected: e.target.checked })}
-            className="w-5 h-5 text-orange-600 rounded focus:ring-orange-500"
+            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
           />
-          <span className="text-orange-700">空車走行回送料金を収受していない</span>
+          <span className="font-medium">収受できていない</span>
         </label>
 
         {/* 把握していない */}
