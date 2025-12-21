@@ -54,7 +54,7 @@ export function Q29TransactionTiers() {
                     type="text"
                     value={data[key].ratio}
                     onChange={(e) => handleTierChange(key, "ratio", e.target.value)}
-                    className="w-16 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                    className="w-16 px-2 py-1 border border-gray-300 rounded text-right flash-green"
                     placeholder=""
                   />
                   <span className="text-gray-600">割</span>

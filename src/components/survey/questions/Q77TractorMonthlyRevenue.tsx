@@ -26,7 +26,7 @@ export function Q77TractorMonthlyRevenue() {
                 value={data.monthlyRevenue}
                 onChange={(e) => update({ monthlyRevenue: e.target.value })}
                 placeholder=""
-                className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.monthlyRevenue ? 'input-filled' : 'flash-pink'}`}
+                className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.monthlyRevenue ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600">万円/月</span>
             </div>
@@ -42,7 +42,7 @@ export function Q77TractorMonthlyRevenue() {
                 value={data.highwayFee}
                 onChange={(e) => update({ highwayFee: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.highwayFee ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.highwayFee ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-16">万円/月</span>
             </div>
@@ -58,7 +58,7 @@ export function Q77TractorMonthlyRevenue() {
                 value={data.ferryFee}
                 onChange={(e) => update({ ferryFee: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.ferryFee ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.ferryFee ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-16">万円/月</span>
             </div>
@@ -74,7 +74,7 @@ export function Q77TractorMonthlyRevenue() {
                 value={data.relayFacilityFee}
                 onChange={(e) => update({ relayFacilityFee: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.relayFacilityFee ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.relayFacilityFee ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-16">万円/月</span>
             </div>
@@ -90,7 +90,7 @@ export function Q77TractorMonthlyRevenue() {
                 value={data.otherFee}
                 onChange={(e) => update({ otherFee: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.otherFee ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.otherFee ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-16">万円/月</span>
             </div>

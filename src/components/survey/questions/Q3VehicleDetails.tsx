@@ -139,7 +139,7 @@ export function Q3VehicleDetails({ className = "", showTotalCheck = true }: Q3Ve
                           onChange={(e) =>
                             handleDryvanVehicleChange(size.id as keyof VehicleCounts, e.target.value)
                           }
-                          className={`w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${data.dryvan.vehicles[size.id as keyof VehicleCounts] ? 'input-filled' : 'flash-pink'}`}
+                          className={`w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${data.dryvan.vehicles[size.id as keyof VehicleCounts] ? 'input-filled' : 'flash-green'}`}
                           placeholder="0"
                         />
                         <span className="text-xs text-slate-500">両</span>
@@ -230,7 +230,7 @@ export function Q3VehicleDetails({ className = "", showTotalCheck = true }: Q3Ve
                           onChange={(e) =>
                             handleNonDryvanVehicleChange(size.id as keyof VehicleCounts, e.target.value)
                           }
-                          className={`w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${data.nonDryvan.vehicles[size.id as keyof VehicleCounts] ? 'input-filled' : 'flash-pink'}`}
+                          className={`w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${data.nonDryvan.vehicles[size.id as keyof VehicleCounts] ? 'input-filled' : 'flash-green'}`}
                           placeholder="0"
                         />
                         <span className="text-xs text-slate-500">両</span>
@@ -278,7 +278,7 @@ export function Q3VehicleDetails({ className = "", showTotalCheck = true }: Q3Ve
                 type="text"
                 value={data.nonDryvan.vehicleTypesOther}
                 onChange={(e) => handleOtherTextChange(e.target.value)}
-                className={`w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 ${data.nonDryvan.vehicleTypesOther ? 'input-filled' : 'flash-pink'}`}
+                className={`w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 ${data.nonDryvan.vehicleTypesOther ? 'input-filled' : 'flash-green'}`}
                 placeholder="その他の車型を入力してください"
               />
             </div>

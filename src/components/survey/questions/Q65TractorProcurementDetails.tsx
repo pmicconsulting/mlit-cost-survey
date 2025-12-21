@@ -79,7 +79,7 @@ export function Q65TractorProcurementDetails() {
                   value={data.purchase.price}
                   onChange={(e) => updatePurchase("price", e.target.value)}
                   placeholder=""
-                  className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.purchase.price ? 'input-filled' : 'flash-pink'}`}
+                  className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.purchase.price ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600">万円</span>
               </div>
@@ -129,7 +129,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.price}
                     onChange={(e) => updateLease("price", e.target.value)}
                     placeholder=""
-                    className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.price ? 'input-filled' : 'flash-pink'}`}
+                    className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.price ? 'input-filled' : 'flash-green'}`}
                   />
                   <span className="text-gray-600 w-12">万円</span>
                 </div>
@@ -145,7 +145,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.monthlyFee}
                     onChange={(e) => updateLease("monthlyFee", e.target.value)}
                     placeholder=""
-                    className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.monthlyFee ? 'input-filled' : 'flash-pink'}`}
+                    className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.monthlyFee ? 'input-filled' : 'flash-green'}`}
                   />
                   <span className="text-gray-600 w-12">円</span>
                 </div>
@@ -161,7 +161,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.contractYears}
                     onChange={(e) => updateLease("contractYears", e.target.value)}
                     placeholder=""
-                    className={`w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.contractYears ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.contractYears ? 'input-filled' : 'flash-green'}`}
                   />
                   <span className="text-gray-600">年</span>
                   <input
@@ -169,7 +169,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.contractMonths}
                     onChange={(e) => updateLease("contractMonths", e.target.value)}
                     placeholder=""
-                    className={`w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.contractMonths ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.contractMonths ? 'input-filled' : 'flash-green'}`}
                   />
                   <span className="text-gray-600">ヶ月</span>
                 </div>
@@ -185,7 +185,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.buyoutPrice}
                     onChange={(e) => updateLease("buyoutPrice", e.target.value)}
                     placeholder=""
-                    className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.buyoutPrice ? 'input-filled' : 'flash-pink'}`}
+                    className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent ${data.lease.buyoutPrice ? 'input-filled' : 'flash-green'}`}
                   />
                   <span className="text-gray-600 w-12">万円</span>
                 </div>

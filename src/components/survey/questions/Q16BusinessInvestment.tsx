@@ -382,7 +382,7 @@ export function Q16BusinessInvestment({ className = "" }: Q16BusinessInvestmentP
                         value={catData.percentage}
                         onChange={(e) => handlePercentageChange(category.id, e.target.value)}
                         disabled={!isEnabled}
-                        className={`w-20 px-2 py-1 border border-slate-300 rounded text-right text-sm ${isEnabled ? (catData.percentage ? "input-filled" : "flash-pink") : "disabled:bg-slate-100"}`}
+                        className={`w-20 px-2 py-1 border border-slate-300 rounded text-right text-sm ${isEnabled ? (catData.percentage ? "input-filled" : "flash-green") : "disabled:bg-slate-100"}`}
                         placeholder="0"
                       />
                       <span className="text-sm text-slate-500">%</span>
@@ -394,7 +394,7 @@ export function Q16BusinessInvestment({ className = "" }: Q16BusinessInvestmentP
                         value={catData.amount ? parseInt(catData.amount).toLocaleString() : ""}
                         onChange={(e) => handleAmountChange(category.id, e.target.value)}
                         disabled={!isEnabled}
-                        className={`w-28 px-2 py-1 border border-slate-300 rounded text-right text-sm ${isEnabled ? (catData.amount ? "input-filled" : "flash-pink") : "disabled:bg-slate-100"}`}
+                        className={`w-28 px-2 py-1 border border-slate-300 rounded text-right text-sm ${isEnabled ? (catData.amount ? "input-filled" : "flash-green") : "disabled:bg-slate-100"}`}
                         placeholder="0"
                       />
                       <span className="text-sm text-slate-500">万円/年</span>

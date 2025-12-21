@@ -94,7 +94,7 @@ export function Q12FinancialStatement({ className = "" }: Q12FinancialStatementP
                         onChange={(e) => handleChange(item.id, e.target.value)}
                         className={`w-32 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${
                           isNegative ? "text-red-600" : ""
-                        } ${isIncome ? "border-blue-300 bg-white" : "border-slate-300"} ${value ? 'input-filled' : 'flash-pink'}`}
+                        } ${isIncome ? "border-blue-300 bg-white" : "border-slate-300"} ${value ? 'input-filled' : 'flash-green'}`}
                         placeholder="0"
                       />
                       <span className="text-sm text-slate-500 w-10">千円</span>

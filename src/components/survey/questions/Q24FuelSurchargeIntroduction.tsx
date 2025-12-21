@@ -54,7 +54,7 @@ export function Q24FuelSurchargeIntroduction() {
                     type="text"
                     value={data.percentage}
                     onChange={(e) => update({ percentage: e.target.value })}
-                    className="w-20 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                    className="w-20 px-2 py-1 border border-gray-300 rounded text-right flash-green"
                   />
                   <span className="text-gray-600">%</span>
                 </div>

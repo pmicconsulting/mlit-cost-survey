@@ -26,7 +26,7 @@ export function Q44EquipmentCosts() {
                 value={data.accessoryCost}
                 onChange={(e) => update({ accessoryCost: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.accessoryCost ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.accessoryCost ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-12">万円</span>
             </div>
@@ -42,7 +42,7 @@ export function Q44EquipmentCosts() {
                 value={data.digitalTacho}
                 onChange={(e) => update({ digitalTacho: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.digitalTacho ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.digitalTacho ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-12">万円</span>
             </div>
@@ -58,7 +58,7 @@ export function Q44EquipmentCosts() {
                 value={data.driveRecorder}
                 onChange={(e) => update({ driveRecorder: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.driveRecorder ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.driveRecorder ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-12">万円</span>
             </div>
@@ -74,7 +74,7 @@ export function Q44EquipmentCosts() {
                 value={data.asv}
                 onChange={(e) => update({ asv: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.asv ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.asv ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-12">万円</span>
             </div>
@@ -90,7 +90,7 @@ export function Q44EquipmentCosts() {
                 value={data.otherSafetyCost}
                 onChange={(e) => update({ otherSafetyCost: e.target.value })}
                 placeholder=""
-                className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.otherSafetyCost ? 'input-filled' : 'flash-pink'}`}
+                className={`w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.otherSafetyCost ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600">万円</span>
             </div>

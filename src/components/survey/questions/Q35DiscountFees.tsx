@@ -69,7 +69,7 @@ export function Q35DiscountFees() {
                           value={data.otherDescription}
                           onChange={(e) => update({ otherDescription: e.target.value })}
                           placeholder="具体的にご記入ください"
-                          className="w-full px-2 py-1 border border-gray-300 rounded text-sm flash-pink"
+                          className="w-full px-2 py-1 border border-gray-300 rounded text-sm flash-green"
                         />
                       </div>
                     ) : (
@@ -82,7 +82,7 @@ export function Q35DiscountFees() {
                       value={itemData?.fixedAmount ?? ""}
                       onChange={(e) => handleItemChange(item.id, "fixedAmount", e.target.value)}
                       disabled={!itemData?.selected}
-                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${itemData?.selected ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${itemData?.selected ? "flash-green" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                   <td className="border border-gray-300 px-2 py-1">
@@ -91,7 +91,7 @@ export function Q35DiscountFees() {
                       value={itemData?.percentage ?? ""}
                       onChange={(e) => handleItemChange(item.id, "percentage", e.target.value)}
                       disabled={!itemData?.selected}
-                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${itemData?.selected ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${itemData?.selected ? "flash-green" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                 </tr>

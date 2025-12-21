@@ -56,7 +56,7 @@ export function Q20StandbyWorkFees() {
                     type="text"
                     value={data.hourlyRate}
                     onChange={(e) => update({ hourlyRate: e.target.value })}
-                    className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.hourlyRate ? "input-filled" : "flash-pink"}`}
+                    className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.hourlyRate ? "input-filled" : "flash-green"}`}
                   />
                   <span className="text-gray-600">円（税込）</span>
                 </div>

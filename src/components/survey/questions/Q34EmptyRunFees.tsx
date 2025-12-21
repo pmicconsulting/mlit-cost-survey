@@ -64,7 +64,7 @@ export function Q34EmptyRunFees() {
                         type="text"
                         value={data.calculationMethods.hourly.rate}
                         onChange={(e) => handleMethodChange("hourly", "rate", e.target.value)}
-                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-green"
                       />
                       <span className="text-gray-600 text-sm">円/時間</span>
                     </div>
@@ -88,7 +88,7 @@ export function Q34EmptyRunFees() {
                         type="text"
                         value={data.calculationMethods.distance.rate}
                         onChange={(e) => handleMethodChange("distance", "rate", e.target.value)}
-                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-green"
                       />
                       <span className="text-gray-600 text-sm">円/km</span>
                     </div>
@@ -112,7 +112,7 @@ export function Q34EmptyRunFees() {
                         type="text"
                         value={data.calculationMethods.fareRatio.ratio}
                         onChange={(e) => handleMethodChange("fareRatio", "ratio", e.target.value)}
-                        className="w-16 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                        className="w-16 px-2 py-1 border border-gray-300 rounded text-right flash-green"
                       />
                       <span className="text-gray-600 text-sm">割</span>
                     </div>
@@ -137,7 +137,7 @@ export function Q34EmptyRunFees() {
                     value={data.other.description}
                     onChange={(e) => handleOtherChange("description", e.target.value)}
                     placeholder="具体的にご記入ください"
-                    className="mt-2 w-full px-3 py-2 border border-gray-300 rounded flash-pink"
+                    className="mt-2 w-full px-3 py-2 border border-gray-300 rounded flash-green"
                   />
                 )}
               </div>

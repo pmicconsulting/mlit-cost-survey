@@ -74,7 +74,7 @@ export function Q32CancellationFees() {
                       value={row?.fixedAmount ?? ""}
                       onChange={(e) => handleRowChange(timing.id, "fixedAmount", e.target.value)}
                       disabled={!row?.useFixedAmount}
-                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row?.useFixedAmount ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row?.useFixedAmount ? "flash-green" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                   <td className="border border-gray-300 px-2 py-1 text-center">
@@ -91,7 +91,7 @@ export function Q32CancellationFees() {
                       value={row?.fareRatio ?? ""}
                       onChange={(e) => handleRowChange(timing.id, "fareRatio", e.target.value)}
                       disabled={!row?.useFareRatio}
-                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row?.useFareRatio ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row?.useFareRatio ? "flash-green" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                   <td className="border border-gray-300 px-1 py-1">

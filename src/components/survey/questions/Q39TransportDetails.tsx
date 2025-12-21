@@ -94,7 +94,7 @@ export function Q39TransportDetails() {
                     type="text"
                     value={row.actualDistance}
                     onChange={(e) => handleRowChange(index, "actualDistance", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.actualDistance ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.actualDistance ? 'input-filled' : 'flash-green'}`}
                   />
                 </td>
                 <td className="border border-gray-300 px-1 py-1">
@@ -102,7 +102,7 @@ export function Q39TransportDetails() {
                     type="text"
                     value={row.constraintHours}
                     onChange={(e) => handleRowChange(index, "constraintHours", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.constraintHours ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.constraintHours ? 'input-filled' : 'flash-green'}`}
                   />
                 </td>
                 <td className="border border-gray-300 px-1 py-1">
@@ -110,7 +110,7 @@ export function Q39TransportDetails() {
                     type="text"
                     value={row.constraintMinutes}
                     onChange={(e) => handleRowChange(index, "constraintMinutes", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.constraintMinutes ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.constraintMinutes ? 'input-filled' : 'flash-green'}`}
                   />
                 </td>
                 <td className="border border-gray-300 px-1 py-1">
@@ -118,7 +118,7 @@ export function Q39TransportDetails() {
                     type="text"
                     value={row.averageFare}
                     onChange={(e) => handleRowChange(index, "averageFare", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.averageFare ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.averageFare ? 'input-filled' : 'flash-green'}`}
                   />
                 </td>
                 <td className="border border-gray-300 px-1 py-1">
@@ -126,7 +126,7 @@ export function Q39TransportDetails() {
                     type="text"
                     value={row.averageFee}
                     onChange={(e) => handleRowChange(index, "averageFee", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.averageFee ? 'input-filled' : 'flash-pink'}`}
+                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.averageFee ? 'input-filled' : 'flash-green'}`}
                   />
                 </td>
               </tr>

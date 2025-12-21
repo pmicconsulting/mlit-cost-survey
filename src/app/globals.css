@@ -25,23 +25,23 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ピンクフラッシュアニメーション - 未入力フィールド用 */
-@keyframes pinkFlash {
+/* グリーンフラッシュアニメーション - 未入力フィールド用 */
+@keyframes greenFlash {
   0%, 100% {
-    background-color: #fce7f3;
-    box-shadow: 0 0 8px #f472b6;
+    background-color: #dcfce7;
+    box-shadow: 0 0 8px #4ade80;
   }
   50% {
-    background-color: #fbcfe8;
-    box-shadow: 0 0 16px #ec4899;
+    background-color: #bbf7d0;
+    box-shadow: 0 0 16px #22c55e;
   }
 }
 
-.flash-pink {
-  animation: pinkFlash 1s ease-in-out infinite;
+.flash-green {
+  animation: greenFlash 1s ease-in-out infinite;
 }
 
-.flash-pink:focus {
+.flash-green:focus {
   animation: none;
   background-color: white;
   box-shadow: 0 0 0 2px #3b82f6;

@@ -32,7 +32,7 @@ export function Q61OperationDetails() {
             value={data.cargoItem}
             onChange={(e) => update({ cargoItem: e.target.value })}
             placeholder="例：食品、機械部品など"
-            className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.cargoItem ? 'input-filled' : 'flash-pink'}`}
+            className={`w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.cargoItem ? 'input-filled' : 'flash-green'}`}
           />
         </div>
 
@@ -49,7 +49,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.preDepartureTime}
                   onChange={(e) => update({ preDepartureTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.preDepartureTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.preDepartureTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -64,7 +64,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.toLoadingLocationTime}
                   onChange={(e) => update({ toLoadingLocationTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.toLoadingLocationTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.toLoadingLocationTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -79,7 +79,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.toLoadingLocationDistance}
                   onChange={(e) => update({ toLoadingLocationDistance: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.toLoadingLocationDistance ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.toLoadingLocationDistance ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">km</span>
               </div>
@@ -100,7 +100,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.loadingWaitTime}
                   onChange={(e) => update({ loadingWaitTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingWaitTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingWaitTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -115,7 +115,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.loadingAncillaryTime}
                   onChange={(e) => update({ loadingAncillaryTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingAncillaryTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingAncillaryTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -130,7 +130,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.loadingWorkTime}
                   onChange={(e) => update({ loadingWorkTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingWorkTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingWorkTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -173,7 +173,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.loadingSecuringTime}
                   onChange={(e) => update({ loadingSecuringTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingSecuringTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.loadingSecuringTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -194,14 +194,14 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.transitTimeHours}
                   onChange={(e) => update({ transitTimeHours: e.target.value })}
-                  className={`w-16 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transitTimeHours ? 'input-filled' : 'flash-pink'}`}
+                  className={`w-16 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transitTimeHours ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600">時間</span>
                 <input
                   type="text"
                   value={data.transitTimeMinutes}
                   onChange={(e) => update({ transitTimeMinutes: e.target.value })}
-                  className={`w-16 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transitTimeMinutes ? 'input-filled' : 'flash-pink'}`}
+                  className={`w-16 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transitTimeMinutes ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600">分</span>
               </div>
@@ -216,7 +216,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.transitDistance}
                   onChange={(e) => update({ transitDistance: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transitDistance ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.transitDistance ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">km</span>
               </div>
@@ -237,7 +237,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.unloadingWaitTime}
                   onChange={(e) => update({ unloadingWaitTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.unloadingWaitTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.unloadingWaitTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -252,7 +252,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.unloadingWorkTime}
                   onChange={(e) => update({ unloadingWorkTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.unloadingWorkTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.unloadingWorkTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -295,7 +295,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.unloadingAncillaryTime}
                   onChange={(e) => update({ unloadingAncillaryTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.unloadingAncillaryTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.unloadingAncillaryTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -316,7 +316,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.returnToGarageTime}
                   onChange={(e) => update({ returnToGarageTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.returnToGarageTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.returnToGarageTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>
@@ -331,7 +331,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.returnToGarageDistance}
                   onChange={(e) => update({ returnToGarageDistance: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.returnToGarageDistance ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.returnToGarageDistance ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">km</span>
               </div>
@@ -346,7 +346,7 @@ export function Q61OperationDetails() {
                   type="text"
                   value={data.postArrivalTime}
                   onChange={(e) => update({ postArrivalTime: e.target.value })}
-                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.postArrivalTime ? 'input-filled' : 'flash-pink'}`}
+                  className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.postArrivalTime ? 'input-filled' : 'flash-green'}`}
                 />
                 <span className="text-gray-600 w-8">分</span>
               </div>

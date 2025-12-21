@@ -21,7 +21,7 @@ export function Q38LoadRate() {
             type="text"
             value={data.averageLoadRate}
             onChange={(e) => update({ averageLoadRate: e.target.value })}
-            className={`w-24 px-3 py-2 border border-gray-300 rounded-lg text-right ${data.averageLoadRate ? 'input-filled' : 'flash-pink'}`}
+            className={`w-24 px-3 py-2 border border-gray-300 rounded-lg text-right ${data.averageLoadRate ? 'input-filled' : 'flash-green'}`}
             placeholder=""
           />
           <span className="text-gray-600">%</span>
@@ -34,7 +34,7 @@ export function Q38LoadRate() {
             value={data.mainCargoItems}
             onChange={(e) => update({ mainCargoItems: e.target.value })}
             placeholder="例：食品、日用品、機械部品など"
-            className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${data.mainCargoItems ? 'input-filled' : 'flash-pink'}`}
+            className={`w-full px-3 py-2 border border-gray-300 rounded-lg ${data.mainCargoItems ? 'input-filled' : 'flash-green'}`}
           />
         </div>
 

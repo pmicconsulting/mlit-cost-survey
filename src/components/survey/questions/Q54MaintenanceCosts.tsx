@@ -27,7 +27,7 @@ export function Q54MaintenanceCosts() {
                 value={data.inspectionCost}
                 onChange={(e) => update({ inspectionCost: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.inspectionCost ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.inspectionCost ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-12">円/年</span>
             </div>
@@ -44,7 +44,7 @@ export function Q54MaintenanceCosts() {
                 value={data.maintenanceCost}
                 onChange={(e) => update({ maintenanceCost: e.target.value })}
                 placeholder=""
-                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.maintenanceCost ? 'input-filled' : 'flash-pink'}`}
+                className={`flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-purple-500 focus:border-transparent ${data.maintenanceCost ? 'input-filled' : 'flash-green'}`}
               />
               <span className="text-gray-600 w-12">円/年</span>
             </div>

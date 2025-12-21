@@ -69,7 +69,7 @@ export function Q26FuelProcurement() {
                 value={data.other.description}
                 onChange={(e) => handleOtherChange("description", e.target.value)}
                 placeholder="具体的にご記入ください"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg flash-pink"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg flash-green"
               />
             </div>
           )}

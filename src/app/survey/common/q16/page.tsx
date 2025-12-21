@@ -562,10 +562,10 @@ export default function SurveyQ16Page() {
             )}
           </button>
           <Link
-            href="/survey/confirm"
+            href="/dashboard"
             className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
           >
-            確認画面へ
+            ダッシュボードへ
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

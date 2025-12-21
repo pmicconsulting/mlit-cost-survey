@@ -45,7 +45,7 @@ export function Q18LoadingUnloadingFees() {
                 type="text"
                 value={data.manualWork.hourlyRate}
                 onChange={(e) => handleManualWorkChange("hourlyRate", e.target.value)}
-                className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.manualWork.hourlyRate ? "input-filled" : "flash-pink"}`}
+                className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.manualWork.hourlyRate ? "input-filled" : "flash-green"}`}
               />
               <span className="text-gray-600">円（税込）</span>
             </div>
@@ -70,7 +70,7 @@ export function Q18LoadingUnloadingFees() {
                 type="text"
                 value={data.mechanicalWork.hourlyRate}
                 onChange={(e) => handleMechanicalWorkChange("hourlyRate", e.target.value)}
-                className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.mechanicalWork.hourlyRate ? "input-filled" : "flash-pink"}`}
+                className={`w-24 px-2 py-1 border border-gray-300 rounded text-right ${data.mechanicalWork.hourlyRate ? "input-filled" : "flash-green"}`}
               />
               <span className="text-gray-600">円（税込）</span>
             </div>

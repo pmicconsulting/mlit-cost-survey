@@ -35,7 +35,7 @@ export function Q2VehicleCount({ className = "" }: Q2VehicleCountProps) {
           min="0"
           value={data.totalVehicles}
           onChange={(e) => handleChange(e.target.value)}
-          className={`w-32 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right ${data.totalVehicles ? 'input-filled' : 'flash-pink'}`}
+          className={`w-32 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right ${data.totalVehicles ? 'input-filled' : 'flash-green'}`}
           placeholder="0"
         />
         <span className="text-slate-700">両</span>

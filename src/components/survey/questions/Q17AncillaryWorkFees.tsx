@@ -161,7 +161,7 @@ export function Q17AncillaryWorkFees() {
                           disabled={hourlyRateDisabled}
                           placeholder=""
                           className={`w-full px-2 py-1 border border-gray-300 rounded text-right
-                            ${itemData.selected && !hourlyRateDisabled ? (hasAnyInput ? "input-filled" : "flash-pink") : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                            ${itemData.selected && !hourlyRateDisabled ? (hasAnyInput ? "input-filled" : "flash-green") : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                         />
                         <span className="text-gray-500 whitespace-nowrap">円</span>
                       </div>
@@ -170,7 +170,7 @@ export function Q17AncillaryWorkFees() {
                     {/* 運賃に含まれている */}
                     <td className="border border-gray-300 px-3 py-2 text-center">
                       <div className={`inline-block p-1 rounded ${
-                        itemData.selected && !includedInFareDisabled && !hasAnyInput ? "flash-pink" : ""
+                        itemData.selected && !includedInFareDisabled && !hasAnyInput ? "flash-green" : ""
                       }`}>
                         <input
                           type="checkbox"
@@ -198,7 +198,7 @@ export function Q17AncillaryWorkFees() {
                           disabled={lossAmountDisabled}
                           placeholder=""
                           className={`w-full px-2 py-1 border border-gray-300 rounded text-right
-                            ${itemData.selected && !lossAmountDisabled ? (hasAnyInput ? "input-filled" : "flash-pink") : "disabled:bg-gray-100 disabled:text-gray-400"}`}
+                            ${itemData.selected && !lossAmountDisabled ? (hasAnyInput ? "input-filled" : "flash-green") : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                         />
                         <span className="text-gray-500 whitespace-nowrap">円</span>
                       </div>

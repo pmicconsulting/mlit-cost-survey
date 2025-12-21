@@ -56,7 +56,7 @@ export function Q31CharterFeeLevel() {
                   type="text"
                   value={data[key].value}
                   onChange={(e) => handleOptionChange(key, "value", e.target.value)}
-                  className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
+                  className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-green"
                 />
                 <span className="text-gray-600">{unit}</span>
               </div>

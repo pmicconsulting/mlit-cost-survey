@@ -179,7 +179,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                                   onChange={(e) => handleHoursChange(item.id, e.target.value)}
                                   disabled={!isChecked}
                                   className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                                    isChecked ? `border-blue-300 bg-white ${itemData.hours ? 'input-filled' : 'flash-pink'}` : "border-slate-200 bg-slate-100"
+                                    isChecked ? `border-blue-300 bg-white ${itemData.hours ? 'input-filled' : 'flash-green'}` : "border-slate-200 bg-slate-100"
                                   }`}
                                   placeholder="-"
                                 />
@@ -198,7 +198,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                               onChange={(e) => handleAmountChange(item.id, e.target.value)}
                               disabled={!isChecked}
                               className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                                isChecked ? `border-blue-300 bg-white ${itemData.amount ? 'input-filled' : 'flash-pink'}` : "border-slate-200 bg-slate-100"
+                                isChecked ? `border-blue-300 bg-white ${itemData.amount ? 'input-filled' : 'flash-green'}` : "border-slate-200 bg-slate-100"
                               }`}
                               placeholder="-"
                             />
@@ -242,7 +242,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                       type="text"
                       value={data.otherDescription || ""}
                       onChange={(e) => update({ otherDescription: e.target.value })}
-                      className={`mt-2 ml-8 w-64 px-3 py-2 border border-blue-300 rounded-lg text-sm ${data.otherDescription ? 'input-filled' : 'flash-pink'}`}
+                      className={`mt-2 ml-8 w-64 px-3 py-2 border border-blue-300 rounded-lg text-sm ${data.otherDescription ? 'input-filled' : 'flash-green'}`}
                       placeholder="内容を入力"
                     />
                   )}
@@ -258,7 +258,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                       onChange={(e) => handleOtherAmountChange(e.target.value)}
                       disabled={!data.items.otherSafety?.checked}
                       className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                        data.items.otherSafety?.checked ? `border-blue-300 bg-white ${data.items.otherSafety?.amount ? 'input-filled' : 'flash-pink'}` : "border-slate-200 bg-slate-100"
+                        data.items.otherSafety?.checked ? `border-blue-300 bg-white ${data.items.otherSafety?.amount ? 'input-filled' : 'flash-green'}` : "border-slate-200 bg-slate-100"
                       }`}
                       placeholder="-"
                     />
