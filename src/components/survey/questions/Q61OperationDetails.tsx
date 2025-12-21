@@ -49,7 +49,7 @@ export function Q61OperationDetails() {
             </tr>
             <tr>
               <td className="border border-gray-300 px-3 py-2" colSpan={2}>輸送品目は何ですか？</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">食品/飲料</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">食品/飲料</td>
               <td className="border border-gray-300 px-3 py-2">
                 <input
                   type="text"
@@ -62,8 +62,8 @@ export function Q61OperationDetails() {
             </tr>
             <tr>
               <td className="border border-gray-300 px-3 py-2 w-28" rowSpan={1}>乗務前点呼・整備点検等</td>
-              <td className="border border-gray-300 px-3 py-2">出社から運行開始までの所要時間（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">15分</td>
+              <td className="border border-gray-300 px-3 py-2">出社から運行開始までの所要時間（平均）<br/><span className="text-xs text-gray-500">・作業服着替え、乗務前点呼<br/>・乗務前整備点検、運行指示<br/>・朝礼、安全確認、指導等の所要時間</span></td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">15分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -85,8 +85,8 @@ export function Q61OperationDetails() {
             </tr>
             <tr>
               <td className="border border-gray-300 px-3 py-2" rowSpan={2}>指定場所へ移動時間と距離</td>
-              <td className="border border-gray-300 px-3 py-2">車庫から積込場所までの所要時間（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">15分</td>
+              <td className="border border-gray-300 px-3 py-2">車庫等から指定場所までの所要時間（平均）</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">15分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -100,8 +100,8 @@ export function Q61OperationDetails() {
               </td>
             </tr>
             <tr>
-              <td className="border border-gray-300 px-3 py-2">車庫から積込場所までの走行距離（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">5km</td>
+              <td className="border border-gray-300 px-3 py-2">車庫等から指定場所までの走行距離（平均）</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">5km</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -124,7 +124,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">待機時間</td>
               <td className="border border-gray-300 px-3 py-2">待機時間（平均）<br/><span className="text-xs text-gray-500">（受付時間、伝票の受け渡し時間等）</span></td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">30分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">30分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -140,7 +140,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">附帯作業時間</td>
               <td className="border border-gray-300 px-3 py-2">附帯作業の所要時間（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">30分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">30分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -156,7 +156,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">積込作業の所要時間</td>
               <td className="border border-gray-300 px-3 py-2">積込作業の所要時間（平均）<br/><span className="text-xs text-gray-500">・運転者による準備作業時間を含む<br/>・運転者が実施しない場合でも記入</span></td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">30分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">30分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -172,7 +172,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">誰が積込作業を実施しますか</td>
               <td className="border border-gray-300 px-3 py-2">①運転者 ②荷主・倉庫業者等 ③その他</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">→</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">→</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex gap-1 flex-wrap">
                   {WORKER_OPTIONS.map((option) => (
@@ -201,7 +201,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">積付（養生・固縛等）作業時間</td>
               <td className="border border-gray-300 px-3 py-2">積込作業後の積付（養生・固縛）作業時間（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">20分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">20分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -224,7 +224,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2" rowSpan={2}>出発地→到着地<br/>運行の時間・距離</td>
               <td className="border border-gray-300 px-3 py-2">出発地から到着地までの所要時間（平均）<br/><span className="text-xs text-gray-500">（連続運転時間の休憩時間等を含む/休息期間を含まない）</span></td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">55分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">55分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -246,7 +246,7 @@ export function Q61OperationDetails() {
             </tr>
             <tr>
               <td className="border border-gray-300 px-3 py-2">出発地から到着地までの走行距離（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">40km</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">40km</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -269,7 +269,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">待機時間</td>
               <td className="border border-gray-300 px-3 py-2">待機時間（平均）<br/><span className="text-xs text-gray-500">（受付時間、伝票の受け渡し時間等）</span></td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">30分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">30分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -285,7 +285,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">取卸作業の所要時間</td>
               <td className="border border-gray-300 px-3 py-2">取卸作業の所要時間（平均）<br/><span className="text-xs text-gray-500">・運転者による準備作業時間を含む<br/>・運転者が実施しない場合でも記入</span></td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">50分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">50分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -301,7 +301,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">誰が取卸作業を実施しますか</td>
               <td className="border border-gray-300 px-3 py-2">①運転者 ②荷主・倉庫業者等 ③その他</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">→</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">→</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex gap-1 flex-wrap">
                   {WORKER_OPTIONS.map((option) => (
@@ -330,7 +330,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">附帯作業時間</td>
               <td className="border border-gray-300 px-3 py-2">附帯作業の所要時間（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">15分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">15分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -353,7 +353,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2" rowSpan={2}>車庫へ移動時間と距離</td>
               <td className="border border-gray-300 px-3 py-2">目的地から車庫までの所要時間（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">15分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">15分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -368,7 +368,7 @@ export function Q61OperationDetails() {
             </tr>
             <tr>
               <td className="border border-gray-300 px-3 py-2">目的地から車庫までの走行距離（平均）</td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">5km</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">5km</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -391,7 +391,7 @@ export function Q61OperationDetails() {
             <tr>
               <td className="border border-gray-300 px-3 py-2">乗務後点呼・整備点検等</td>
               <td className="border border-gray-300 px-3 py-2">帰庫から退社までの所要時間（平均）<br/><span className="text-xs text-gray-500">・乗務後点呼、乗務後整備点検、指導等<br/>・安全指導、作業服着替え等の所要時間</span></td>
-              <td className="border border-gray-300 px-3 py-2 text-center flash-green text-green-700 font-medium">15分</td>
+              <td className="border border-gray-300 px-3 py-2 text-center text-green-700 font-medium">15分</td>
               <td className="border border-gray-300 px-3 py-2">
                 <div className="flex items-center gap-1">
                   <input
@@ -452,7 +452,7 @@ export function Q61OperationDetails() {
 
             <div>
               <label className="block text-gray-700 text-sm mb-1">
-                車庫から積込場所までの所要時間
+                車庫等から指定場所までの所要時間
               </label>
               <div className="flex items-center gap-2">
                 <input
@@ -467,7 +467,7 @@ export function Q61OperationDetails() {
 
             <div>
               <label className="block text-gray-700 text-sm mb-1">
-                車庫から積込場所までの走行距離
+                車庫等から指定場所までの走行距離
               </label>
               <div className="flex items-center gap-2">
                 <input
