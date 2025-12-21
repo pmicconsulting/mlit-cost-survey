@@ -12,7 +12,7 @@ export function Q8FiscalYearChange({ className = "" }: { className?: string }) {
     <RadioQuestion
       questionNumber="q8"
       title="設問8"
-      description="過去2年間に決算期の変更はありましたか？"
+      description="過去２期の決算において、決算期の変更により決算期間が通常より短縮または延長された結果、通常の決算期間と比べて業績が著しく変動している状況はありますか。"
       icon={Calendar}
       iconBgColor="bg-purple-100"
       iconColor="text-purple-600"
@@ -31,7 +31,7 @@ export function Q9OperatingProfit({ className = "" }: { className?: string }) {
     <RadioQuestion
       questionNumber="q9"
       title="設問9"
-      description="直近の決算期において、営業損益は黒字でしたか？"
+      description="一般貨物自動車運送事業損益明細表で、直近の決算期で、営業損益（営業利益）が黒字（プラス）ですか。"
       icon={TrendingUp}
       iconBgColor="bg-green-100"
       iconColor="text-green-600"
@@ -50,7 +50,7 @@ export function Q10ConsecutiveLoss({ className = "" }: { className?: string }) {
     <RadioQuestion
       questionNumber="q10"
       title="設問10"
-      description="直近2期連続で経常損益が赤字でしたか？"
+      description="一般貨物自動車運送事業損益明細表で、過去２期連続で、経常損益（経常利益）が黒字（プラス）ですか。"
       icon={TrendingDown}
       iconBgColor="bg-red-100"
       iconColor="text-red-600"
@@ -69,7 +69,7 @@ export function Q11ExcessDebt({ className = "" }: { className?: string }) {
     <RadioQuestion
       questionNumber="q11"
       title="設問11"
-      description="直近の決算期において、債務超過の状態にありますか？"
+      description="直近の決算期の貸借対照表「株主（自己）資本の部」は債務超過ですか。※債務超過は「株主資本合計がマイナス」の状態です。"
       icon={AlertCircle}
       iconBgColor="bg-orange-100"
       iconColor="text-orange-600"
@@ -88,7 +88,7 @@ export function Q14TaxAccountant({ className = "" }: { className?: string }) {
     <RadioQuestion
       questionNumber="q14"
       title="設問14"
-      description="決算書類の作成に税理士が関与していますか？"
+      description="決算書作成にあたり、税理士・公認会計士が関与していますか。"
       icon={FileText}
       iconBgColor="bg-blue-100"
       iconColor="text-blue-600"

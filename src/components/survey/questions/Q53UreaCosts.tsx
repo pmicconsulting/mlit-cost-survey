@@ -10,7 +10,7 @@ export function Q53UreaCosts() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問53 尿素水（AdBlue等）費用</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の尿素水関連費用をご記入ください。
+          【年間】この車両の尿素水の単価、１リットル当たり走行可能距離をご記入ください。
         </p>
       </div>
 

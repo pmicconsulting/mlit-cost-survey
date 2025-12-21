@@ -10,7 +10,7 @@ export function Q77TractorMonthlyRevenue() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問77 月間収入・料金</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターの月間収入と各種料金をご記入ください。
+          【月間】この車両における収入額（運賃+作業料金、待機料金等）、高速道路料金等の各種料金をご記入ください。
         </p>
       </div>
 

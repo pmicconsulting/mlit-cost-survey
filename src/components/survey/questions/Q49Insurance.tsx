@@ -10,7 +10,7 @@ export function Q49Insurance() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問49 保険料</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両に係る年間の保険料をご記入ください。
+          【年間】この車両の自賠責保険、任意保険について、それぞれご記入ください。
         </p>
       </div>
 

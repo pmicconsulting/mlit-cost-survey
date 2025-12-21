@@ -4,9 +4,9 @@ import { useQ45 } from "../SurveyContext";
 import { DistanceRange } from "../types";
 
 const DISTANCE_RANGE_OPTIONS: { id: DistanceRange; label: string; subLabel: string }[] = [
-  { id: "short", label: "近距離帯", subLabel: "(200km未満)" },
-  { id: "medium", label: "中距離帯", subLabel: "(200km以上～450km未満)" },
-  { id: "long", label: "長距離帯", subLabel: "(450km以上)" },
+  { id: "short", label: "近距離輸送", subLabel: "（200km未満）" },
+  { id: "medium", label: "中距離輸送", subLabel: "（200km以上～450km未満）" },
+  { id: "long", label: "長距離輸送", subLabel: "（450km以上）" },
 ];
 
 export function Q45DistanceRange() {
@@ -17,7 +17,7 @@ export function Q45DistanceRange() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問45 主な運行距離帯</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の主な運行距離帯を選択してください。
+          この車両の主な運行距離帯について、１つ選択してください。（該当するものを１つ選択）
         </p>
       </div>
 

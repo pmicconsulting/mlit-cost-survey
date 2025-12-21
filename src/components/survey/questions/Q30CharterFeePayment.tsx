@@ -10,7 +10,7 @@ export function Q30CharterFeePayment() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問30 利用運送手数料の請求・支払い</h3>
         <p className="text-sm text-blue-100 mt-1">
-          傭車手配時の利用運送手数料の請求・支払いについてご回答ください。
+          利用運送手数料（傭車手配の手数料）の請求、支払いについてご回答ください。
         </p>
       </div>
 
@@ -26,7 +26,7 @@ export function Q30CharterFeePayment() {
             onChange={(e) => update({ addToShipper: e.target.checked })}
             className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
           />
-          <span className="font-medium">荷主等に請求して収受している</span>
+          <span className="font-medium">主に運賃に加算して荷主等に請求</span>
         </label>
 
         <label
@@ -40,7 +40,7 @@ export function Q30CharterFeePayment() {
             onChange={(e) => update({ deductFromPartner: e.target.checked })}
             className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
           />
-          <span className="font-medium">協力会社等から差し引いている</span>
+          <span className="font-medium">主に運賃から差し引いて協力会社等に支払い</span>
         </label>
 
         <label

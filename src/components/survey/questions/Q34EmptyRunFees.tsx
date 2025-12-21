@@ -29,7 +29,7 @@ export function Q34EmptyRunFees() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問34 空車走行回送料金</h3>
         <p className="text-sm text-blue-100 mt-1">
-          空車走行（回送）料金の収受実態についてご回答ください。
+          復荷（帰り荷）がなく、復路等を「空車走行」する場合、空車の移動費用（回送料金）の収受状況、計算方法をご回答ください。
         </p>
       </div>
 
@@ -64,7 +64,7 @@ export function Q34EmptyRunFees() {
                         type="text"
                         value={data.calculationMethods.hourly.rate}
                         onChange={(e) => handleMethodChange("hourly", "rate", e.target.value)}
-                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
                       />
                       <span className="text-gray-600 text-sm">円/時間</span>
                     </div>
@@ -88,7 +88,7 @@ export function Q34EmptyRunFees() {
                         type="text"
                         value={data.calculationMethods.distance.rate}
                         onChange={(e) => handleMethodChange("distance", "rate", e.target.value)}
-                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                        className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
                       />
                       <span className="text-gray-600 text-sm">円/km</span>
                     </div>
@@ -112,7 +112,7 @@ export function Q34EmptyRunFees() {
                         type="text"
                         value={data.calculationMethods.fareRatio.ratio}
                         onChange={(e) => handleMethodChange("fareRatio", "ratio", e.target.value)}
-                        className="w-16 px-2 py-1 border border-gray-300 rounded text-right"
+                        className="w-16 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
                       />
                       <span className="text-gray-600 text-sm">割</span>
                     </div>
@@ -137,7 +137,7 @@ export function Q34EmptyRunFees() {
                     value={data.other.description}
                     onChange={(e) => handleOtherChange("description", e.target.value)}
                     placeholder="具体的にご記入ください"
-                    className="mt-2 w-full px-3 py-2 border border-gray-300 rounded"
+                    className="mt-2 w-full px-3 py-2 border border-gray-300 rounded flash-pink"
                   />
                 )}
               </div>

@@ -196,7 +196,7 @@ export function Q3VehicleDetails({ className = "", showTotalCheck = true }: Q3Ve
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Truck className="w-5 h-5 text-green-600" />
-            <h3 className="text-lg font-bold text-slate-900">ドライバン等以外</h3>
+            <h3 className="text-lg font-bold text-slate-900">特殊車両（ドライバン等以外）</h3>
           </div>
           <div className="text-sm font-medium text-slate-600">
             小計: <span className="text-green-600 font-bold">{nonDryvanTotal}</span> 両
@@ -278,7 +278,7 @@ export function Q3VehicleDetails({ className = "", showTotalCheck = true }: Q3Ve
                 type="text"
                 value={data.nonDryvan.vehicleTypesOther}
                 onChange={(e) => handleOtherTextChange(e.target.value)}
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 flash-pink"
                 placeholder="その他の車型を入力してください"
               />
             </div>
@@ -286,54 +286,6 @@ export function Q3VehicleDetails({ className = "", showTotalCheck = true }: Q3Ve
         </div>
       </div>
 
-      {/* 合計確認 */}
-      {showTotalCheck && (
-        <div
-          className={`mt-6 rounded-xl border-2 p-5 ${
-            q2Total > 0 && !isMatching
-              ? "border-orange-300 bg-orange-50"
-              : "border-slate-200 bg-white"
-          }`}
-        >
-          <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-            {isMatching && q2Total > 0 ? (
-              <CheckCircle className="w-5 h-5 text-green-600" />
-            ) : q2Total > 0 && !isMatching ? (
-              <AlertTriangle className="w-5 h-5 text-orange-600" />
-            ) : null}
-            合計確認
-          </h3>
-          <div className="space-y-2">
-            <div className="flex justify-between py-2 border-b border-slate-200">
-              <span className="text-slate-700">設問2 保有車両台数</span>
-              <span className="font-bold text-slate-900">{q2Total} 両</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span className="text-slate-600 ml-4">設問3 ドライバン等</span>
-              <span className="text-blue-600">{dryvanTotal} 両</span>
-            </div>
-            <div className="flex justify-between py-2">
-              <span className="text-slate-600 ml-4">設問3 ドライバン等以外</span>
-              <span className="text-green-600">{nonDryvanTotal} 両</span>
-            </div>
-            <div className="flex justify-between py-2 border-t border-slate-200">
-              <span className="text-slate-700">設問3 合計</span>
-              <span className={`font-bold ${isMatching ? "text-green-600" : "text-orange-600"}`}>
-                {q3Total} 両 {isMatching && q2Total > 0 && "✓ 一致"}
-              </span>
-            </div>
-          </div>
-          {q2Total > 0 && !isMatching && (
-            <div className="mt-4 p-3 bg-orange-100 rounded-lg">
-              <p className="text-sm text-orange-800">
-                <AlertTriangle className="w-4 h-4 inline mr-1" />
-                設問2の保有車両台数（{q2Total}両）と設問3の合計（{q3Total}両）が一致しません。
-                入力内容をご確認ください。
-              </p>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }

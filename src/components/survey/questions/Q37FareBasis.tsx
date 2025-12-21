@@ -16,7 +16,7 @@ export function Q37FareBasis() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問37 個建運賃の算定基準</h3>
         <p className="text-sm text-blue-100 mt-1">
-          個建運賃の算定基準についてご回答ください。（複数選択可）
+          「個建運賃」を適用している場合、ご回答ください。どのような基準により設定していますか。
         </p>
       </div>
 
@@ -89,7 +89,7 @@ export function Q37FareBasis() {
                 value={data.other.description}
                 onChange={(e) => handleOtherChange("description", e.target.value)}
                 placeholder="具体的にご記入ください"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg flash-pink"
               />
             </div>
           )}

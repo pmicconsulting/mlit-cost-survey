@@ -10,7 +10,7 @@ export function Q78TractorMonthlyOperations() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問78 月間運行データ</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターの月間の運行データをご記入ください。
+          【月間】この車両の積載率、総走行距離等について、ご記入ください。
         </p>
       </div>
 

@@ -29,7 +29,7 @@ export function Q39TransportDetails() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問39 主な輸送の詳細</h3>
         <p className="text-sm text-blue-100 mt-1">
-          主な輸送について、車両サイズ、距離、拘束時間、運賃・料金をご回答ください。（最大5件）
+          主な輸送について、実車距離、平均拘束時間、平均運賃額、平均料金額をご回答ください。（平均料金額は作業料、待機時間料、割増料等とします）
         </p>
       </div>
 

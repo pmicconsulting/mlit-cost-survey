@@ -24,7 +24,7 @@ export function Q32CancellationFees() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問32 キャンセル料の収受</h3>
         <p className="text-sm text-blue-100 mt-1">
-          キャンセル時期別のキャンセル料の収受実態と頻度についてご回答ください。
+          キャンセル料について、ご回答ください。
         </p>
       </div>
 
@@ -74,7 +74,7 @@ export function Q32CancellationFees() {
                       value={row?.fixedAmount ?? ""}
                       onChange={(e) => handleRowChange(timing.id, "fixedAmount", e.target.value)}
                       disabled={!row?.useFixedAmount}
-                      className="w-full px-2 py-1 border border-gray-200 rounded text-right disabled:bg-gray-100 disabled:text-gray-400"
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row?.useFixedAmount ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                   <td className="border border-gray-300 px-2 py-1 text-center">
@@ -91,7 +91,7 @@ export function Q32CancellationFees() {
                       value={row?.fareRatio ?? ""}
                       onChange={(e) => handleRowChange(timing.id, "fareRatio", e.target.value)}
                       disabled={!row?.useFareRatio}
-                      className="w-full px-2 py-1 border border-gray-200 rounded text-right disabled:bg-gray-100 disabled:text-gray-400"
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row?.useFareRatio ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                   <td className="border border-gray-300 px-1 py-1">

@@ -4,8 +4,8 @@ import { useQ64 } from "../SurveyContext";
 import { ProcurementMethod } from "../types";
 
 const PROCUREMENT_OPTIONS: { id: ProcurementMethod; label: string }[] = [
-  { id: "purchase", label: "自社で購入" },
-  { id: "lease", label: "リース" },
+  { id: "purchase", label: "購入による調達" },
+  { id: "lease", label: "リースによる調達" },
   { id: "other", label: "その他" },
 ];
 
@@ -15,9 +15,9 @@ export function Q64TractorProcurementMethod() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-orange-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問64 トラクターの調達方法</h3>
+        <h3 className="font-bold text-lg">問64 調達方法</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターの調達方法を選択してください。
+          記入対象の車両は、どのように調達しましたか、購入、リースのいずれか選択してください。（該当するものを１つ選択）
         </p>
       </div>
 

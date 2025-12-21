@@ -17,7 +17,7 @@ export function Q23FuelSurchargeNegotiation() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問23 燃料サーチャージの交渉</h3>
         <p className="text-sm text-blue-100 mt-1">
-          燃料サーチャージについて、荷主と交渉したことがありますか。
+          荷主等に燃料サーチャージの導入に向けた交渉をしたことがありますか。
         </p>
       </div>
 

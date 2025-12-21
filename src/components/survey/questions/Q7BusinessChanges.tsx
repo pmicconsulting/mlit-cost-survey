@@ -49,7 +49,7 @@ export function Q7BusinessChanges({ className = "" }: Q7BusinessChangesProps) {
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問7</h2>
           <p className="text-slate-600 text-sm">
-            過去2年間に以下に該当するものはありますか？（複数選択可）
+            直近の決算月から過去２年間に、設立、合併、事業譲渡・譲受のいずれかが発生している場合、該当するものをすべて選択してください。
           </p>
         </div>
       </div>

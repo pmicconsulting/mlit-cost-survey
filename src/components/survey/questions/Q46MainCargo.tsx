@@ -10,7 +10,7 @@ export function Q46MainCargo() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問46 主な輸送品</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両で主に輸送している品目をご記入ください。
+          この車両の主な輸送品をご記入ください。（複数記入可）
         </p>
       </div>
 

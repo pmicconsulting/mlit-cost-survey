@@ -10,7 +10,7 @@ export function Q72TractorOilCosts() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問72 オイル関連費用</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターのオイル関連費用をご記入ください。
+          【年間】この車両のオイル単価、オイル交換量、オイル交換１回当たりの走行距離、工賃等をご記入ください。
         </p>
       </div>
 

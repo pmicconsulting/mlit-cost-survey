@@ -8,9 +8,9 @@ export function Q68TractorCrewCount() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-orange-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問68 1日当たり平均乗務人数</h3>
+        <h3 className="font-bold text-lg">問68 乗務人数</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターの1日当たり平均乗務人数をご記入ください。
+          この車両には、１日当たり何名の運転者が乗務しますか。（二交代→2名・三交代→3名）
         </p>
       </div>
 

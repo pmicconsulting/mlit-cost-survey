@@ -4,10 +4,10 @@ import { useQ29 } from "../SurveyContext";
 import { TransactionTier } from "../types";
 
 const TIERS: { key: keyof Omit<ReturnType<typeof useQ29>["data"], "unknown">; label: string }[] = [
-  { key: "directDeal", label: "真荷主との直取引" },
-  { key: "firstTier", label: "1次請け（元請け）" },
-  { key: "secondTier", label: "2次請け" },
-  { key: "thirdOrMore", label: "3次請け以上" },
+  { key: "directDeal", label: "真荷主と直取引（元請の立場で受注）" },
+  { key: "firstTier", label: "（元請から見て）1次請け" },
+  { key: "secondTier", label: "（元請から見て）2次請け" },
+  { key: "thirdOrMore", label: "（元請から見て）3次請け以上" },
 ];
 
 export function Q29TransactionTiers() {
@@ -28,7 +28,7 @@ export function Q29TransactionTiers() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問29 取引次数と比率</h3>
         <p className="text-sm text-blue-100 mt-1">
-          取引の次数別の比率についてご回答ください。合計が10割になるようにご記入ください。
+          主な取引次数（元請、1次、2次、３次以上）と取引比率をご回答ください。
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export function Q29TransactionTiers() {
                     type="text"
                     value={data[key].ratio}
                     onChange={(e) => handleTierChange(key, "ratio", e.target.value)}
-                    className="w-16 px-2 py-1 border border-gray-300 rounded text-right"
+                    className="w-16 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
                     placeholder=""
                   />
                   <span className="text-gray-600">割</span>

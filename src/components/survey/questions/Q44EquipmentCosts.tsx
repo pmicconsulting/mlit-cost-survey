@@ -10,7 +10,7 @@ export function Q44EquipmentCosts() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問44 車両付属備品等の費用</h3>
         <p className="text-sm text-purple-100 mt-1">
-          車両購入・リース時に付属した備品や安全装備の費用をご記入ください。
+          車両の付属備品等の費用のうち輸送の安全確保のために必要な経費をご記入ください。
         </p>
       </div>
 

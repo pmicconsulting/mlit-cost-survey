@@ -10,7 +10,7 @@ export function Q25FuelSurchargePrice() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問25 燃料サーチャージ基準価格</h3>
         <p className="text-sm text-blue-100 mt-1">
-          燃料サーチャージを導入している場合の基準価格と購入価格をご回答ください。
+          燃料サーチャージの基準価格と購入価格の年間の平均額をご回答ください。
         </p>
       </div>
 

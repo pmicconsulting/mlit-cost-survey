@@ -10,7 +10,7 @@ export function Q38LoadRate() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問38 個建運賃の積載率と主な輸送品</h3>
         <p className="text-sm text-blue-100 mt-1">
-          個建運賃での輸送における平均積載率と主な輸送品についてご回答ください。
+          個建運賃における、【年間】「平均積載率」と「その主な輸送品」をご回答ください。
         </p>
       </div>
 

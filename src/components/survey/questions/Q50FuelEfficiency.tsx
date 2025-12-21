@@ -10,7 +10,7 @@ export function Q50FuelEfficiency() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問50 平均燃費</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の平均燃費をご記入ください。
+          【年間】この車両の平均的な燃費をご記入ください。
         </p>
       </div>
 

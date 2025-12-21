@@ -10,7 +10,7 @@ export function Q59VehicleWashing() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問59 車両洗浄</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の月間の車両洗浄に関するデータをご記入ください。
+          【月間】この車両を洗浄するための所要時間、費用をご記入ください。
         </p>
       </div>
 

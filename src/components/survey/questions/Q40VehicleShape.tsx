@@ -13,9 +13,9 @@ export function Q40VehicleShape() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-purple-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問40 車両形状の選択</h3>
+        <h3 className="font-bold text-lg">問40 車両形状</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象となる単車について、車両形状を選択してください。
+          記入する車両の形状について、該当するものを選択してください。（該当するものを１つ選択）
         </p>
       </div>
 

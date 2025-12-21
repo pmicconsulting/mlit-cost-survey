@@ -33,9 +33,7 @@ export function Q65TractorProcurementDetails() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問65 調達詳細</h3>
         <p className="text-sm text-orange-100 mt-1">
-          {q64Data.method === "purchase" && "購入に関する詳細をご記入ください。"}
-          {q64Data.method === "lease" && "リースに関する詳細をご記入ください。"}
-          {q64Data.method === "other" && "調達方法の詳細をご記入ください。"}
+          購入、リースのいずれか一つにご回答ください。（該当するものを１つ選択）
         </p>
       </div>
 
@@ -81,7 +79,7 @@ export function Q65TractorProcurementDetails() {
                   value={data.purchase.price}
                   onChange={(e) => updatePurchase("price", e.target.value)}
                   placeholder=""
-                  className="w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-40 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent flash-pink"
                 />
                 <span className="text-gray-600">万円</span>
               </div>
@@ -131,7 +129,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.price}
                     onChange={(e) => updateLease("price", e.target.value)}
                     placeholder=""
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent flash-pink"
                   />
                   <span className="text-gray-600 w-12">万円</span>
                 </div>
@@ -147,7 +145,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.monthlyFee}
                     onChange={(e) => updateLease("monthlyFee", e.target.value)}
                     placeholder=""
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent flash-pink"
                   />
                   <span className="text-gray-600 w-12">円</span>
                 </div>
@@ -163,7 +161,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.contractYears}
                     onChange={(e) => updateLease("contractYears", e.target.value)}
                     placeholder=""
-                    className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent flash-pink"
                   />
                   <span className="text-gray-600">年</span>
                   <input
@@ -171,7 +169,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.contractMonths}
                     onChange={(e) => updateLease("contractMonths", e.target.value)}
                     placeholder=""
-                    className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent flash-pink"
                   />
                   <span className="text-gray-600">ヶ月</span>
                 </div>
@@ -187,7 +185,7 @@ export function Q65TractorProcurementDetails() {
                     value={data.lease.buyoutPrice}
                     onChange={(e) => updateLease("buyoutPrice", e.target.value)}
                     placeholder=""
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent flash-pink"
                   />
                   <span className="text-gray-600 w-12">万円</span>
                 </div>

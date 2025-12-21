@@ -16,7 +16,7 @@ export function Q26FuelProcurement() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問26 燃料調達方法</h3>
         <p className="text-sm text-blue-100 mt-1">
-          軽油の主な調達方法についてご回答ください。（複数選択可）
+          燃料の調達方法をご回答ください。
         </p>
       </div>
 
@@ -69,7 +69,7 @@ export function Q26FuelProcurement() {
                 value={data.other.description}
                 onChange={(e) => handleOtherChange("description", e.target.value)}
                 placeholder="具体的にご記入ください"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg flash-pink"
               />
             </div>
           )}

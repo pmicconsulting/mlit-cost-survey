@@ -4,10 +4,10 @@ import { useQ31 } from "../SurveyContext";
 import { CharterFeeLevel } from "../types";
 
 const OPTIONS: { key: keyof ReturnType<typeof useQ31>["data"]; label: string; unit: string }[] = [
-  { key: "deductPercentage", label: "運賃に一定率を乗じて差し引き", unit: "%" },
-  { key: "addPercentage", label: "運賃に一定率を乗じて加算", unit: "%" },
-  { key: "deductFixed", label: "定額を差し引き", unit: "円" },
-  { key: "addFixed", label: "定額を加算", unit: "円" },
+  { key: "deductPercentage", label: "運賃に一定率を乗じた額を差し引いて協力会社等に支払い", unit: "%" },
+  { key: "addPercentage", label: "運賃に一定率を乗じた額を加算して荷主等に請求", unit: "%" },
+  { key: "deductFixed", label: "運賃額に関係なく定額を差し引いて協力会社等に支払い", unit: "円" },
+  { key: "addFixed", label: "運賃額に関係なく定額を加算して荷主等に請求", unit: "円" },
 ];
 
 export function Q31CharterFeeLevel() {
@@ -28,7 +28,7 @@ export function Q31CharterFeeLevel() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問31 利用運送手数料の水準</h3>
         <p className="text-sm text-blue-100 mt-1">
-          利用運送手数料の算出方法と水準についてご回答ください。
+          利用運送手数料（傭車手配の手数料）の平均的な水準をご回答ください。
         </p>
       </div>
 
@@ -56,7 +56,7 @@ export function Q31CharterFeeLevel() {
                   type="text"
                   value={data[key].value}
                   onChange={(e) => handleOptionChange(key, "value", e.target.value)}
-                  className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                  className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
                 />
                 <span className="text-gray-600">{unit}</span>
               </div>

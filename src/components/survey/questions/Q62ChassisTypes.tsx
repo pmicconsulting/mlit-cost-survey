@@ -16,9 +16,9 @@ export function Q62ChassisTypes() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-orange-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問62 牽引シャーシの選択</h3>
+        <h3 className="font-bold text-lg">問62 牽引シャーシ</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象となるトラクターで牽引するシャーシの種類を選択してください。（複数選択可）
+          この車両が牽引する主なシャーシを選択してください。なお、バン型（常温）以外の特殊車両は別様式（WEB又はエクセル様式）から回答ください。（複数選択可）
         </p>
       </div>
 

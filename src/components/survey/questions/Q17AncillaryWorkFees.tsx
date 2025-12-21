@@ -50,6 +50,8 @@ export function Q17AncillaryWorkFees() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問17 附帯作業料の収受実態</h3>
         <p className="text-sm text-blue-100 mt-1">
+          附帯作業料の収受実態についてご回答ください。
+          <br />
           ※「回数」単位で収受している場合、「1時間単位」に換算してください。
           <br />
           ※収受をできていない場合は1時間当たりの本来収受すべき額（収入損失額）をご回答ください。
@@ -130,8 +132,8 @@ export function Q17AncillaryWorkFees() {
                             }
                             disabled={isDisabled || !itemData.selected}
                             placeholder="内容を記入"
-                            className="flex-1 px-2 py-1 border border-gray-300 rounded text-sm
-                              disabled:bg-gray-100 disabled:text-gray-400"
+                            className={`flex-1 px-2 py-1 border border-gray-300 rounded text-sm
+                              ${itemData.selected && !isDisabled ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                           />
                         )}
                       </div>
@@ -148,8 +150,8 @@ export function Q17AncillaryWorkFees() {
                           }
                           disabled={isDisabled || !itemData.selected || itemData.includedInFare}
                           placeholder=""
-                          className="w-full px-2 py-1 border border-gray-300 rounded text-right
-                            disabled:bg-gray-100 disabled:text-gray-400"
+                          className={`w-full px-2 py-1 border border-gray-300 rounded text-right
+                            ${itemData.selected && !itemData.includedInFare && !isDisabled ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                         />
                         <span className="text-gray-500 whitespace-nowrap">円</span>
                       </div>
@@ -179,8 +181,8 @@ export function Q17AncillaryWorkFees() {
                           }
                           disabled={isDisabled || !itemData.selected}
                           placeholder=""
-                          className="w-full px-2 py-1 border border-gray-300 rounded text-right
-                            disabled:bg-gray-100 disabled:text-gray-400"
+                          className={`w-full px-2 py-1 border border-gray-300 rounded text-right
+                            ${itemData.selected && !isDisabled ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                         />
                         <span className="text-gray-500 whitespace-nowrap">円</span>
                       </div>

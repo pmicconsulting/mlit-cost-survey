@@ -4,8 +4,8 @@ import { useQ42 } from "../SurveyContext";
 import { ProcurementMethod } from "../types";
 
 const PROCUREMENT_OPTIONS: { id: ProcurementMethod; label: string }[] = [
-  { id: "purchase", label: "自社で購入" },
-  { id: "lease", label: "リース" },
+  { id: "purchase", label: "購入による調達" },
+  { id: "lease", label: "リースによる調達" },
   { id: "other", label: "その他" },
 ];
 
@@ -15,9 +15,9 @@ export function Q42ProcurementMethod() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-purple-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問42 車両の調達方法</h3>
+        <h3 className="font-bold text-lg">問42 調達方法</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の調達方法を選択してください。
+          記入対象の車両はどのように調達しましたか。購入、リースのいずれかを選択してください。（該当するものを１つ選択）
         </p>
       </div>
 

@@ -10,7 +10,7 @@ export function Q57MonthlyOperations() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問57 月間運行データ</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の月間の運行データをご記入ください。
+          【月間】この車両の積載率、総走行距離等について、ご記入ください。
         </p>
       </div>
 

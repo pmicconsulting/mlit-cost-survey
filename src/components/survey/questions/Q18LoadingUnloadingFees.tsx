@@ -21,6 +21,9 @@ export function Q18LoadingUnloadingFees() {
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問18 積込・取卸作業料の収受実態</h3>
+        <p className="text-sm text-blue-100 mt-1">
+          積込・取卸作業料の収受実態についてご回答ください。
+        </p>
       </div>
 
       <div className="p-4 space-y-4">
@@ -42,7 +45,7 @@ export function Q18LoadingUnloadingFees() {
                 type="text"
                 value={data.manualWork.hourlyRate}
                 onChange={(e) => handleManualWorkChange("hourlyRate", e.target.value)}
-                className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
               />
               <span className="text-gray-600">円（税込）</span>
             </div>
@@ -67,7 +70,7 @@ export function Q18LoadingUnloadingFees() {
                 type="text"
                 value={data.mechanicalWork.hourlyRate}
                 onChange={(e) => handleMechanicalWorkChange("hourlyRate", e.target.value)}
-                className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
               />
               <span className="text-gray-600">円（税込）</span>
             </div>

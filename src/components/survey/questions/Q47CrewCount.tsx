@@ -8,9 +8,9 @@ export function Q47CrewCount() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-purple-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問47 1日当たり平均乗務人数</h3>
+        <h3 className="font-bold text-lg">問47 乗務人数</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の1日当たり平均乗務人数をご記入ください。
+          この車両には、【１日】当たり平均何名の運転者が乗務しますか。（二交代→2名・三交代→3名）
         </p>
       </div>
 

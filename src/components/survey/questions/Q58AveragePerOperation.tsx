@@ -10,7 +10,7 @@ export function Q58AveragePerOperation() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問58 1運行当たり平均</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の1運行当たりの平均データをご記入ください。
+          この車両の【１運行】当たりの平均的な輸送距離（片道）、ラウンド回数（輸送回数）をご記入ください。
         </p>
       </div>
 

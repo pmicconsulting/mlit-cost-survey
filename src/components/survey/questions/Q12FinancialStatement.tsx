@@ -45,7 +45,7 @@ export function Q12FinancialStatement({ className = "" }: Q12FinancialStatementP
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問12</h2>
           <p className="text-slate-600 text-sm">
-            一般貨物自動車運送事業損益明細表の数値をご記入ください（単位：千円）
+            一般貨物自動車運送事業損益明細表から、「千円」単位で転記してください。
           </p>
         </div>
       </div>

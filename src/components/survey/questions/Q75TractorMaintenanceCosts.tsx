@@ -10,7 +10,7 @@ export function Q75TractorMaintenanceCosts() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問75 車検・修理費用</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターの年間の車検・修理費用をご記入ください。
+          【年間】この車両の車検整備費用、定期点検・一般修理費等をご記入ください。
         </p>
       </div>
 

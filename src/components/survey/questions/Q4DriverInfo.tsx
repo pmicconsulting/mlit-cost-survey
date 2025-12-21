@@ -46,7 +46,7 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問4</h2>
           <p className="text-slate-600 text-sm">
-            運転者1人当たり月間平均についてご記入ください（直近1年間の平均）
+            【全ての営業所】における「運転者」について、以下ご記入ください。
           </p>
         </div>
       </div>

@@ -10,7 +10,7 @@ export function Q52TireCosts() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問52 タイヤ関連費用</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両のタイヤ関連費用をご記入ください。
+          【年間】この車両のタイヤ単価、必要本数、交換工賃等をご記入ください。
         </p>
       </div>
 

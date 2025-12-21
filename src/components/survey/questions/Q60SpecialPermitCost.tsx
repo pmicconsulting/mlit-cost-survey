@@ -10,7 +10,7 @@ export function Q60SpecialPermitCost() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問60 特殊車両通行許可費用</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の特殊車両通行許可申請の費用をご記入ください。
+          【年間】この車両が特殊車両通行許可を得ている場合、平均の申請手数料等をご記入ください。
         </p>
       </div>
 

@@ -10,7 +10,7 @@ export function Q70TractorInsurance() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問70 保険料</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターに係る年間の保険料をご記入ください。
+          【年間】この車両の自賠責保険、任意保険について、それぞれご記入ください。
         </p>
       </div>
 

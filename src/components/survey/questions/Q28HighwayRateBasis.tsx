@@ -17,7 +17,7 @@ export function Q28HighwayRateBasis() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問28 高速道路利用料金の収受基準</h3>
         <p className="text-sm text-blue-100 mt-1">
-          高速道路利用料金を収受している場合、どの料金を基準としていますか。
+          高速道路利用料金の請求額で、基準としている主な料金をご回答ください。
         </p>
       </div>
 

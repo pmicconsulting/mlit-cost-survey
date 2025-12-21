@@ -10,7 +10,7 @@ export function Q55CargoHandlingSupplies() {
       <div className="bg-purple-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問55 荷役関連経費</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両に係る荷役関連の経費をご記入ください。
+          【年間】この車両に必要な荷役関連の経費（税込・平均）について、ご記入ください。
         </p>
       </div>
 

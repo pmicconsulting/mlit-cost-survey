@@ -25,7 +25,7 @@ export function Q5AdministrativePenalty({ className = "" }: Q5AdministrativePena
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問5</h2>
           <p className="text-slate-600 text-sm">
-            過去2年間に行政処分を受けたことはありますか？
+            過去２年間に、行政処分により事業停止処分を受けたことはありますか。
           </p>
         </div>
       </div>
@@ -53,11 +53,6 @@ export function Q5AdministrativePenalty({ className = "" }: Q5AdministrativePena
         ))}
       </div>
 
-      {data.hasAdministrativePenalty === "yes" && (
-        <div className="mt-4 p-3 bg-amber-50 rounded-lg text-sm text-amber-800">
-          ※ 行政処分を受けた場合、詳細は別途確認させていただく場合があります。
-        </div>
-      )}
     </div>
   );
 }

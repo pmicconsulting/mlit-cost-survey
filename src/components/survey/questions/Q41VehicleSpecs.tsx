@@ -8,9 +8,9 @@ export function Q41VehicleSpecs() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-purple-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問41 車両の基本情報</h3>
+        <h3 className="font-bold text-lg">問41 車両の形状等</h3>
         <p className="text-sm text-purple-100 mt-1">
-          対象車両の基本情報をご記入ください。
+          記入する車両の形状等についてご記入ください。
         </p>
       </div>
 

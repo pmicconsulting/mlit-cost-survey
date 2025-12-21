@@ -21,7 +21,7 @@ export function Q24FuelSurchargeIntroduction() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問24 燃料サーチャージの導入状況</h3>
         <p className="text-sm text-blue-100 mt-1">
-          燃料サーチャージの導入状況についてご回答ください。
+          燃料サーチャージを導入していますか。導入している場合、受注件数に対する割合をご回答ください。
         </p>
       </div>
 
@@ -54,7 +54,7 @@ export function Q24FuelSurchargeIntroduction() {
                     type="text"
                     value={data.percentage}
                     onChange={(e) => update({ percentage: e.target.value })}
-                    className="w-20 px-2 py-1 border border-gray-300 rounded text-right"
+                    className="w-20 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
                   />
                   <span className="text-gray-600">%</span>
                 </div>

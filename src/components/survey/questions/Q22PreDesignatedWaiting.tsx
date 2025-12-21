@@ -16,7 +16,7 @@ export function Q22PreDesignatedWaiting() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問22 指定時間前の待機時間</h3>
         <p className="text-sm text-blue-100 mt-1">
-          荷主等の指定した積込・取卸時刻前に到着し、待機が発生した場合の収受実態についてご回答ください。
+          【指定時間前の待機時間】貨物取卸しに指定時間がある場合、到着から取卸し開始までの待機時間が発生することがありますか。
         </p>
       </div>
 
@@ -36,12 +36,12 @@ export function Q22PreDesignatedWaiting() {
           </label>
           {data.waitingNotCollected.selected && (
             <div className="mt-3 ml-8 flex items-center gap-2">
-              <span className="text-gray-600">→ 最大待機時間：</span>
+              <span className="text-gray-600">→ 1年以内最長で約</span>
               <input
                 type="text"
                 value={data.waitingNotCollected.maxHours}
                 onChange={(e) => handleNotCollectedChange("maxHours", e.target.value)}
-                className="w-20 px-2 py-1 border border-gray-300 rounded text-right"
+                className="w-20 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
               />
               <span className="text-gray-600">時間</span>
             </div>

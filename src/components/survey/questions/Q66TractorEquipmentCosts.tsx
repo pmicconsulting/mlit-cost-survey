@@ -8,9 +8,9 @@ export function Q66TractorEquipmentCosts() {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <div className="bg-orange-600 text-white px-4 py-3">
-        <h3 className="font-bold text-lg">問66 トラクター付属備品等の費用</h3>
+        <h3 className="font-bold text-lg">問66 車両付属備品等の費用</h3>
         <p className="text-sm text-orange-100 mt-1">
-          トラクター購入・リース時に付属した備品や安全装備の費用をご記入ください。
+          車両の付属備品等の費用のうち輸送の安全確保のために必要な経費をご記入ください。
         </p>
       </div>
 

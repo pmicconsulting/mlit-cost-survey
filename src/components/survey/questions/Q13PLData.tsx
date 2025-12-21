@@ -38,7 +38,7 @@ export function Q13PLData({ className = "" }: Q13PLDataProps) {
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問13</h2>
           <p className="text-slate-600 text-sm">
-            損益計算書（P/L）の数値をご記入ください（単位：千円）
+            直近の確定申告で提出をした損益計算書（P/L）から、「千円」単位で転記してください。
           </p>
         </div>
       </div>

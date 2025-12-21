@@ -24,7 +24,7 @@ export function Q33DistanceBands() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問33 運行距離帯別の状況</h3>
         <p className="text-sm text-blue-100 mt-1">
-          距離帯別の平均運行距離、復荷確保割合、復荷運賃水準についてご回答ください。
+          運行距離帯別に、主な輸送について、運行距離、復荷（帰り荷）を確保できる割合、往路運賃に対する割合をご回答ください。
         </p>
       </div>
 

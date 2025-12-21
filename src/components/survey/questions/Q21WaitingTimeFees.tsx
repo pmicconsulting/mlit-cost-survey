@@ -28,7 +28,7 @@ export function Q21WaitingTimeFees() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問21 荷待ち等の待機時間料</h3>
         <p className="text-sm text-blue-100 mt-1">
-          「荷主等の都合による荷待ち」等の待機時間料の収受実態についてご回答ください。
+          荷待ち等の待機時間料を収受できていますか。（荷主等の責任に基づく時間に限定し、指定時間よりも早めに到着した場合の待機時間は対象としません。）
         </p>
       </div>
 
@@ -51,7 +51,7 @@ export function Q21WaitingTimeFees() {
                 type="text"
                 value={data.separateCollection.hourlyRate}
                 onChange={(e) => handleSeparateChange("hourlyRate", e.target.value)}
-                className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
               />
               <span className="text-gray-600">円（税込）</span>
             </div>
@@ -76,7 +76,7 @@ export function Q21WaitingTimeFees() {
                 type="text"
                 value={data.includedInFare.hourlyRate}
                 onChange={(e) => handleIncludedChange("hourlyRate", e.target.value)}
-                className="w-24 px-2 py-1 border border-gray-300 rounded text-right"
+                className="w-24 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
               />
               <span className="text-gray-600">円（税込）</span>
             </div>
@@ -101,7 +101,7 @@ export function Q21WaitingTimeFees() {
                 type="text"
                 value={data.notCollected.lossAmount}
                 onChange={(e) => handleNotCollectedChange("lossAmount", e.target.value)}
-                className="w-28 px-2 py-1 border border-gray-300 rounded text-right"
+                className="w-28 px-2 py-1 border border-gray-300 rounded text-right flash-pink"
               />
               <span className="text-gray-600">千円</span>
             </div>

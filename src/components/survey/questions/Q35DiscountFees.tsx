@@ -24,7 +24,7 @@ export function Q35DiscountFees() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問35 割引料金の収受</h3>
         <p className="text-sm text-blue-100 mt-1">
-          各種割引の収受実態についてご回答ください。
+          適用している割引料金をご回答ください。
         </p>
       </div>
 
@@ -69,7 +69,7 @@ export function Q35DiscountFees() {
                           value={data.otherDescription}
                           onChange={(e) => update({ otherDescription: e.target.value })}
                           placeholder="具体的にご記入ください"
-                          className="w-full px-2 py-1 border border-gray-300 rounded text-sm"
+                          className="w-full px-2 py-1 border border-gray-300 rounded text-sm flash-pink"
                         />
                       </div>
                     ) : (
@@ -82,7 +82,7 @@ export function Q35DiscountFees() {
                       value={itemData?.fixedAmount ?? ""}
                       onChange={(e) => handleItemChange(item.id, "fixedAmount", e.target.value)}
                       disabled={!itemData?.selected}
-                      className="w-full px-2 py-1 border border-gray-200 rounded text-right disabled:bg-gray-100 disabled:text-gray-400"
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${itemData?.selected ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                   <td className="border border-gray-300 px-2 py-1">
@@ -91,7 +91,7 @@ export function Q35DiscountFees() {
                       value={itemData?.percentage ?? ""}
                       onChange={(e) => handleItemChange(item.id, "percentage", e.target.value)}
                       disabled={!itemData?.selected}
-                      className="w-full px-2 py-1 border border-gray-200 rounded text-right disabled:bg-gray-100 disabled:text-gray-400"
+                      className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${itemData?.selected ? "flash-pink" : "disabled:bg-gray-100 disabled:text-gray-400"}`}
                     />
                   </td>
                 </tr>

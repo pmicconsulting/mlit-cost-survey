@@ -10,7 +10,7 @@ export function Q27HighwayFerryRates() {
       <div className="bg-blue-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問27 高速道路・フェリー利用料金の収受率</h3>
         <p className="text-sm text-blue-100 mt-1">
-          高速道路・フェリー利用料金の荷主からの収受率についてご回答ください。
+          高速道路やフェリーを利用した場合、当該利用料金を実質的に収受している割合をご回答ください（運賃に含められている場合を含めます）。
         </p>
       </div>
 

@@ -10,7 +10,7 @@ export function Q69TractorTaxes() {
       <div className="bg-orange-600 text-white px-4 py-3">
         <h3 className="font-bold text-lg">問69 税金</h3>
         <p className="text-sm text-orange-100 mt-1">
-          対象トラクターに係る年間の税金をご記入ください。
+          この車両の環境性能割（旧・自動車取得税）、自動車税、自動車重量税について、それぞれご記入ください。
         </p>
       </div>
 
