@@ -43,13 +43,16 @@ interface Q15SafetyExpensesProps {
 export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
   const { data, update } = useQ15();
 
-  // チェックボックス処理
+  // チェックボックス処理（チェックを外すと入力値をクリア）
   const handleToggle = (itemId: string) => {
     const currentItem = data.items[itemId] || { checked: false, hours: "", amount: "" };
+    const newChecked = !currentItem.checked;
     update({
       items: {
         ...data.items,
-        [itemId]: { ...currentItem, checked: !currentItem.checked },
+        [itemId]: newChecked
+          ? { ...currentItem, checked: true }
+          : { checked: false, hours: "", amount: "" },
       },
     });
   };
@@ -76,15 +79,26 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
     });
   };
 
-  // その他チェックボックス処理
+  // その他チェックボックス処理（チェックを外すと入力値をクリア）
   const handleOtherToggle = () => {
     const currentItem = data.items.otherSafety || { checked: false, hours: "", amount: "" };
-    update({
-      items: {
-        ...data.items,
-        otherSafety: { ...currentItem, checked: !currentItem.checked },
-      },
-    });
+    const newChecked = !currentItem.checked;
+    if (newChecked) {
+      update({
+        items: {
+          ...data.items,
+          otherSafety: { ...currentItem, checked: true },
+        },
+      });
+    } else {
+      update({
+        items: {
+          ...data.items,
+          otherSafety: { checked: false, hours: "", amount: "" },
+        },
+        otherDescription: "",
+      });
+    }
   };
 
   // その他金額入力処理
