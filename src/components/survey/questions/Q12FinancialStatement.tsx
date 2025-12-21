@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { Calculator } from "lucide-react";
 import { useQ12 } from "../SurveyContext";
 import { Q12Data } from "../types";
@@ -36,11 +35,6 @@ export function Q12FinancialStatement({ className = "" }: Q12FinancialStatementP
     const cleanValue = value.replace(/[^0-9-]/g, "");
     update({ [itemId]: cleanValue });
   };
-
-  const total = useMemo(() => {
-    const revenue = parseInt(data.revenue) || 0;
-    return { revenue };
-  }, [data.revenue]);
 
   return (
     <div className={`bg-white rounded-xl shadow-sm border border-slate-200 p-6 ${className}`}>
@@ -110,14 +104,7 @@ export function Q12FinancialStatement({ className = "" }: Q12FinancialStatementP
         </table>
       </div>
 
-      <div className="mt-4 p-3 bg-slate-50 rounded-lg">
-        <div className="flex justify-between text-sm">
-          <span className="text-slate-600">入力された営業収益:</span>
-          <span className="font-medium">{total.revenue.toLocaleString()} 千円</span>
-        </div>
-      </div>
-
-      <div className="mt-3 p-3 bg-amber-50 rounded-lg text-sm text-amber-800">
+      <div className="mt-4 p-3 bg-amber-50 rounded-lg text-sm text-amber-800">
         ※ 損益（営業損益・経常損益）は赤字の場合マイナス値で入力してください。
       </div>
     </div>
