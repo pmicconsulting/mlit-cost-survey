@@ -31,6 +31,23 @@ import {
 import { BUSINESS_TYPES, BusinessType } from "@/types/profile";
 import { Profile, SurveyDraft } from "@/types/profile";
 
+interface UploadedFile {
+  id: string;
+  file_name: string;
+  file_path: string;
+  file_size: number;
+  mime_type: string;
+  uploaded_at: string;
+}
+
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) return "0 B";
+  const k = 1024;
+  const sizes = ["B", "KB", "MB", "GB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+}
+
 type SurveyStatus = "not_started" | "in_progress" | "submitted";
 type OfficeType = "single" | "multiple";
 
@@ -126,9 +143,10 @@ interface EditFormData {
 export default function DashboardPage() {
   const router = useRouter();
   const supabase = createClient();
-  const [user, setUser] = useState<{ email?: string } | null>(null);
+  const [user, setUser] = useState<{ id?: string; email?: string } | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [surveyDraft, setSurveyDraft] = useState<SurveyDraft | null>(null);
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [loading, setLoading] = useState(true);
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -177,6 +195,18 @@ export default function DashboardPage() {
 
         if (draftData) {
           setSurveyDraft(draftData as SurveyDraft);
+        }
+
+        // アップロード済みファイル取得
+        const { data: filesData } = await supabase
+          .from("uploaded_files")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("uploaded_at", { ascending: false })
+          .limit(5);
+
+        if (filesData) {
+          setUploadedFiles(filesData as UploadedFile[]);
         }
       }
 
@@ -304,9 +334,8 @@ export default function DashboardPage() {
       icon: <Upload className="w-6 h-6" />,
       title: "資料アップロード",
       description: "調査資料をアップロード",
-      href: "#",
+      href: "/dashboard/upload",
       color: "from-green-500 to-green-600",
-      disabled: true,
     },
   ];
 
@@ -438,19 +467,17 @@ export default function DashboardPage() {
         {/* Menu Grid */}
         <h2 className="text-xl font-bold text-slate-900 mb-4">メニュー</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          {menuItems.map((item) => {
-            const content = (
+          {menuItems.map((item) => (
+            <Link key={item.title} href={item.href}>
               <div
                 className={`group h-full bg-white rounded-2xl p-6 border transition-all ${
-                  item.disabled
-                    ? "border-slate-200 opacity-60 cursor-not-allowed"
-                    : item.highlight
+                  item.highlight
                     ? "border-blue-300 ring-2 ring-blue-100 hover:shadow-xl cursor-pointer"
                     : "border-slate-200 hover:border-slate-300 hover:shadow-lg cursor-pointer"
                 }`}
               >
                 <div
-                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} text-white mb-4 ${!item.disabled && "group-hover:scale-110"} transition-transform`}
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r ${item.color} text-white mb-4 group-hover:scale-110 transition-transform`}
                 >
                   {item.icon}
                 </div>
@@ -458,29 +485,13 @@ export default function DashboardPage() {
                   {item.title}
                 </h3>
                 <p className="text-slate-600 text-sm mb-4">{item.description}</p>
-                {item.disabled ? (
-                  <span className="inline-flex items-center text-slate-400 text-sm font-medium">
-                    準備中
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
-                    開く
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </span>
-                )}
+                <span className="inline-flex items-center text-blue-600 text-sm font-medium group-hover:gap-2 transition-all">
+                  開く
+                  <ArrowRight className="w-4 h-4 ml-1" />
+                </span>
               </div>
-            );
-
-            if (item.disabled) {
-              return <div key={item.title}>{content}</div>;
-            }
-
-            return (
-              <Link key={item.title} href={item.href}>
-                {content}
-              </Link>
-            );
-          })}
+            </Link>
+          ))}
         </div>
 
         {/* Business Info */}
@@ -780,6 +791,68 @@ export default function DashboardPage() {
               </dl>
             </div>
           </div>
+          )}
+        </div>
+
+        {/* Uploaded Files Section */}
+        <div className="mt-8 bg-white rounded-2xl shadow-lg p-6 border border-slate-200">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <Upload className="w-5 h-5 text-green-600" />
+              アップロード済みファイル
+            </h2>
+            <Link
+              href="/dashboard/upload"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 text-sm font-medium"
+            >
+              すべて見る
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {uploadedFiles.length === 0 ? (
+            <div className="py-8 text-center">
+              <FileText className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+              <p className="text-slate-500 mb-4">まだファイルがアップロードされていません</p>
+              <Link
+                href="/dashboard/upload"
+                className="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+              >
+                <Upload className="w-4 h-4" />
+                ファイルをアップロード
+              </Link>
+            </div>
+          ) : (
+            <ul className="divide-y divide-slate-100">
+              {uploadedFiles.map((file) => (
+                <li key={file.id} className="py-3 flex items-center gap-3">
+                  <div className="flex-shrink-0">
+                    {file.mime_type.startsWith("image/") ? (
+                      <div className="w-8 h-8 bg-purple-100 rounded flex items-center justify-center">
+                        <FileText className="w-4 h-4 text-purple-500" />
+                      </div>
+                    ) : file.mime_type === "application/pdf" ? (
+                      <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
+                        <FileText className="w-4 h-4 text-red-500" />
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8 bg-green-100 rounded flex items-center justify-center">
+                        <FileText className="w-4 h-4 text-green-500" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-slate-900 text-sm font-medium truncate">
+                      {file.file_name}
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      {formatFileSize(file.file_size)} ・{" "}
+                      {new Date(file.uploaded_at).toLocaleDateString("ja-JP")}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           )}
         </div>
 

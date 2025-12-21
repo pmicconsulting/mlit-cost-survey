@@ -1,0 +1,86 @@
+"use client";
+
+import { useQ73 } from "../SurveyContext";
+
+export function Q73TractorTireCosts() {
+  const { data, update } = useQ73();
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-orange-600 text-white px-4 py-3">
+        <h3 className="font-bold text-lg">問73 タイヤ関連費用</h3>
+        <p className="text-sm text-orange-100 mt-1">
+          対象トラクターのタイヤ関連費用をご記入ください。
+        </p>
+      </div>
+
+      <div className="p-4 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              タイヤ単価
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={data.tireUnitPrice}
+                onChange={(e) => update({ tireUnitPrice: e.target.value })}
+                placeholder=""
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+              <span className="text-gray-600 w-12">円/本</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              タイヤの必要本数
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={data.tireCount}
+                onChange={(e) => update({ tireCount: e.target.value })}
+                placeholder=""
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+              <span className="text-gray-600 w-12">本/両</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              タイヤ交換の工賃
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={data.tireChangeLaborCost}
+                onChange={(e) => update({ tireChangeLaborCost: e.target.value })}
+                placeholder=""
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+              <span className="text-gray-600 w-12">円/回</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              タイヤ1交換当たり走行距離
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={data.tireChangeDistance}
+                onChange={(e) => update({ tireChangeDistance: e.target.value })}
+                placeholder=""
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-right focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+              <span className="text-gray-600 w-12">km/回</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
