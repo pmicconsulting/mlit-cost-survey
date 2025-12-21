@@ -25,7 +25,7 @@ export function Q5AdministrativePenalty({ className = "" }: Q5AdministrativePena
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問5</h2>
           <p className="text-slate-600 text-sm">
-            過去２年間に、行政処分により事業停止処分を受けたことはありますか。
+            過去２年間に、行政処分により事業停止処分を受けたことはありますか。（該当するもの１つ選択）
           </p>
         </div>
       </div>

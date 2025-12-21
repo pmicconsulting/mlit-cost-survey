@@ -15,7 +15,7 @@ export function Q6DisasterImpact({ className = "" }: Q6DisasterImpactProps) {
     <RadioQuestion
       questionNumber="q6"
       title="設問6"
-      description="直近の決算月から過去２年間に、災害等の影響による営業収益・費用の一時的かつ大きな変動がありましたか。"
+      description="直近の決算月から過去２年間に、災害等の影響による営業収益・費用の一時的かつ大きな変動がありましたか。（該当するもの１つ選択）"
       icon={CloudLightning}
       iconBgColor="bg-purple-100"
       iconColor="text-purple-600"

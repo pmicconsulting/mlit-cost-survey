@@ -55,25 +55,25 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-slate-100">
-              <th className="border border-slate-300 px-3 py-2 text-left text-sm font-medium text-slate-700">
+            <tr className="bg-red-100">
+              <th className="border border-red-200 px-3 py-2 text-left text-sm font-medium text-red-700">
                 1ヶ月合計
               </th>
               {DRIVER_CATEGORIES.map((cat) => (
-                <th key={cat.id} className="border border-slate-300 px-3 py-2 text-center">
-                  <div className="text-sm font-medium text-slate-700">{cat.label}</div>
-                  {cat.subLabel && <div className="text-xs text-slate-500">{cat.subLabel}</div>}
+                <th key={cat.id} className="border border-red-200 px-3 py-2 text-center">
+                  <div className="text-sm font-medium text-red-700">{cat.label}</div>
+                  {cat.subLabel && <div className="text-xs text-red-500">{cat.subLabel}</div>}
                 </th>
               ))}
-              <th className="border border-slate-300 px-3 py-2 text-center">
-                <div className="text-sm font-medium text-slate-900">合計</div>
+              <th className="border border-red-200 px-3 py-2 text-center">
+                <div className="text-sm font-medium text-red-700">合計</div>
               </th>
             </tr>
           </thead>
           <tbody>
             {/* 運転者数（1行目） */}
-            <tr className="bg-blue-50">
-              <td className="border border-slate-300 px-3 py-3 text-sm font-bold text-slate-800 bg-blue-100">
+            <tr className="hover:bg-slate-50">
+              <td className="border border-slate-300 px-3 py-3 text-sm font-medium text-slate-700 bg-slate-50">
                 運転者数
               </td>
               {DRIVER_CATEGORIES.map((cat) => (
@@ -84,15 +84,15 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
                       min="0"
                       value={data.driverCount[cat.id]}
                       onChange={(e) => handleDriverCountChange(cat.id, e.target.value)}
-                      className="w-16 px-2 py-2 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm bg-white"
+                      className="w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm"
                       placeholder="0"
                     />
                     <span className="text-xs text-slate-500">人</span>
                   </div>
                 </td>
               ))}
-              <td className="border border-slate-300 px-2 py-2 text-center bg-blue-100">
-                <div className="text-lg font-bold text-blue-600">{totalDrivers}人</div>
+              <td className="border border-slate-300 px-2 py-2 text-center bg-slate-50">
+                {/* 合計列は空欄 */}
               </td>
             </tr>
             {/* 指標データ */}
@@ -101,34 +101,27 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
                 <td className="border border-slate-300 px-3 py-3 text-sm font-medium text-slate-700 bg-slate-50">
                   {metric.label}
                 </td>
-                {DRIVER_CATEGORIES.map((cat) => {
-                  const hasDrivers = parseInt(data.driverCount[cat.id]) > 0;
-                  return (
-                    <td
-                      key={cat.id}
-                      className={`border border-slate-300 px-2 py-2 text-center ${
-                        hasDrivers ? "bg-blue-50" : ""
-                      }`}
-                    >
-                      <div className="flex items-center justify-center gap-1">
-                        <input
-                          type="number"
-                          min={metric.min}
-                          max={metric.max}
-                          value={data.drivers[cat.id][metric.id as keyof DriverMetrics]}
-                          onChange={(e) =>
-                            handleMetricChange(cat.id, metric.id as DriverMetricId, e.target.value)
-                          }
-                          className={`w-16 px-2 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm ${
-                            hasDrivers ? "border-blue-300 bg-white" : "border-slate-300"
-                          }`}
-                          placeholder="-"
-                        />
-                        <span className="text-xs text-slate-500 w-8 text-left">{metric.unit}</span>
-                      </div>
-                    </td>
-                  );
-                })}
+                {DRIVER_CATEGORIES.map((cat) => (
+                  <td
+                    key={cat.id}
+                    className="border border-slate-300 px-2 py-2 text-center"
+                  >
+                    <div className="flex items-center justify-center gap-1">
+                      <input
+                        type="number"
+                        min={metric.min}
+                        max={metric.max}
+                        value={data.drivers[cat.id][metric.id as keyof DriverMetrics]}
+                        onChange={(e) =>
+                          handleMetricChange(cat.id, metric.id as DriverMetricId, e.target.value)
+                        }
+                        className="w-16 px-2 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-right text-sm"
+                        placeholder="-"
+                      />
+                      <span className="text-xs text-slate-500 w-8 text-left">{metric.unit}</span>
+                    </div>
+                  </td>
+                ))}
                 <td className="border border-slate-300 px-2 py-2 text-center bg-slate-50">
                   {/* 合計列は空欄 */}
                 </td>
@@ -138,13 +131,6 @@ export function Q4DriverInfo({ className = "" }: Q4DriverInfoProps) {
         </table>
       </div>
 
-      <div className="mt-4 p-3 bg-amber-50 rounded-lg text-sm text-amber-800">
-        <p>
-          ※ 運転者数が入力されている車型のセルがハイライトされます。
-          <br />
-          ※ 賃金総額には基本給、諸手当（時間外手当を含む）、賞与月割額を含みます。
-        </p>
-      </div>
     </div>
   );
 }
