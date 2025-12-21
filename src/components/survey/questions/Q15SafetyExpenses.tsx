@@ -1,38 +1,37 @@
 "use client";
 
-import { Shield, Clock, Wallet } from "lucide-react";
+import { Shield } from "lucide-react";
 import { useQ15 } from "../SurveyContext";
 import { SafetyItem } from "../types";
 
-// 安全関連経費の項目
+// 安全関連経費の項目（PDFに準拠）
 const SAFETY_ITEMS = [
   {
-    category: "トラック法 法定",
+    category: "トラック法法定",
     items: [
-      { id: "managementTraining", label: "運行管理者講習の受講費用" },
-      { id: "maintenanceTraining", label: "整備管理者講習の受講費用" },
-      { id: "driverTraining", label: "運転者講習の受講費用" },
-      { id: "initialTraining", label: "初任運転者に対する適性診断・特別指導" },
-      { id: "elderlyDiagnosis", label: "高齢運転者に対する適性診断" },
-      { id: "accidentDiagnosis", label: "事故惹起運転者に対する特定診断・特別指導" },
+      { id: "managementTraining", label: "運行管理者講習の受講費用", hasTime: true },
+      { id: "maintenanceTraining", label: "整備管理者講習の受講費用", hasTime: true },
+      { id: "driverTraining", label: "運転者講習の受講費用", hasTime: true },
+      { id: "aptitudeDiagnosis", label: "運転者の適性診断受診費用（初任、一般、適齢、特別等）", hasTime: true },
+      { id: "alcoholDetector", label: "アルコール検知器導入費用", hasTime: false },
     ],
   },
   {
-    category: "労働安全衛生法 法定",
+    category: "労働安全衛生法法定",
     items: [
-      { id: "healthCheck", label: "健康診断（定期・雇入時）" },
-      { id: "stressCheck", label: "ストレスチェック" },
+      { id: "initialHealthCheck", label: "雇入れ時健康診断に係る費用", hasTime: false },
+      { id: "periodicHealthCheck", label: "定期健康診断に係る費用", hasTime: false },
     ],
   },
   {
-    category: "任意",
+    category: "法定以外",
     items: [
-      { id: "sleepApnea", label: "睡眠時無呼吸症候群（SAS）スクリーニング" },
-      { id: "brainDock", label: "脳ドック" },
-      { id: "driveRecorder", label: "ドライブレコーダーによる安全運転指導" },
-      { id: "digitalTacho", label: "デジタルタコグラフによる安全運転指導" },
-      { id: "safetyDevice", label: "衝突被害軽減ブレーキ等の安全装置装備車両の導入" },
-      { id: "otherSafety", label: "その他安全対策費用" },
+      { id: "gMark", label: "安全性優良営業所（Gマーク）認定申請費用", hasTime: false },
+      { id: "safetyConsulting", label: "安全マネジメントコンサルティング費用", hasTime: false },
+      { id: "autoRollCall", label: "自動点呼システム導入費用", hasTime: false },
+      { id: "heatstroke", label: "熱中症対策費用", hasTime: false },
+      { id: "safetyManagementSystem", label: "安全運行管理システム導入費用", hasTime: false },
+      { id: "driverTrainingTime", label: "ドライバーの研修時間", hasTime: true },
     ],
   },
 ];
@@ -77,14 +76,27 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
     });
   };
 
-  // 集計
-  const selectedCount = Object.values(data.items).filter((item: SafetyItem) => item.checked).length;
-  const totalHours = Object.values(data.items)
-    .filter((item: SafetyItem) => item.checked)
-    .reduce((sum, item: SafetyItem) => sum + (parseFloat(item.hours) || 0), 0);
-  const totalAmount = Object.values(data.items)
-    .filter((item: SafetyItem) => item.checked)
-    .reduce((sum, item: SafetyItem) => sum + (parseFloat(item.amount) || 0), 0);
+  // その他チェックボックス処理
+  const handleOtherToggle = () => {
+    const currentItem = data.items.otherSafety || { checked: false, hours: "", amount: "" };
+    update({
+      items: {
+        ...data.items,
+        otherSafety: { ...currentItem, checked: !currentItem.checked },
+      },
+    });
+  };
+
+  // その他金額入力処理
+  const handleOtherAmountChange = (value: string) => {
+    const currentItem = data.items.otherSafety || { checked: false, hours: "", amount: "" };
+    update({
+      items: {
+        ...data.items,
+        otherSafety: { ...currentItem, amount: value.replace(/[^0-9.]/g, "") },
+      },
+    });
+  };
 
   return (
     <div className={`bg-white rounded-xl shadow-sm border border-slate-200 p-6 ${className}`}>
@@ -95,41 +107,15 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
         <div>
           <h2 className="text-lg font-bold text-slate-900">設問15</h2>
           <p className="text-slate-600 text-sm">
-            安全確保のための経費について、該当するものを選択し、年間の時間と金額をご記入ください
+            【過去１年間】輸送の安全確保のために必要な経費のうち、該当するものを選択の上、「万円」単位の概算経費（税込）及び研修等に要している時間を記入してください。
           </p>
-        </div>
-      </div>
-
-      {/* サマリー */}
-      <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-slate-50 rounded-lg">
-        <div className="text-center">
-          <div className="text-sm text-slate-500">選択項目数</div>
-          <div className="text-2xl font-bold text-blue-600">{selectedCount}</div>
-        </div>
-        <div className="text-center">
-          <div className="text-sm text-slate-500 flex items-center justify-center gap-1">
-            <Clock className="w-4 h-4" />
-            合計時間/年
-          </div>
-          <div className="text-2xl font-bold text-green-600">{totalHours.toFixed(1)}時間</div>
-        </div>
-        <div className="text-center">
-          <div className="text-sm text-slate-500 flex items-center justify-center gap-1">
-            <Wallet className="w-4 h-4" />
-            合計金額/年
-          </div>
-          <div className="text-2xl font-bold text-purple-600">{totalAmount.toFixed(1)}万円</div>
         </div>
       </div>
 
       {/* カテゴリごとの項目 */}
       {SAFETY_ITEMS.map((category) => (
         <div key={category.category} className="mb-6">
-          <div
-            className={`px-4 py-2 rounded-t-lg font-bold text-sm ${
-              category.category.includes("法定") ? "bg-blue-600 text-white" : "bg-purple-600 text-white"
-            }`}
-          >
+          <div className="bg-blue-600 text-white px-4 py-2 rounded-t-lg font-bold text-sm">
             【{category.category}】
           </div>
 
@@ -138,11 +124,13 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
               <thead>
                 <tr className="bg-slate-100">
                   <th className="px-4 py-2 text-left text-sm font-medium text-slate-700">項目</th>
-                  <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-28">
-                    年間時間
+                  <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-32">
+                    年間受講時間
                   </th>
-                  <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-28">
-                    年間金額
+                  <th className="px-4 py-2 text-center text-sm font-medium text-slate-700 w-36">
+                    <div className="text-xs leading-tight">
+                      概算額（年間の平均<br />支出額・償却額）税込
+                    </div>
                   </th>
                 </tr>
               </thead>
@@ -159,12 +147,12 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                       }`}
                     >
                       <td className="px-4 py-3">
-                        <label className="flex items-center gap-3 cursor-pointer">
+                        <label className="flex items-start gap-3 cursor-pointer">
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => handleToggle(item.id)}
-                            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 mt-0.5"
                           />
                           <span
                             className={`text-sm ${
@@ -176,19 +164,23 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                         </label>
                       </td>
                       <td className="px-4 py-2 text-center">
-                        <div className="flex items-center justify-center gap-1">
-                          <input
-                            type="text"
-                            value={itemData.hours}
-                            onChange={(e) => handleHoursChange(item.id, e.target.value)}
-                            disabled={!isChecked}
-                            className={`w-16 px-2 py-1 border rounded text-right text-sm ${
-                              isChecked ? "border-blue-300 bg-white" : "border-slate-200 bg-slate-100"
-                            }`}
-                            placeholder="-"
-                          />
-                          <span className="text-xs text-slate-500">時間</span>
-                        </div>
+                        {item.hasTime ? (
+                          <div className="flex items-center justify-center gap-1">
+                            <input
+                              type="text"
+                              value={itemData.hours}
+                              onChange={(e) => handleHoursChange(item.id, e.target.value)}
+                              disabled={!isChecked}
+                              className={`w-16 px-2 py-1 border rounded text-right text-sm ${
+                                isChecked ? "border-blue-300 bg-white" : "border-slate-200 bg-slate-100"
+                              }`}
+                              placeholder="-"
+                            />
+                            <span className="text-xs text-slate-500">時間/年</span>
+                          </div>
+                        ) : (
+                          <span className="text-slate-400">-</span>
+                        )}
                       </td>
                       <td className="px-4 py-2 text-center">
                         <div className="flex items-center justify-center gap-1">
@@ -202,7 +194,7 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
                             }`}
                             placeholder="-"
                           />
-                          <span className="text-xs text-slate-500">万円</span>
+                          <span className="text-xs text-slate-500">万円/年</span>
                         </div>
                       </td>
                     </tr>
@@ -214,26 +206,64 @@ export function Q15SafetyExpenses({ className = "" }: Q15SafetyExpensesProps) {
         </div>
       ))}
 
-      {/* その他の説明入力 */}
-      {data.items.otherSafety?.checked && (
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-700 mb-2">
-            「その他安全対策費用」の内容
-          </label>
-          <textarea
-            value={data.otherDescription}
-            onChange={(e) => update({ otherDescription: e.target.value })}
-            className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
-            rows={3}
-            placeholder="その他の安全対策費用の内容をご記入ください"
-          />
+      {/* その他 */}
+      <div className="mb-6">
+        <div className="border border-slate-200 rounded-lg overflow-hidden">
+          <table className="w-full">
+            <tbody>
+              <tr className={`${data.items.otherSafety?.checked ? "bg-blue-50" : "bg-white"}`}>
+                <td className="px-4 py-3">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={data.items.otherSafety?.checked || false}
+                      onChange={handleOtherToggle}
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                    />
+                    <span
+                      className={`text-sm ${
+                        data.items.otherSafety?.checked ? "text-blue-700 font-medium" : "text-slate-700"
+                      }`}
+                    >
+                      その他
+                    </span>
+                  </label>
+                  {data.items.otherSafety?.checked && (
+                    <input
+                      type="text"
+                      value={data.otherDescription || ""}
+                      onChange={(e) => update({ otherDescription: e.target.value })}
+                      className="mt-2 ml-8 w-64 px-3 py-2 border border-blue-300 rounded-lg text-sm"
+                      placeholder="内容を入力"
+                    />
+                  )}
+                </td>
+                <td className="px-4 py-2 text-center w-32">
+                  <span className="text-slate-400">-</span>
+                </td>
+                <td className="px-4 py-2 text-center w-36">
+                  <div className="flex items-center justify-center gap-1">
+                    <input
+                      type="text"
+                      value={data.items.otherSafety?.amount || ""}
+                      onChange={(e) => handleOtherAmountChange(e.target.value)}
+                      disabled={!data.items.otherSafety?.checked}
+                      className={`w-16 px-2 py-1 border rounded text-right text-sm ${
+                        data.items.otherSafety?.checked ? "border-blue-300 bg-white" : "border-slate-200 bg-slate-100"
+                      }`}
+                      placeholder="-"
+                    />
+                    <span className="text-xs text-slate-500">万円/年</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      )}
+      </div>
 
-      <div className="mt-4 p-3 bg-amber-50 rounded-lg text-sm text-amber-800">
-        ※ 該当する項目にチェックを入れると、時間・金額の入力欄が有効になります。
-        <br />
-        ※ 時間は運転者1人当たりの年間合計、金額は事業全体の年間合計でご記入ください。
+      <div className="p-3 bg-amber-50 rounded-lg text-sm text-amber-800">
+        （複数選択可）※「該当しない」場合、未記入で構いません。
       </div>
     </div>
   );
