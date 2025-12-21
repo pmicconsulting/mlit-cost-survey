@@ -289,7 +289,7 @@ export default function DashboardPage() {
         surveyStatus.status === "in_progress"
           ? `ステップ${surveyStatus.currentStep || 1}から再開`
           : "原価の実態について回答する",
-      href: "/survey/common/q2-q3",
+      href: "/survey/dryvan/step1",
       color: "from-blue-500 to-blue-600",
       highlight: surveyStatus.status === "in_progress",
     },
@@ -800,7 +800,7 @@ export default function DashboardPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/survey/common/q2-q3"
+              href="/survey/dryvan/step1"
               className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
             >
               <ClipboardCheck className="w-5 h-5" />

@@ -38,11 +38,11 @@ const RESULT_MESSAGES: Record<Exclude<VehicleType, null>, { title: string; messa
   },
   special_only: {
     title: "該当する特殊車両を1両以上ご回答ください",
-    message: "例：海上コンテナ輸送車、重量物輸送車を保有する場合、各1台以上、合計2台以上をご回答ください。",
+    message: "例：海上コンテナ輸送車、重量物輸送車を保有する場合、各1台以上と、合計2両以上をご回答ください。（最低２両）",
   },
   both: {
     title: "ドライバン等と特殊車両の両方をご回答ください",
-    message: "ドライバン等を1台以上、該当する特殊車両を1台以上ご記入ください。",
+    message: "ドライバン等を1両以上、該当する特殊車両を1両以上ご記入ください。",
   },
   none: {
     title: "その他の車両についてご回答ください",
@@ -130,7 +130,7 @@ export default function SelectTruckPage() {
             車両選択ガイド
           </h1>
           <p className="text-slate-600">
-            質問に回答して、ご協力いただく車両を確認してください
+            質問に回答して、ご回答される車両をご確認ください
           </p>
         </div>
 
@@ -148,7 +148,7 @@ export default function SelectTruckPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { value: "1" as BranchCount, label: "1営業所" },
-              { value: "2-9" as BranchCount, label: "2〜9営業所" },
+              { value: "2-9" as BranchCount, label: "2〜9の営業所" },
               { value: "10+" as BranchCount, label: "10以上の営業所" },
             ].map((option) => (
               <button
@@ -405,7 +405,7 @@ export default function SelectTruckPage() {
                       2
                     </span>
                     <span className="font-bold text-slate-900">
-                      選定した各営業所ごとに回答する車両を選定します
+                      選定した各営業所ごとに回答する車両を選定してください
                     </span>
                   </div>
                   {expandedStep === 2 ? (
