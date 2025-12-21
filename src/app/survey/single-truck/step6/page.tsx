@@ -12,8 +12,8 @@ export default function SingleTruckStep6Page() {
         stepNumber={6}
         stepTitle="運行詳細"
         prevHref="/survey/single-truck/step5"
-        nextHref="/dashboard"
-        nextLabel="ダッシュボードへ"
+        nextHref="/survey/tractor/step1"
+        nextLabel="次へ進む"
       >
         {/* セクションヘッダー */}
         <div className="bg-purple-600 text-white px-4 py-2 rounded-lg font-bold mb-4">

@@ -12,8 +12,8 @@ export default function DryvanStep17Page() {
         stepNumber={17}
         stepTitle="主な輸送詳細"
         prevHref="/survey/dryvan/step16"
-        nextHref="/dashboard"
-        nextLabel="ダッシュボードへ"
+        nextHref="/survey/single-truck/step1"
+        nextLabel="次へ進む"
       >
         {/* セクションヘッダー */}
         <div className="bg-green-600 text-white px-4 py-2 rounded-lg font-bold mb-4">

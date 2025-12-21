@@ -71,66 +71,81 @@ export function Q39TransportDetails() {
             </tr>
           </thead>
           <tbody>
-            {data.rows.map((row, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300 px-2 py-2 text-center text-gray-600">
-                  {index + 1}
-                </td>
-                <td className="border border-gray-300 px-1 py-1">
-                  <select
-                    value={row.vehicleSize}
-                    onChange={(e) => handleRowChange(index, "vehicleSize", e.target.value)}
-                    className="w-full px-2 py-1 border border-gray-200 rounded"
-                  >
-                    {VEHICLE_SIZE_OPTIONS.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td className="border border-gray-300 px-1 py-1">
-                  <input
-                    type="text"
-                    value={row.actualDistance}
-                    onChange={(e) => handleRowChange(index, "actualDistance", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.actualDistance ? 'input-filled' : 'flash-green'}`}
-                  />
-                </td>
-                <td className="border border-gray-300 px-1 py-1">
-                  <input
-                    type="text"
-                    value={row.constraintHours}
-                    onChange={(e) => handleRowChange(index, "constraintHours", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.constraintHours ? 'input-filled' : 'flash-green'}`}
-                  />
-                </td>
-                <td className="border border-gray-300 px-1 py-1">
-                  <input
-                    type="text"
-                    value={row.constraintMinutes}
-                    onChange={(e) => handleRowChange(index, "constraintMinutes", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.constraintMinutes ? 'input-filled' : 'flash-green'}`}
-                  />
-                </td>
-                <td className="border border-gray-300 px-1 py-1">
-                  <input
-                    type="text"
-                    value={row.averageFare}
-                    onChange={(e) => handleRowChange(index, "averageFare", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.averageFare ? 'input-filled' : 'flash-green'}`}
-                  />
-                </td>
-                <td className="border border-gray-300 px-1 py-1">
-                  <input
-                    type="text"
-                    value={row.averageFee}
-                    onChange={(e) => handleRowChange(index, "averageFee", e.target.value)}
-                    className={`w-full px-2 py-1 border border-gray-200 rounded text-right ${row.averageFee ? 'input-filled' : 'flash-green'}`}
-                  />
-                </td>
-              </tr>
-            ))}
+            {data.rows.map((row, index) => {
+              // 車両サイズが選択されているかどうか
+              const isVehicleSelected = row.vehicleSize !== "";
+
+              // 入力フィールドのクラス名を生成する関数
+              const getInputClass = (value: string) => {
+                if (!isVehicleSelected) {
+                  // 車両サイズ未選択時はフラッシュなし
+                  return "w-full px-2 py-1 border border-gray-200 rounded text-right";
+                }
+                // 車両サイズ選択時は入力状態に応じてスタイル変更
+                return `w-full px-2 py-1 border border-gray-200 rounded text-right ${value ? 'input-filled' : 'flash-green'}`;
+              };
+
+              return (
+                <tr key={index} className="hover:bg-gray-50">
+                  <td className="border border-gray-300 px-2 py-2 text-center text-gray-600">
+                    {index + 1}
+                  </td>
+                  <td className="border border-gray-300 px-1 py-1">
+                    <select
+                      value={row.vehicleSize}
+                      onChange={(e) => handleRowChange(index, "vehicleSize", e.target.value)}
+                      className={`w-full px-2 py-1 border border-gray-200 rounded ${isVehicleSelected ? 'input-filled' : ''}`}
+                    >
+                      {VEHICLE_SIZE_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="border border-gray-300 px-1 py-1">
+                    <input
+                      type="text"
+                      value={row.actualDistance}
+                      onChange={(e) => handleRowChange(index, "actualDistance", e.target.value)}
+                      className={getInputClass(row.actualDistance)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 px-1 py-1">
+                    <input
+                      type="text"
+                      value={row.constraintHours}
+                      onChange={(e) => handleRowChange(index, "constraintHours", e.target.value)}
+                      className={getInputClass(row.constraintHours)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 px-1 py-1">
+                    <input
+                      type="text"
+                      value={row.constraintMinutes}
+                      onChange={(e) => handleRowChange(index, "constraintMinutes", e.target.value)}
+                      className={getInputClass(row.constraintMinutes)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 px-1 py-1">
+                    <input
+                      type="text"
+                      value={row.averageFare}
+                      onChange={(e) => handleRowChange(index, "averageFare", e.target.value)}
+                      className={getInputClass(row.averageFare)}
+                    />
+                  </td>
+                  <td className="border border-gray-300 px-1 py-1">
+                    <input
+                      type="text"
+                      value={row.averageFee}
+                      onChange={(e) => handleRowChange(index, "averageFee", e.target.value)}
+                      className={getInputClass(row.averageFee)}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
 
