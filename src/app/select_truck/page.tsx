@@ -33,20 +33,20 @@ const SPECIAL_VEHICLE_LIST = [
 // 結果メッセージの定義
 const RESULT_MESSAGES: Record<Exclude<VehicleType, null>, { title: string; message: string }> = {
   dryvan_only: {
-    title: "ドライバン等を1両以上ご回答ください",
-    message: "可能であれば、最大積載量が異なる車両をお持ちの場合、ご入力ください。",
+    title: "ドライバン等について１台ご回答ください",
+    message: "単独車両（単車）：形状がバンボディ、ウィングボディ、平ボディ、幌ウィングである車両。牽引車・被牽引車：バン型（常温）の被牽引車と、それを牽引する牽引車。",
   },
   special_only: {
-    title: "該当する特殊車両を1両以上ご回答ください",
-    message: "例：海上コンテナ輸送車、重量物輸送車を保有する場合、各1台以上と、合計2両以上をご回答ください。（最低２両）",
+    title: "該当する特殊車両を１台ご回答ください",
+    message: "例：海上コンテナ輸送車、重量物輸送車を保有する場合、各１台で、合計２台をご回答ください。",
   },
   both: {
-    title: "ドライバン等と特殊車両の両方をご回答ください",
-    message: "ドライバン等を1両以上、該当する特殊車両を1両以上ご記入ください。",
+    title: "ドライバン等とそれぞれの特殊車両の車型につき、１台ずつご回答ください。",
+    message: "ドライバン等を１台、該当する特殊車両を１台で、合計２台。",
   },
   none: {
-    title: "その他の車両についてご回答ください",
-    message: "ドライバン等、特殊車両以外の車両についてご回答ください。",
+    title: "その他車型について１台ご回答ください。",
+    message: "ドライバン等、特殊車両以外の車両について１台ご回答ください。",
   },
 };
 
@@ -147,9 +147,9 @@ export default function SelectTruckPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { value: "1" as BranchCount, label: "1営業所" },
-              { value: "2-9" as BranchCount, label: "2〜9の営業所" },
-              { value: "10+" as BranchCount, label: "10以上の営業所" },
+              { value: "1" as BranchCount, label: "１営業所" },
+              { value: "2-9" as BranchCount, label: "２〜９の営業所" },
+              { value: "10+" as BranchCount, label: "１０以上の営業所" },
             ].map((option) => (
               <button
                 key={option.value}
@@ -192,10 +192,10 @@ export default function SelectTruckPage() {
 
             <div className="space-y-3">
               {[
-                { value: "dryvan_only" as VehicleType, label: "① ドライバン等だけを保有" },
-                { value: "special_only" as VehicleType, label: "② 特殊車両だけを保有" },
-                { value: "both" as VehicleType, label: "③ ドライバン等と特殊車両を保有" },
-                { value: "none" as VehicleType, label: "④ ドライバン等・特殊車両がない" },
+                { value: "dryvan_only" as VehicleType, label: "① ドライバン等を保有し、「特殊車両」を保有していない場合" },
+                { value: "special_only" as VehicleType, label: "② ドライバン等と特殊車両を保有している場合" },
+                { value: "both" as VehicleType, label: "③ ドライバン等を保有せず、特殊車両だけを保有している場合" },
+                { value: "none" as VehicleType, label: "④ ドライバン等及び「特殊車両」を保有していない場合" },
               ].map((option) => (
                 <button
                   key={option.value}
