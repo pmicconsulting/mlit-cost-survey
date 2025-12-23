@@ -1221,10 +1221,10 @@ export default function SelectTruckPage() {
               {/* 強調メッセージ（赤字） */}
               <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-6">
                 <p className="text-red-600 font-bold text-lg">
-                  {vehicleType === "dryvan_only" && "ドライバン等を1両以上、ご回答ください。可能であれば、最大積載量が異なる車両をお持ちの場合、ご入力ください。"}
-                  {vehicleType === "special_only" && "該当する特殊車両を1両以上、ご回答ください。例：海上コンテナ輸送車、重量物輸送車を保有する場合、各1台以上、合計2台以上をご回答ください。"}
-                  {vehicleType === "both" && "ドライバン等を1台以上、該当する特殊車両を1台以上ご記入ください。"}
-                  {vehicleType === "none" && "ドライバン等、特殊車両以外の車両についてご回答ください。"}
+                  {vehicleType === "dryvan_only" && "ドライバン等について１台ご回答ください。"}
+                  {vehicleType === "both" && "ドライバン等とそれぞれの特殊車両の車型につき、１台ずつご回答ください。"}
+                  {vehicleType === "special_only" && "それぞれの特殊車両の車型につき、1台ずつご回答ください。"}
+                  {vehicleType === "none" && "その他車型について1台ご回答ください。"}
                 </p>
               </div>
 
