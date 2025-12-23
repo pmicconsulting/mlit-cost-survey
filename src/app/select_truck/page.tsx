@@ -596,7 +596,7 @@ export default function SelectTruckPage() {
               {/* 強調メッセージ（赤字） */}
               <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-6">
                 <p className="text-red-600 font-bold text-lg">
-                  特殊車両の車型につき、1台以上ずつご回答ください。
+                  【該当する営業所において】それぞれの特殊車両の車型につき、1台ずつご回答ください。
                 </p>
               </div>
 
@@ -762,7 +762,7 @@ export default function SelectTruckPage() {
               {/* 強調メッセージ（赤字） */}
               <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-6">
                 <p className="text-red-600 font-bold text-lg">
-                  ドライバン等と各特殊車両の車型につき、1台以上ずつご回答ください。
+                  【該当する営業所において】ドライバン等とそれぞれの特殊車両の車型につき、１台ずつご回答ください。
                 </p>
               </div>
 
@@ -926,7 +926,7 @@ export default function SelectTruckPage() {
               {/* 強調メッセージ（赤字） */}
               <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-6">
                 <p className="text-red-600 font-bold text-lg">
-                  ドライバン等、特殊車両に該当しない、貴社が保有する車型について1台以上ご回答ください。
+                  【該当する営業所において】その他車型について1台ご回答ください。
                 </p>
               </div>
 
@@ -1080,7 +1080,7 @@ export default function SelectTruckPage() {
               {/* 強調メッセージ（赤字） */}
               <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-6">
                 <p className="text-red-600 font-bold text-lg">
-                  ドライバン等について1台ご回答ください。
+                  【該当する営業所において】ドライバン等について１台ご回答ください。
                 </p>
               </div>
 
