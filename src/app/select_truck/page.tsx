@@ -257,10 +257,10 @@ export default function SelectTruckPage() {
 
             <div className="space-y-3">
               {[
-                { value: "dryvan_only" as VehicleType, label: "① ドライバン等だけを保有" },
-                { value: "special_only" as VehicleType, label: "② 特殊車両だけを保有" },
-                { value: "both" as VehicleType, label: "③ ドライバン等と特殊車両を保有" },
-                { value: "none" as VehicleType, label: "④ ドライバン等・特殊車両がない" },
+                { value: "dryvan_only" as VehicleType, label: "① ドライバン等を保有し、「特殊車両」を保有していない場合" },
+                { value: "both" as VehicleType, label: "② ドライバン等と特殊車両を保有している場合" },
+                { value: "special_only" as VehicleType, label: "③ ドライバン等を保有せず、特殊車両だけを保有している場合" },
+                { value: "none" as VehicleType, label: "④ ドライバン等を保有せず、特殊車両も保有していない場合" },
               ].map((option) => (
                 <button
                   key={option.value}
