@@ -37,7 +37,7 @@ const RESULT_MESSAGES: Record<Exclude<VehicleType, null>, { title: string; messa
     message: "単独車両（単車）：形状がバンボディ、ウィングボディ、平ボディ、幌ウィングである車両。牽引車・被牽引車：バン型（常温）の被牽引車と、それを牽引する牽引車。",
   },
   special_only: {
-    title: "該当する特殊車両を１台ご回答ください",
+    title: "それぞれの特殊車両の車型につき、1台ずつご回答ください。",
     message: "例：海上コンテナ輸送車、重量物輸送車を保有する場合、各１台で、合計２台をご回答ください。",
   },
   both: {
@@ -45,7 +45,7 @@ const RESULT_MESSAGES: Record<Exclude<VehicleType, null>, { title: string; messa
     message: "ドライバン等を１台、該当する特殊車両を１台で、合計２台。",
   },
   none: {
-    title: "その他車型について１台ご回答ください。",
+    title: "その他車型について1台ご回答ください。",
     message: "ドライバン等、特殊車両以外の車両について１台ご回答ください。",
   },
 };
@@ -193,8 +193,8 @@ export default function SelectTruckPage() {
             <div className="space-y-3">
               {[
                 { value: "dryvan_only" as VehicleType, label: "① ドライバン等を保有し、「特殊車両」を保有していない場合" },
-                { value: "special_only" as VehicleType, label: "② ドライバン等と特殊車両を保有している場合" },
-                { value: "both" as VehicleType, label: "③ ドライバン等を保有せず、特殊車両だけを保有している場合" },
+                { value: "both" as VehicleType, label: "② ドライバン等と特殊車両を保有している場合" },
+                { value: "special_only" as VehicleType, label: "③ ドライバン等を保有せず、特殊車両だけを保有している場合" },
                 { value: "none" as VehicleType, label: "④ ドライバン等及び「特殊車両」を保有していない場合" },
               ].map((option) => (
                 <button
